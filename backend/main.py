@@ -1,7 +1,10 @@
 from flask import Flask, jsonify, request
 from flask_cors import CORS
+from Analizador_Sintactico import parse, errores
+from src.TS.Arbol import Arbol
+from src.TS.TablaSimbolos import TablaSimbolos
+from src.TS.Excepcion import Excepcion
 
-from Analizador_Sintactico import parse
 
 
 app = Flask(__name__)
@@ -17,11 +20,23 @@ devuelve la salida interpretada '''
 def recibirDatos():
     salida = ""
     entrada = request.json['entrada']
-    instrucciones = parse(entrada)
-    
-    for instruccion in instrucciones:
-        salida += instruccion.interpretar(None,None) + "\n"
-    #Se llama al analizador lexico
+
+    instrucciones = parse(entrada) #ARBOL AST
+    ast = Arbol(instrucciones)
+    TSGlobal = TablaSimbolos('global')
+    ast.setTSGlobal(TSGlobal)
+
+    for error in errores: #Captura de errores lexicos y sintacticos 
+        ast.getExcepciones().append(error)
+        ast.updateConsolaln(error.toString())
+
+    for instruccion in ast.getInstrucciones():
+        valor = instruccion.interpretar(ast, TSGlobal)
+        if isinstance(valor, Excepcion):
+            ast.getExcepciones().append(valor)
+            ast.updateConsolaln(valor.toString())
+    salida = ast.getConsola()
+
     return jsonify({'salida': salida})
 
 if __name__ == '__main__':

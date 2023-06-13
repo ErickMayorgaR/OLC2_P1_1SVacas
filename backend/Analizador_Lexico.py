@@ -31,7 +31,18 @@ tokens  = [
     'MENOS',
     'POR',
     'DIV',
+    'POTENCIA',
+    'PORCENTAJE',
+    'MENOR',
+    'MAYOR',
     'IGUAL',
+    'MAYORIGUAL',
+    'MENORIGUAL',
+    'IGUALIGUAL',
+    'DIFERENTE',
+    'OR',
+    'AND',
+    'NOT',
     'ENTERO',
     'DECIMAL',
     'CADENA',
@@ -49,7 +60,18 @@ t_MAS           = r'\+'
 t_MENOS         = r'\-'
 t_POR           = r'\*'
 t_DIV           = r'\/'
+t_POTENCIA      = r'\^'
+t_PORCENTAJE    = r'\%'
+t_MENOR         = r'\<'
+t_MAYOR         = r'\>'
 t_IGUAL         = r'\='
+t_MAYORIGUAL    = r'\>\='
+t_MENORIGUAL    = r'\<\='
+t_IGUALIGUAL    = r'\=\='
+t_DIFERENTE     = r'\!\='
+t_OR            = r'\|\|'
+t_AND           = r'\&\&'
+t_NOT           = r'\!'
 
 #Decimal
 def t_DECIMAL(t):
@@ -116,12 +138,5 @@ def t_error(t):
 def find_column(inp, tk):
     line_start = inp.rfind('\n', 0, tk.lexpos) + 1
     return (tk.lexpos - line_start) + 1
-
-def test_lexer(lexer):
-    while True:
-        tok = lexer.token()
-        if not tok:
-            break  # No more input
-        print(tok)
 
 lexer = lex.lex(reflags = re.IGNORECASE)

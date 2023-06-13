@@ -57,39 +57,35 @@ export class AppComponent {
   onSubmit() {
     if (this.entrada != "") {
       const x = { "entrada": this.entrada }
-      this.appService.consumirAnalizador(x).subscribe(
+      this.appService.consumirAnalizador(x).subscribe({
 
-        data => {
+        next: (data) => {
           console.log('Datos recibidos');
-          this.salida = data.output;
+          this.salida = data.salida;
           this.simbolos = data.arreglo_simbolos;
           this.errores = data.arreglo_errores;
         },
-
-        error => {
+        error: (error) => {
           console.log('There was an error :(', error);
           this.simbolos = [];
           this.errores = [];
-
+  
           if (error.error) {
             if (error.error.output)
               this.salida = error.error.output;
-
             else if (error.error.message)
               this.salida = error.error.message;
-
             else
               this.salida = error.error;
-          }
-          else {
+          } else {
             this.salida = "Ocurrió un error desconocido.\nIngrese otra entrada.";
           }
         }
-      );
-    } else
+      });
+    } else {
       this.salida = "Entrada vacía. Intente de nuevo.";
+    }
   }
-
 
   // getAST() {
 

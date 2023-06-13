@@ -6,9 +6,9 @@ _tabversion = '3.10'
 
 _lr_method = 'LALR'
 
-_lr_signature = 'initleftMASMENOSleftPORDIVleftPARIPARDrightUMENOSANY BOOLEAN CADENA DECIMAL DIV DPUNTOS ENTERO ID IGUAL LLAVEDER LLAVEIZQ MAS MENOS NUMBER PARD PARI POR PTCOMA PUNTO RCONSOLE RELSE RFALSE RIF RLET RLOG RTRUE STRINGinit : instruccionesinstrucciones    : instrucciones instruccioninstrucciones : instruccioninstruccion : imprimir PTCOMA\n                    | declaracion_normal PTCOMA\n                    | condicional_if PTCOMAimprimir : RCONSOLE PUNTO RLOG PARI expresion PARDdeclaracion_normal : RLET ID DPUNTOS tipo IGUAL expresioncondicional_if : RIF PARI expresion PARD LLAVEIZQ LLAVEDERtipo : STRING\n            | NUMBER\n            | BOOLEANexpresion : expresion MAS expresion\n                | expresion MENOS expresion\n                | expresion POR expresion\n                | expresion DIV expresionexpresion : MENOS expresion %prec UMENOSexpresion : ENTEROexpresion : DECIMALexpresion : CADENAexpresion : RTRUE\n                | RFALSE'
+_lr_signature = 'initleftORleftANDrightNOTleftIGUALIGUALDIFERENTEMENORMENORIGUALMAYORMAYORIGUALleftMASMENOSleftPORDIVPORCENTAJEleftPARIPARDnonassocPOTENCIArightUMENOSAND ANY BOOLEAN CADENA DECIMAL DIFERENTE DIV DPUNTOS ENTERO ID IGUAL IGUALIGUAL LLAVEDER LLAVEIZQ MAS MAYOR MAYORIGUAL MENOR MENORIGUAL MENOS NOT NUMBER OR PARD PARI POR PORCENTAJE POTENCIA PTCOMA PUNTO RCONSOLE RELSE RFALSE RIF RLET RLOG RTRUE STRINGinit : instruccionesinstrucciones    : instrucciones instruccioninstrucciones : instruccioninstruccion : imprimir PTCOMA\n                    | declaracion_normal PTCOMA\n                    | condicional_if PTCOMAimprimir : RCONSOLE PUNTO RLOG PARI expresion PARDdeclaracion_normal : RLET ID DPUNTOS tipo IGUAL expresioncondicional_if : RIF PARI expresion PARD LLAVEIZQ LLAVEDERtipo : STRING\n            | NUMBER\n            | BOOLEANexpresion : expresion MAS expresion\n                | expresion MENOS expresion\n                | expresion POR expresion\n                | expresion DIV expresion\n                | expresion POTENCIA expresion\n                | expresion PORCENTAJE expresionexpresion : expresion IGUALIGUAL expresion\n                 | expresion DIFERENTE expresion\n                 | expresion MENOR expresion\n                 | expresion MAYOR expresion\n                 | expresion MENORIGUAL expresion\n                 | expresion MAYORIGUAL expresionexpresion : expresion AND expresion\n                 | expresion OR expresionexpresion : MENOS expresion %prec UMENOSexpresion : ENTEROexpresion : DECIMALexpresion : CADENAexpresion : RTRUE\n                | RFALSEexpresion : ID'
     
-_lr_action_items = {'RCONSOLE':([0,2,3,10,11,12,13,],[7,7,-3,-2,-4,-5,-6,]),'RLET':([0,2,3,10,11,12,13,],[8,8,-3,-2,-4,-5,-6,]),'RIF':([0,2,3,10,11,12,13,],[9,9,-3,-2,-4,-5,-6,]),'$end':([1,2,3,10,11,12,13,],[0,-1,-3,-2,-4,-5,-6,]),'PTCOMA':([4,5,6,21,22,23,24,25,36,40,41,42,43,44,45,46,],[11,12,13,-18,-19,-20,-21,-22,-17,-13,-14,-15,-16,-7,-8,-9,]),'PUNTO':([7,],[14,]),'ID':([8,],[15,]),'PARI':([9,17,],[16,26,]),'RLOG':([14,],[17,]),'DPUNTOS':([15,],[18,]),'MENOS':([16,19,20,21,22,23,24,25,26,32,33,34,35,36,37,38,40,41,42,43,45,],[20,33,20,-18,-19,-20,-21,-22,20,20,20,20,20,-17,33,20,-13,-14,-15,-16,33,]),'ENTERO':([16,20,26,32,33,34,35,38,],[21,21,21,21,21,21,21,21,]),'DECIMAL':([16,20,26,32,33,34,35,38,],[22,22,22,22,22,22,22,22,]),'CADENA':([16,20,26,32,33,34,35,38,],[23,23,23,23,23,23,23,23,]),'RTRUE':([16,20,26,32,33,34,35,38,],[24,24,24,24,24,24,24,24,]),'RFALSE':([16,20,26,32,33,34,35,38,],[25,25,25,25,25,25,25,25,]),'STRING':([18,],[28,]),'NUMBER':([18,],[29,]),'BOOLEAN':([18,],[30,]),'PARD':([19,21,22,23,24,25,36,37,40,41,42,43,],[31,-18,-19,-20,-21,-22,-17,44,-13,-14,-15,-16,]),'MAS':([19,21,22,23,24,25,36,37,40,41,42,43,45,],[32,-18,-19,-20,-21,-22,-17,32,-13,-14,-15,-16,32,]),'POR':([19,21,22,23,24,25,36,37,40,41,42,43,45,],[34,-18,-19,-20,-21,-22,-17,34,34,34,-15,-16,34,]),'DIV':([19,21,22,23,24,25,36,37,40,41,42,43,45,],[35,-18,-19,-20,-21,-22,-17,35,35,35,-15,-16,35,]),'IGUAL':([27,28,29,30,],[38,-10,-11,-12,]),'LLAVEIZQ':([31,],[39,]),'LLAVEDER':([39,],[46,]),}
+_lr_action_items = {'RCONSOLE':([0,2,3,10,11,12,13,],[7,7,-3,-2,-4,-5,-6,]),'RLET':([0,2,3,10,11,12,13,],[8,8,-3,-2,-4,-5,-6,]),'RIF':([0,2,3,10,11,12,13,],[9,9,-3,-2,-4,-5,-6,]),'$end':([1,2,3,10,11,12,13,],[0,-1,-3,-2,-4,-5,-6,]),'PTCOMA':([4,5,6,21,22,23,24,25,26,47,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,],[11,12,13,-28,-29,-30,-31,-32,-33,-27,-13,-14,-15,-16,-17,-18,-19,-20,-21,-22,-23,-24,-25,-26,-7,-8,-9,]),'PUNTO':([7,],[14,]),'ID':([8,16,20,27,33,34,35,36,37,38,39,40,41,42,43,44,45,46,49,],[15,26,26,26,26,26,26,26,26,26,26,26,26,26,26,26,26,26,26,]),'PARI':([9,17,],[16,27,]),'RLOG':([14,],[17,]),'DPUNTOS':([15,],[18,]),'MENOS':([16,19,20,21,22,23,24,25,26,27,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,51,52,53,54,55,56,57,58,59,60,61,62,63,64,66,],[20,34,20,-28,-29,-30,-31,-32,-33,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,-27,34,20,-13,-14,-15,-16,-17,-18,34,34,34,34,34,34,34,34,34,]),'ENTERO':([16,20,27,33,34,35,36,37,38,39,40,41,42,43,44,45,46,49,],[21,21,21,21,21,21,21,21,21,21,21,21,21,21,21,21,21,21,]),'DECIMAL':([16,20,27,33,34,35,36,37,38,39,40,41,42,43,44,45,46,49,],[22,22,22,22,22,22,22,22,22,22,22,22,22,22,22,22,22,22,]),'CADENA':([16,20,27,33,34,35,36,37,38,39,40,41,42,43,44,45,46,49,],[23,23,23,23,23,23,23,23,23,23,23,23,23,23,23,23,23,23,]),'RTRUE':([16,20,27,33,34,35,36,37,38,39,40,41,42,43,44,45,46,49,],[24,24,24,24,24,24,24,24,24,24,24,24,24,24,24,24,24,24,]),'RFALSE':([16,20,27,33,34,35,36,37,38,39,40,41,42,43,44,45,46,49,],[25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,]),'STRING':([18,],[29,]),'NUMBER':([18,],[30,]),'BOOLEAN':([18,],[31,]),'PARD':([19,21,22,23,24,25,26,47,48,51,52,53,54,55,56,57,58,59,60,61,62,63,64,],[32,-28,-29,-30,-31,-32,-33,-27,65,-13,-14,-15,-16,-17,-18,-19,-20,-21,-22,-23,-24,-25,-26,]),'MAS':([19,21,22,23,24,25,26,47,48,51,52,53,54,55,56,57,58,59,60,61,62,63,64,66,],[33,-28,-29,-30,-31,-32,-33,-27,33,-13,-14,-15,-16,-17,-18,33,33,33,33,33,33,33,33,33,]),'POR':([19,21,22,23,24,25,26,47,48,51,52,53,54,55,56,57,58,59,60,61,62,63,64,66,],[35,-28,-29,-30,-31,-32,-33,-27,35,35,35,-15,-16,-17,-18,35,35,35,35,35,35,35,35,35,]),'DIV':([19,21,22,23,24,25,26,47,48,51,52,53,54,55,56,57,58,59,60,61,62,63,64,66,],[36,-28,-29,-30,-31,-32,-33,-27,36,36,36,-15,-16,-17,-18,36,36,36,36,36,36,36,36,36,]),'POTENCIA':([19,21,22,23,24,25,26,47,48,51,52,53,54,55,56,57,58,59,60,61,62,63,64,66,],[37,-28,-29,-30,-31,-32,-33,-27,37,37,37,37,37,None,37,37,37,37,37,37,37,37,37,37,]),'PORCENTAJE':([19,21,22,23,24,25,26,47,48,51,52,53,54,55,56,57,58,59,60,61,62,63,64,66,],[38,-28,-29,-30,-31,-32,-33,-27,38,38,38,-15,-16,-17,-18,38,38,38,38,38,38,38,38,38,]),'IGUALIGUAL':([19,21,22,23,24,25,26,47,48,51,52,53,54,55,56,57,58,59,60,61,62,63,64,66,],[39,-28,-29,-30,-31,-32,-33,-27,39,-13,-14,-15,-16,-17,-18,-19,-20,-21,-22,-23,-24,39,39,39,]),'DIFERENTE':([19,21,22,23,24,25,26,47,48,51,52,53,54,55,56,57,58,59,60,61,62,63,64,66,],[40,-28,-29,-30,-31,-32,-33,-27,40,-13,-14,-15,-16,-17,-18,-19,-20,-21,-22,-23,-24,40,40,40,]),'MENOR':([19,21,22,23,24,25,26,47,48,51,52,53,54,55,56,57,58,59,60,61,62,63,64,66,],[41,-28,-29,-30,-31,-32,-33,-27,41,-13,-14,-15,-16,-17,-18,-19,-20,-21,-22,-23,-24,41,41,41,]),'MAYOR':([19,21,22,23,24,25,26,47,48,51,52,53,54,55,56,57,58,59,60,61,62,63,64,66,],[42,-28,-29,-30,-31,-32,-33,-27,42,-13,-14,-15,-16,-17,-18,-19,-20,-21,-22,-23,-24,42,42,42,]),'MENORIGUAL':([19,21,22,23,24,25,26,47,48,51,52,53,54,55,56,57,58,59,60,61,62,63,64,66,],[43,-28,-29,-30,-31,-32,-33,-27,43,-13,-14,-15,-16,-17,-18,-19,-20,-21,-22,-23,-24,43,43,43,]),'MAYORIGUAL':([19,21,22,23,24,25,26,47,48,51,52,53,54,55,56,57,58,59,60,61,62,63,64,66,],[44,-28,-29,-30,-31,-32,-33,-27,44,-13,-14,-15,-16,-17,-18,-19,-20,-21,-22,-23,-24,44,44,44,]),'AND':([19,21,22,23,24,25,26,47,48,51,52,53,54,55,56,57,58,59,60,61,62,63,64,66,],[45,-28,-29,-30,-31,-32,-33,-27,45,-13,-14,-15,-16,-17,-18,-19,-20,-21,-22,-23,-24,-25,45,45,]),'OR':([19,21,22,23,24,25,26,47,48,51,52,53,54,55,56,57,58,59,60,61,62,63,64,66,],[46,-28,-29,-30,-31,-32,-33,-27,46,-13,-14,-15,-16,-17,-18,-19,-20,-21,-22,-23,-24,-25,-26,46,]),'IGUAL':([28,29,30,31,],[49,-10,-11,-12,]),'LLAVEIZQ':([32,],[50,]),'LLAVEDER':([50,],[67,]),}
 
 _lr_action = {}
 for _k, _v in _lr_action_items.items():
@@ -17,7 +17,7 @@ for _k, _v in _lr_action_items.items():
       _lr_action[_x][_k] = _y
 del _lr_action_items
 
-_lr_goto_items = {'init':([0,],[1,]),'instrucciones':([0,],[2,]),'instruccion':([0,2,],[3,10,]),'imprimir':([0,2,],[4,4,]),'declaracion_normal':([0,2,],[5,5,]),'condicional_if':([0,2,],[6,6,]),'expresion':([16,20,26,32,33,34,35,38,],[19,36,37,40,41,42,43,45,]),'tipo':([18,],[27,]),}
+_lr_goto_items = {'init':([0,],[1,]),'instrucciones':([0,],[2,]),'instruccion':([0,2,],[3,10,]),'imprimir':([0,2,],[4,4,]),'declaracion_normal':([0,2,],[5,5,]),'condicional_if':([0,2,],[6,6,]),'expresion':([16,20,27,33,34,35,36,37,38,39,40,41,42,43,44,45,46,49,],[19,47,48,51,52,53,54,55,56,57,58,59,60,61,62,63,64,66,]),'tipo':([18,],[28,]),}
 
 _lr_goto = {}
 for _k, _v in _lr_goto_items.items():
@@ -27,26 +27,37 @@ for _k, _v in _lr_goto_items.items():
 del _lr_goto_items
 _lr_productions = [
   ("S' -> init","S'",1,None,None,None),
-  ('init -> instrucciones','init',1,'p_inicio','Analizador_Sintactico.py',24),
-  ('instrucciones -> instrucciones instruccion','instrucciones',2,'p_instrucciones_lista','Analizador_Sintactico.py',29),
-  ('instrucciones -> instruccion','instrucciones',1,'p_instrucciones_2','Analizador_Sintactico.py',35),
-  ('instruccion -> imprimir PTCOMA','instruccion',2,'p_instrucciones_evaluar','Analizador_Sintactico.py',43),
-  ('instruccion -> declaracion_normal PTCOMA','instruccion',2,'p_instrucciones_evaluar','Analizador_Sintactico.py',44),
-  ('instruccion -> condicional_if PTCOMA','instruccion',2,'p_instrucciones_evaluar','Analizador_Sintactico.py',45),
-  ('imprimir -> RCONSOLE PUNTO RLOG PARI expresion PARD','imprimir',6,'p_imprimir','Analizador_Sintactico.py',50),
-  ('declaracion_normal -> RLET ID DPUNTOS tipo IGUAL expresion','declaracion_normal',6,'p_declaracion_normal','Analizador_Sintactico.py',56),
-  ('condicional_if -> RIF PARI expresion PARD LLAVEIZQ LLAVEDER','condicional_if',6,'p_condicional_if','Analizador_Sintactico.py',63),
-  ('tipo -> STRING','tipo',1,'p_tipo','Analizador_Sintactico.py',70),
-  ('tipo -> NUMBER','tipo',1,'p_tipo','Analizador_Sintactico.py',71),
-  ('tipo -> BOOLEAN','tipo',1,'p_tipo','Analizador_Sintactico.py',72),
-  ('expresion -> expresion MAS expresion','expresion',3,'p_expresion_binaria','Analizador_Sintactico.py',78),
-  ('expresion -> expresion MENOS expresion','expresion',3,'p_expresion_binaria','Analizador_Sintactico.py',79),
-  ('expresion -> expresion POR expresion','expresion',3,'p_expresion_binaria','Analizador_Sintactico.py',80),
-  ('expresion -> expresion DIV expresion','expresion',3,'p_expresion_binaria','Analizador_Sintactico.py',81),
-  ('expresion -> MENOS expresion','expresion',2,'p_expresion_unaria','Analizador_Sintactico.py',92),
-  ('expresion -> ENTERO','expresion',1,'p_expresion_entero','Analizador_Sintactico.py',96),
-  ('expresion -> DECIMAL','expresion',1,'p_expresion_decimal','Analizador_Sintactico.py',100),
-  ('expresion -> CADENA','expresion',1,'p_expresion_cadena','Analizador_Sintactico.py',104),
-  ('expresion -> RTRUE','expresion',1,'p_expresion_boolean','Analizador_Sintactico.py',108),
-  ('expresion -> RFALSE','expresion',1,'p_expresion_boolean','Analizador_Sintactico.py',109),
+  ('init -> instrucciones','init',1,'p_inicio','Analizador_Sintactico.py',32),
+  ('instrucciones -> instrucciones instruccion','instrucciones',2,'p_instrucciones_lista','Analizador_Sintactico.py',37),
+  ('instrucciones -> instruccion','instrucciones',1,'p_instrucciones_2','Analizador_Sintactico.py',43),
+  ('instruccion -> imprimir PTCOMA','instruccion',2,'p_instrucciones_evaluar','Analizador_Sintactico.py',51),
+  ('instruccion -> declaracion_normal PTCOMA','instruccion',2,'p_instrucciones_evaluar','Analizador_Sintactico.py',52),
+  ('instruccion -> condicional_if PTCOMA','instruccion',2,'p_instrucciones_evaluar','Analizador_Sintactico.py',53),
+  ('imprimir -> RCONSOLE PUNTO RLOG PARI expresion PARD','imprimir',6,'p_imprimir','Analizador_Sintactico.py',58),
+  ('declaracion_normal -> RLET ID DPUNTOS tipo IGUAL expresion','declaracion_normal',6,'p_declaracion_normal','Analizador_Sintactico.py',64),
+  ('condicional_if -> RIF PARI expresion PARD LLAVEIZQ LLAVEDER','condicional_if',6,'p_condicional_if','Analizador_Sintactico.py',71),
+  ('tipo -> STRING','tipo',1,'p_tipo','Analizador_Sintactico.py',78),
+  ('tipo -> NUMBER','tipo',1,'p_tipo','Analizador_Sintactico.py',79),
+  ('tipo -> BOOLEAN','tipo',1,'p_tipo','Analizador_Sintactico.py',80),
+  ('expresion -> expresion MAS expresion','expresion',3,'p_expresion_binaria','Analizador_Sintactico.py',86),
+  ('expresion -> expresion MENOS expresion','expresion',3,'p_expresion_binaria','Analizador_Sintactico.py',87),
+  ('expresion -> expresion POR expresion','expresion',3,'p_expresion_binaria','Analizador_Sintactico.py',88),
+  ('expresion -> expresion DIV expresion','expresion',3,'p_expresion_binaria','Analizador_Sintactico.py',89),
+  ('expresion -> expresion POTENCIA expresion','expresion',3,'p_expresion_binaria','Analizador_Sintactico.py',90),
+  ('expresion -> expresion PORCENTAJE expresion','expresion',3,'p_expresion_binaria','Analizador_Sintactico.py',91),
+  ('expresion -> expresion IGUALIGUAL expresion','expresion',3,'p_expresion_binaria_relacional','Analizador_Sintactico.py',106),
+  ('expresion -> expresion DIFERENTE expresion','expresion',3,'p_expresion_binaria_relacional','Analizador_Sintactico.py',107),
+  ('expresion -> expresion MENOR expresion','expresion',3,'p_expresion_binaria_relacional','Analizador_Sintactico.py',108),
+  ('expresion -> expresion MAYOR expresion','expresion',3,'p_expresion_binaria_relacional','Analizador_Sintactico.py',109),
+  ('expresion -> expresion MENORIGUAL expresion','expresion',3,'p_expresion_binaria_relacional','Analizador_Sintactico.py',110),
+  ('expresion -> expresion MAYORIGUAL expresion','expresion',3,'p_expresion_binaria_relacional','Analizador_Sintactico.py',111),
+  ('expresion -> expresion AND expresion','expresion',3,'p_expresion_binaria_logica','Analizador_Sintactico.py',127),
+  ('expresion -> expresion OR expresion','expresion',3,'p_expresion_binaria_logica','Analizador_Sintactico.py',128),
+  ('expresion -> MENOS expresion','expresion',2,'p_expresion_unaria','Analizador_Sintactico.py',146),
+  ('expresion -> ENTERO','expresion',1,'p_expresion_entero','Analizador_Sintactico.py',150),
+  ('expresion -> DECIMAL','expresion',1,'p_expresion_decimal','Analizador_Sintactico.py',154),
+  ('expresion -> CADENA','expresion',1,'p_expresion_cadena','Analizador_Sintactico.py',158),
+  ('expresion -> RTRUE','expresion',1,'p_expresion_boolean','Analizador_Sintactico.py',162),
+  ('expresion -> RFALSE','expresion',1,'p_expresion_boolean','Analizador_Sintactico.py',163),
+  ('expresion -> ID','expresion',1,'p_expresion_identificador','Analizador_Sintactico.py',171),
 ]
