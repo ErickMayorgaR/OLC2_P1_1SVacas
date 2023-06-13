@@ -42,7 +42,21 @@ class Aritmetica(Instruccion):
             else:
                 return Excepcion("Semántico", "No se puede dividir entre cero", self.fila, self.columna) 
             
+        #potencia
+        elif self.operador == OperadorAritmetico.POTENCIA:
+            return self.potencia(opIzq, opDer)
         
+        #modulo
+        elif self.operador == OperadorAritmetico.PORCENTAJE:
+            if opDer != 0:
+                return self.modulo(opIzq, opDer)
+            else:
+                return Excepcion("Semántico", "No se puede hacer mmodulo de cero", self.fila, self.columna) 
+
+        #unario
+        elif self.operador == OperadorAritmetico.UMENOS:
+            return self.negativo(opIzq)
+
         return Excepcion("Semántico", "Tipo de Operacion no Especificado.", self.fila, self.columna)
         
 
@@ -127,6 +141,64 @@ class Aritmetica(Instruccion):
             return float(self.getType(self.opIzq, opIzq) / self.getType(self.opDer, opDer))
     
         return Excepcion("Semántico", "Los tipos de datos para el signo \"\\\" no pueden ser operados", self.fila, self.columna)
+
+
+    def potencia(self, opIzq, opDer):
+        #entero
+        if self.opIzq.tipo == Tipo.NUMBER and self.opDer.tipo == Tipo.NUMBER:
+            self.tipo = Tipo.NUMBER
+            return int(self.getType(self.opIzq, opIzq) ** self.getType(self.opDer, opDer))
+
+        #decimal
+        elif self.opIzq.tipo == Tipo.DOBLE and self.opDer.tipo == Tipo.NUMBER:
+            self.tipo = Tipo.DOBLE
+            return float(self.getType(self.opIzq, opIzq) ** self.getType(self.opDer, opDer))
+        elif self.opIzq.tipo == Tipo.NUMBER and self.opDer.tipo == Tipo.DOBLE:
+            self.tipo = Tipo.DOBLE
+            return float(self.getType(self.opIzq, opIzq) ** self.getType(self.opDer, opDer))
+        elif self.opIzq.tipo == Tipo.DOBLE and self.opDer.tipo == Tipo.DOBLE:
+            self.tipo = Tipo.DOBLE
+            return float(self.getType(self.opIzq, opIzq) ** self.getType(self.opDer, opDer))
+
+        #cadena
+        elif self.opIzq.tipo == Tipo.CADENA and self.opDer.tipo == Tipo.NUMBER:
+            self.tipo = Tipo.CADENA
+            return str(self.getType(self.opIzq, opIzq) * self.getType(self.opDer, opDer))
+
+        return Excepcion("Semántico", "Los tipos de datos para el signo \"^\" no pueden ser operados", self.fila, self.columna)
+
+
+    def modulo(self, opIzq, opDer):
+        #entero
+        if self.opIzq.tipo == Tipo.NUMBER and self.opDer.tipo == Tipo.NUMBER:
+            self.tipo = Tipo.NUMBER
+            return int(self.getType(self.opIzq, opIzq) % self.getType(self.opDer, opDer))
+
+        #decimal
+        elif self.opIzq.tipo == Tipo.DOBLE and self.opDer.tipo == Tipo.NUMBER:
+            self.tipo = Tipo.DOBLE
+            return float(self.getType(self.opIzq, opIzq) % self.getType(self.opDer, opDer))
+        elif self.opIzq.tipo == Tipo.NUMBER and self.opDer.tipo == Tipo.DOBLE:
+            self.tipo = Tipo.DOBLE
+            return float(self.getType(self.opIzq, opIzq) % self.getType(self.opDer, opDer))
+        elif self.opIzq.tipo == Tipo.DOBLE and self.opDer.tipo == Tipo.DOBLE:
+            self.tipo = Tipo.DOBLE
+            return float(self.getType(self.opIzq, opIzq) % self.getType(self.opDer, opDer))
+
+        return Excepcion("Semántico", "Los tipos de datos para el signo \"%\" no pueden ser operados", self.fila, self.columna)
+
+
+    def negativo(self, opIzq):
+        if self.operador == OperadorAritmetico.UMENOS:
+            #Entero
+            if self.opIzq.tipo == Tipo.NUMBER:
+                self.tipo = Tipo.NUMBER
+                return -self.getType(self.opIzq, opIzq)
+            #Decimal
+            elif self.opIzq.tipo == Tipo.DOBLE:
+                self.tipo = Tipo.DOBLE
+                return -self.getType(self.opIzq, opIzq)
+        return Excepcion("Semántico", "Tipo Erroneo de operacion para - unario.", self.fila, self.columna)
 
 
     def getType(self, nodo, valor):

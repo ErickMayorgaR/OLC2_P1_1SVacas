@@ -1,14 +1,14 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
-import { FormsModule } from '@angular/forms';
-import { InterpretarService } from './services/interpretar.service';
+import { AppService } from './app.service';
 import { HttpClientModule } from '@angular/common/http';
-import { MonacoEditorModule, MONACO_PATH } from '@materia-ui/ngx-monaco-editor';
 
+import { MonacoEditorModule, MONACO_PATH } from '@materia-ui/ngx-monaco-editor';
 
 @NgModule({
   declarations: [
@@ -21,8 +21,8 @@ import { MonacoEditorModule, MONACO_PATH } from '@materia-ui/ngx-monaco-editor';
     HttpClientModule,
     MonacoEditorModule
   ],
-   providers: [
-    InterpretarService,
+  providers: [
+    AppService,
     {
       provide: MONACO_PATH,
       useValue: 'https://unpkg.com/monaco-editor@0.19.3/min/vs'

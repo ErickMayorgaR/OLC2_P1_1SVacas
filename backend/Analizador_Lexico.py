@@ -1,11 +1,12 @@
 import re
 import ply.lex as lex
+from src.TS.Excepcion import Excepcion
 
 errores = []
 
-#  Entrada: IdentificardorToken
 reserved = {
     'console'     :   'RCONSOLE',
+    'NULL'        :   'NULL',
     'log'         :   'RLOG',
     'let'         :   'RLET',
     'Any'         :   'ANY',
@@ -16,22 +17,48 @@ reserved = {
     'false'       :   'RFALSE',
     'if'          :   'RIF',
     'else'        :   'RELSE',
+    'Char'        :   'CHAR',
+    'struct'      :   'STRUCT',
+    'function'    :   'FUNCTION',
+    'end'         :   'END',
+    'in'          :   'IN',
+    'local'       :   'LOCAL',
+    'global'      :   'GLOBAL',
+    'return'      :   'RETURN',
+    'break'       :   'BREAK',
+    'continue'    :   'CONTINUE',
+    'parse'       :   'PARSE',
+    'mutable'     :   'MUTABLE',
 
 }
 
 tokens  = [
     'PUNTO',
+    'COMA',
     'DPUNTOS',
     'PTCOMA',
-    'PARI',
-    'PARD',
-    'LLAVEIZQ',
-    'LLAVEDER',
+    'PARENTESISA',
+    'PARENTESISC',
+    'CORCHETEA',
+    'CORCHETEC',
+    'LLAVEA',
+    'LLAVEC',
     'MAS',
     'MENOS',
     'POR',
     'DIV',
+    'POTENCIA',
+    'PORCENTAJE',
+    'MENOR',
+    'MAYOR',
     'IGUAL',
+    'MAYORIGUAL',
+    'MENORIGUAL',
+    'IGUALIGUAL',
+    'DIFERENTE',
+    'OR',
+    'AND',
+    'NOT',
     'ENTERO',
     'DECIMAL',
     'CADENA',
@@ -39,17 +66,31 @@ tokens  = [
 ]+ list(reserved.values())
 # Tokens
 t_PUNTO         = r'\.'
+t_COMA          = r'\,'
 t_DPUNTOS       = r'\:'
 t_PTCOMA        = r'\;'
-t_PARI          = r'\('
-t_PARD          = r'\)'
-t_LLAVEIZQ      = r'\{'
-t_LLAVEDER      = r'\}'
+t_PARENTESISA   = r'\('
+t_PARENTESISC   = r'\)'
+t_LLAVEA        = r'\{'
+t_LLAVEC        = r'\}'
+t_CORCHETEA     = r'\['
+t_CORCHETEC     = r'\]'
 t_MAS           = r'\+'
 t_MENOS         = r'\-'
 t_POR           = r'\*'
 t_DIV           = r'\/'
+t_POTENCIA      = r'\^'
+t_PORCENTAJE    = r'\%'
+t_MENOR         = r'\<'
+t_MAYOR         = r'\>'
 t_IGUAL         = r'\='
+t_MAYORIGUAL    = r'\>\='
+t_MENORIGUAL    = r'\<\='
+t_IGUALIGUAL    = r'\=\='
+t_DIFERENTE     = r'\!\='
+t_OR            = r'\|\|'
+t_AND           = r'\&\&'
+t_NOT           = r'\!'
 
 #Decimal
 def t_DECIMAL(t):
@@ -91,13 +132,19 @@ def t_ID(t):
     t.type = reserved.get(t.value,'ID')# Check for reserved words
     return t
 
+
+def t_CARACTER(t):
+    r"""\'(\\'|\\\\|\\n|\\t|\\r|\\"|.)?\'"""
+    t.value = t.value[1:-1]
+    return t
+
 #Comentario de Una Linea
-def t_Com_Simple(t):
+def t_ignore_Com_Simple(t):
     r'\/\/.*'
     t.lexer.lineno += 1
 
 #Comentario Multilinea
-def t_Com_Multiple(t):
+def t_ignore_Com_Multiple(t):
     r'\/\*(.|\n)*?\*\/'
     t.lexer.lineno += t.value.count('\n')
     
@@ -111,17 +158,12 @@ t_ignore = " \t"
 
 #Error
 def t_error(t):
-    t.lexer.skip(1)
+    errores.append(Excepcion("Léxico","Error léxico." + t.value[0] , t.lexer.lineno, find_column(input, t)))
+    print("Illegal character '%s'" % t.value[0])
+    t.lexer.skip(1) 
 
 def find_column(inp, tk):
     line_start = inp.rfind('\n', 0, tk.lexpos) + 1
     return (tk.lexpos - line_start) + 1
-
-def test_lexer(lexer):
-    while True:
-        tok = lexer.token()
-        if not tok:
-            break  # No more input
-        print(tok)
 
 lexer = lex.lex(reflags = re.IGNORECASE)
