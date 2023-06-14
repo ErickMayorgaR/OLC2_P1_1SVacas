@@ -9,14 +9,14 @@ reserved = {
     'log'         :   'RLOG',
     'let'         :   'RLET',
     'Any'         :   'ANY',
-    'Number'      :   'NUMBER',
-    'String'      :   'STRING',
-    'Boolean'     :   'BOOLEAN',
+    'number'      :   'NUMBER',
+    'string'      :   'STRING',
+    'boolean'     :   'BOOLEAN',
     'true'        :   'RTRUE',
     'false'       :   'RFALSE',
     'if'          :   'RIF',
     'else'        :   'RELSE',
-
+    'while'       :   'RWHILE'
 }
 
 tokens  = [

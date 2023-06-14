@@ -6,6 +6,9 @@ from src.Expresiones.logica import Logica
 from src.Expresiones.Identificador import Identificador
 from src.Expresiones.primitivos import Primitivos
 from src.Instrucciones.imprimir import Imprimir
+from src.Instrucciones.Sentencias.If import If
+from src.Instrucciones.Sentencias.While import While
+from src.Instrucciones.Variables.Declaracion import Declaracion
 from src.TS.Tipo import Tipo, OperadorAritmetico, OperadorLogico, OperadorRelacional
 from src.TS.Excepcion import Excepcion
 from copy import copy
@@ -50,9 +53,16 @@ def p_instrucciones_2(t):
 def p_instrucciones_evaluar(t):
     '''instruccion : imprimir PTCOMA
                     | declaracion_normal PTCOMA
-                    | condicional_if PTCOMA'''
+                    | condicional_if PTCOMA
+                    | ciclo_while PTCOMA'''
     t[0] = t[1]
-    
+
+def p_error(t):
+    'instruccion : error PTCOMA'
+    errores.append(Excepcion("Sintáctico", "Error sintáctico, " + str(t[1].value), t.lineno(1), find_column(input, t.slice[1])))
+    t[0] = "" 
+
+
 # ///////////////////////////////////////////////////// IMPRIMIR
 def p_imprimir(t):
     'imprimir : RCONSOLE PUNTO RLOG PARI expresion PARD'
@@ -62,15 +72,59 @@ def p_imprimir(t):
 # ///////////////////////////////////////////////////// DECLARACION VARIABLES
 def p_declaracion_normal(t):
     'declaracion_normal : RLET ID DPUNTOS tipo IGUAL expresion'
-    print('Variable:',t[2],'Tipo de dato:',t[4],'Expresion:',t[6])
-    t[0] = [t[2], t[4], t[6]]
+    t[0] = Declaracion(t[2], t[4], t[6], t.lineno(1), find_column(input, t.slice[1]))
 
+def p_declaracion_sin_tipo(t):
+    'declaracion_normal : RLET ID IGUAL expresion'
+    t[0] = Declaracion(t[2], any, t[4], t.lineno(1), find_column(input, t.slice[1]))
+
+def p_declaracion_sin_tipo_sin_valor(t):
+    'declaracion_normal : RLET ID'
+    t[0] = Declaracion(t[2], any, None, t.lineno(1), find_column(input, t.slice[1]))
+
+def p_declaracion_sin_valor(t):
+    'declaracion_normal : RLET ID DPUNTOS tipo'
+    if t[4] = "number":
+        t[0] = Declaracion(t[2], t[4], 0, t.lineno(1), find_column(input, t.slice[1]))
 
 # ///////////////////////////////////////////////////// IF CONDICIONAL
 def p_condicional_if(t):
-    'condicional_if : RIF PARI expresion PARD LLAVEIZQ LLAVEDER'
-    print('Expresion:',t[3])
-    t[0] = t[3]
+    'condicional_if : RIF PARI expresion PARD LLAVEIZQ instrucciones LLAVEDER'
+    t[0] = If(t[3], t[6], None, None, t.lineno(1), find_column(input, t.slice[1]))
+
+def p_condicional_if_elseif_else(t):
+    'condicional_if : RIF PARI expresion PARD LLAVEIZQ instrucciones LLAVEDER condicional_elseifs RELSE LLAVEIZQ instrucciones LLAVEDER'
+    t[0] = If(t[3], t[6], t[11], t[8], t.lineno(1), find_column(input, t.slice[1]))
+
+def p_condicional_if_elseif(t):
+    'condicional_if : RIF PARI expresion PARD LLAVEIZQ instrucciones LLAVEDER condicional_elseifs'
+    t[0] = If(t[3], t[6], None, t[8], t.lineno(1), find_column(input, t.slice[1]))
+
+def p_condicional_if_else(t):
+    'condicional_if : RIF PARI expresion PARD LLAVEIZQ instrucciones LLAVEDER RELSE LLAVEIZQ instrucciones LLAVEDER'
+    t[0] = If(t[3], t[6], t[10], None, t.lineno(1), find_column(input, t.slice[1]))
+
+def p_elseifs_elseifs_elseif(t):
+    'condicional_elseifs : condicional_elseifs condicional_elseif'
+    if t[2] != "":
+        t[1].append(t[2])
+    t[0] = t[1] 
+
+def p_elseifs_elseif(t):
+    'condicional_elseifs : condicional_elseif'
+    if t[1] == "":
+        t[0] = []
+    else:
+        t[0] = [t[1]] 
+
+def p_condicional_elseif(t):
+    'condicional_elseif : RELSE RIF PARI expresion PARD LLAVEIZQ instrucciones LLAVEDER'
+    t[0] = If(t[4], t[7], None, None, t.lineno(1), find_column(input, t.slice[1]))
+
+# ///////////////////////////////////////////////////// CICLO WHILE
+def p_ciclo_While(t):
+    'ciclo_while : WHILE PARI expresion PARD LLAVEIZQ instrucciones LLAVEDER'
+    t[0] = While(t[3], t[6], t.lineno(1), find_column(input, t.slice[1]))
 
 
 # ///////////////////////////////////////////////////// TIPOS
@@ -171,11 +225,6 @@ def p_expresion_identificador(p):
     'expresion : ID'
     p[0] = Identificador(p[1], p.lineno(1), find_column(input, p.slice[1]))
 
-
-
-def p_error(t):
-    print(" Error sintáctico en '%s'" % t.value)
-
 input = ''
 
 def parse(inp):
@@ -200,6 +249,7 @@ from src.TS.TablaSimbolos import TablaSimbolos
 
 entrada = '''
 console.log(4<5&&9>7); // No la camioneta vaconsole.log(4+2-6*3);
+let var1 = 0;
 '''
 
 instrucciones = parse(entrada) #ARBOL AST

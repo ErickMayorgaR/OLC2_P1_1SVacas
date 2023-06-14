@@ -1,10 +1,8 @@
 class Simbolo:
-    def __init__(self, identificador, tipo, valor, local, globall, fila, columna):
+    def __init__(self, identificador, tipo, valor, fila, columna):
         self.identificador = identificador
         self.tipo = tipo
         self.valor = valor
-        self.local = local
-        self.globall = globall
         self.fila = fila
         self.columna = columna
 
@@ -29,11 +27,11 @@ class Simbolo:
     def getFila(self):
         return self.fila
     
+    def setFila(self,fila):
+        self.fila = fila
+
     def getColumna(self):
         return self.columna
 
-    def getLocal(self):
-        return self.local
-
-    def getGloball(self):
-        return self.globall
+    def setColumna(self,columna):
+        self.columna = columna

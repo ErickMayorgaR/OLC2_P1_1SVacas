@@ -6,9 +6,16 @@ class Arbol:
         self.excepciones = []
         self.consola = ""
         self.TSGlobal = None
+        self.TSGInterpretada = {}
         self.dot = ""
         self.contador = 0
 
+    def setTSGI(self, entorno, valor):
+        self.TSGInterpretada[entorno] = valor
+    
+    def getTSGI(self):
+        return self.TSGInterpretada
+        
     def getInstrucciones(self):
         return self.instrucciones
 

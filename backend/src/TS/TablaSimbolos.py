@@ -1,3 +1,4 @@
+from ...TS.Excepcion import Excepcion
 class TablaSimbolos:
     def __init__(self, owner, anterior = None):
         self.tabla = {} #Da un diccionario vacio
@@ -48,4 +49,4 @@ class TablaSimbolos:
                 return "variable actualizada" #Si regresa esto es que si la actualizo
             else:
                 tablaActual = tablaActual.anterior
-        return None #Si regresa esto es que no la actualizo
+        return Excepcion("Semantico", "Variable no encontrada.", simbolo.getFila(), simbolo.getColumna()) 
