@@ -249,7 +249,7 @@ entrada = '''
 let val1:number = 1;
 let val2:number = 10;
 let val3:number = 2021.2020;
-
+console.log(val1, " ", val2, " ", val3);
 '''
 
 instrucciones = parse(entrada) #ARBOL AST
