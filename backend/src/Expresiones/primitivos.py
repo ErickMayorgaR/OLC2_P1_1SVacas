@@ -8,7 +8,6 @@ class Primitivos(Instruccion):
         self.valor = valor
         self.fila = fila
         self.columna = columna
-        super().__init__(fila, columna)
     
     def interpretar(self, tree, table):
         return self.valor

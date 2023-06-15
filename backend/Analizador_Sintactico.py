@@ -8,7 +8,7 @@ from src.Expresiones.primitivos import Primitivos
 from src.Instrucciones.imprimir import Imprimir
 from src.Instrucciones.Sentencias.If import If
 from src.Instrucciones.Sentencias.While import While
-from src.Instrucciones.Variables.Declaracion import Declaracion
+from src.Instrucciones.Variables.Declaracion import DeclaracionVar
 from src.TS.Tipo import Tipo, OperadorAritmetico, OperadorLogico, OperadorRelacional
 from src.TS.Excepcion import Excepcion
 from copy import copy
@@ -53,8 +53,7 @@ def p_instrucciones_2(t):
 def p_instrucciones_evaluar(t):
     '''instruccion : imprimir PTCOMA
                     | declaracion_normal PTCOMA
-                    | condicional_if PTCOMA
-                    | ciclo_while PTCOMA'''
+                    | condicional_if PTCOMA'''
     t[0] = t[1]
 
 def p_error(t):
@@ -72,20 +71,20 @@ def p_imprimir(t):
 # ///////////////////////////////////////////////////// DECLARACION VARIABLES
 def p_declaracion_normal(t):
     'declaracion_normal : RLET ID DPUNTOS tipo IGUAL expresion'
-    t[0] = Declaracion(t[2], t[4], t[6], t.lineno(1), find_column(input, t.slice[1]))
+    t[0] = DeclaracionVar(t[2], t[4], t[6], t.lineno(1), find_column(input, t.slice[1]))
 
 def p_declaracion_sin_tipo(t):
     'declaracion_normal : RLET ID IGUAL expresion'
-    t[0] = Declaracion(t[2], any, t[4], t.lineno(1), find_column(input, t.slice[1]))
+    t[0] = DeclaracionVar(t[2], any, t[4], t.lineno(1), find_column(input, t.slice[1]))
 
 def p_declaracion_sin_tipo_sin_valor(t):
     'declaracion_normal : RLET ID'
-    t[0] = Declaracion(t[2], any, None, t.lineno(1), find_column(input, t.slice[1]))
+    t[0] = DeclaracionVar(t[2], any, None, t.lineno(1), find_column(input, t.slice[1]))
 
 def p_declaracion_sin_valor(t):
     'declaracion_normal : RLET ID DPUNTOS tipo'
-    if t[4] = "number":
-        t[0] = Declaracion(t[2], t[4], 0, t.lineno(1), find_column(input, t.slice[1]))
+    if t[4] == "number":
+        t[0] = DeclaracionVar(t[2], t[4], 0, t.lineno(1), find_column(input, t.slice[1]))
 
 # ///////////////////////////////////////////////////// IF CONDICIONAL
 def p_condicional_if(t):
@@ -122,10 +121,10 @@ def p_condicional_elseif(t):
     t[0] = If(t[4], t[7], None, None, t.lineno(1), find_column(input, t.slice[1]))
 
 # ///////////////////////////////////////////////////// CICLO WHILE
-def p_ciclo_While(t):
+'''def p_ciclo_While(t):
     'ciclo_while : WHILE PARI expresion PARD LLAVEIZQ instrucciones LLAVEDER'
     t[0] = While(t[3], t[6], t.lineno(1), find_column(input, t.slice[1]))
-
+'''
 
 # ///////////////////////////////////////////////////// TIPOS
 def p_tipo(t):
@@ -133,7 +132,6 @@ def p_tipo(t):
             | NUMBER
             | BOOLEAN'''
     t[0] = t[1]
-
 
 # ///////////////////////////////////////////////////// ARITMETICAS
 def p_expresion_binaria(t):
@@ -221,9 +219,9 @@ def p_expresion_boolean(t):
         t[0] = Primitivos(Tipo.BANDERA, False, t.lineno(1), find_column(input, t.slice[1]))
 
 
-def p_expresion_identificador(p):
+def p_expresion_identificador(t):
     'expresion : ID'
-    p[0] = Identificador(p[1], p.lineno(1), find_column(input, p.slice[1]))
+    t[0] = Identificador(t[1], t.lineno(1), find_column(input, t.slice[1]))
 
 input = ''
 
@@ -248,8 +246,10 @@ from src.TS.Arbol import Arbol
 from src.TS.TablaSimbolos import TablaSimbolos
 
 entrada = '''
-console.log(4<5&&9>7); // No la camioneta vaconsole.log(4+2-6*3);
-let var1 = 0;
+let val1:number = 1;
+let val2:number = 10;
+let val3:number = 2021.2020;
+
 '''
 
 instrucciones = parse(entrada) #ARBOL AST

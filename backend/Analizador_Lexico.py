@@ -15,8 +15,7 @@ reserved = {
     'true'        :   'RTRUE',
     'false'       :   'RFALSE',
     'if'          :   'RIF',
-    'else'        :   'RELSE',
-    'while'       :   'RWHILE'
+    'else'        :   'RELSE'
 }
 
 tokens  = [

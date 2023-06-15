@@ -24,18 +24,26 @@ class DeclaracionVar(Instruccion):
             value = self.valor.interpretar(tree, table)
             if isinstance(value, Excepcion):
                 return value
-            
+               
             if self.tipo == any: #Verifica si el tipo de la var no viene
                 self.tipo = self.valor.tipo #Le asigna el tipo a la var
-
-            if self.tipo == self.valor.tipo: #Verifica que las variables sean del mismo tipo 
-                simbolo = Simbolo(str(self.identificador), self.tipo, value, self.fila, self.columna)
-                result = table.setTabla(simbolo)
-                if isinstance(result, Excepcion):
-                    return result
-                return None
-            else:
+            if self.tipo != self.valor.tipo: #Verifica que las variables sean del mismo tipo 
                 return Excepcion("Semántico", "El tipo de dato en la variable \""+self.identificador+"\" es diferente", self.fila, self.columna) 
+        
+        if simboloVar != None:
+            if self.valor == any:
+                simbolo = Simbolo(str(self.identificador), Tipo.ANY, value, self.fila, self.columna)
+            elif self.valor == None :
+                simbolo = Simbolo(str(self.identificador), Tipo.NULO, None, self.fila, self.columna)
+            else:
+                simbolo = Simbolo(str(self.identificador), self.tipo, value, self.fila, self.columna)
+        else:
+            simbolo = Simbolo(str(self.identificador), Tipo.NULO, None, self.fila, self.columna)
+
+        result = table.setTabla(simbolo)
+        if isinstance(result, Excepcion):
+            return result
+        return None
         
         
     def getNode(self):
@@ -51,14 +59,12 @@ class DeclaracionVar(Instruccion):
 
     def tipoDato(self, tipo):
         if tipo == Tipo.BANDERA:
-            return "Bool"
+            return "bool"
         elif tipo == Tipo.CADENA:
-            return "String"
+            return "string"
         elif tipo == Tipo.CARACTER:
-            return "Char"
-        elif tipo == Tipo.DOBLE:
-            return "Float64"
+            return "char"
         elif tipo == Tipo.NUMBER:
-            return "Int64"
+            return "number"
         elif tipo == Tipo.NULO:
             return "Nothing"

@@ -9,6 +9,7 @@ class Tipo(Enum):
     STRUCT = 6
     NULO = 7
     ARREGLO =8
+    ANY = 9
     
 class OperadorAritmetico(Enum):
     MAS = 1

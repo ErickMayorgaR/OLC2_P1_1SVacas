@@ -1,5 +1,6 @@
 from ..Abstract.abstract import Instruccion
 from ..Abstract.NodeCst import NodeCst
+from ..TS.Arbol import Arbol
 
 class Imprimir(Instruccion):
 
@@ -10,6 +11,7 @@ class Imprimir(Instruccion):
     def interpretar(self, tree, table):
         value = self.expresion.interpretar(tree, table)
         print(value)
+        tree.updateConsolaln(value)
         return value
     
     def getNode(self):
