@@ -22,6 +22,7 @@ tokens  = [
     'PUNTO',
     'DPUNTOS',
     'PTCOMA',
+    'COMA',
     'PARI',
     'PARD',
     'LLAVEIZQ',
@@ -51,6 +52,7 @@ tokens  = [
 t_PUNTO         = r'\.'
 t_DPUNTOS       = r'\:'
 t_PTCOMA        = r'\;'
+t_COMA          = r'\,'
 t_PARI          = r'\('
 t_PARD          = r'\)'
 t_LLAVEIZQ      = r'\{'

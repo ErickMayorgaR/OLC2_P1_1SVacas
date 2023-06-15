@@ -64,9 +64,8 @@ def p_error(t):
 
 # ///////////////////////////////////////////////////// IMPRIMIR
 def p_imprimir(t):
-    'imprimir : RCONSOLE PUNTO RLOG PARI expresion PARD'
+    'imprimir : RCONSOLE PUNTO RLOG PARI expresiones_coma PARD'
     t[0] = Imprimir(t[5], t.lineno(1), find_column(input, t.slice[1]))
-
 
 # ///////////////////////////////////////////////////// DECLARACION VARIABLES
 def p_declaracion_normal(t):
@@ -222,6 +221,16 @@ def p_expresion_boolean(t):
 def p_expresion_identificador(t):
     'expresion : ID'
     t[0] = Identificador(t[1], t.lineno(1), find_column(input, t.slice[1]))
+
+#///////////////////////////////////////////////////////////EXPRESIONES COMA
+def p_expresiones_coma_expresiones_coma_epxresion(p):
+    'expresiones_coma : expresiones_coma COMA expresion'
+    p[1].append(p[3])
+    p[0] = p[1]
+
+def p_expresiones_coma_expresion(p):
+    'expresiones_coma : expresion'
+    p[0] = [p[1]]
 
 input = ''
 
