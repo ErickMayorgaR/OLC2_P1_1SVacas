@@ -98,15 +98,24 @@ def t_ENTERO(n):
     return n
 
 #Cadena
+# def t_CADENA(t):
+#     r'(\".*?\")'
+#     t.value = t.value[1:-1] #Se remueven las comillas de la entrada
+#     t.value = t.value.replace('\\t','\t')
+#     t.value = t.value.replace('\\n','\n')
+#     t.value = t.value.replace('\\"','\"')
+#     t.value = t.value.replace("\\'","\'")
+#     t.value = t.value.replace('\\\\','\\')
+#     return t
 def t_CADENA(t):
-    r'(\".*?\")'
+    r'(\"([^\\]|(\\.))*?\")'
     t.value = t.value[1:-1] #Se remueven las comillas de la entrada
     t.value = t.value.replace('\\t','\t')
-    t.value = t.value.replace('\\n','\n')
     t.value = t.value.replace('\\"','\"')
     t.value = t.value.replace("\\'","\'")
     t.value = t.value.replace('\\\\','\\')
     return t
+
 
 #Identificador
 def t_ID(t):

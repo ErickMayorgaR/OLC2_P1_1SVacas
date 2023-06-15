@@ -83,7 +83,11 @@ def p_declaracion_sin_tipo_sin_valor(t):
 def p_declaracion_sin_valor(t):
     'declaracion_normal : RLET ID DPUNTOS tipo'
     if t[4] == "number":
-        t[0] = DeclaracionVar(t[2], t[4], 0, t.lineno(1), find_column(input, t.slice[1]))
+        t[0] = DeclaracionVar(t[2], t[4], "0", t.lineno(1), find_column(input, t.slice[1]))
+    elif t[4] == "string":
+        t[0] = DeclaracionVar(t[2], t[4], "", t.lineno(1), find_column(input, t.slice[1]))
+    elif t[4] == "boolean":
+        t[0] = DeclaracionVar(t[2], t[4], "true", t.lineno(1), find_column(input, t.slice[1]))
 
 # ///////////////////////////////////////////////////// IF CONDICIONAL
 def p_condicional_if(t):
@@ -207,7 +211,7 @@ def p_expresion_decimal(t):
 
 def p_expresion_cadena(t):
     'expresion : CADENA'
-    t[0] = Primitivos(Tipo.CADENA, str(t[1]), t.lineno(1), find_column(input, t.slice[1]))
+    t[0] = Primitivos(Tipo.CADENA, str(t[1]).replace('\\n', '\n'), t.lineno(1), find_column(input, t.slice[1]))
 
 def p_expresion_boolean(t):
     '''expresion : RTRUE
@@ -258,7 +262,11 @@ entrada = '''
 let val1:number = 1;
 let val2:number = 10;
 let val3:number = 2021.2020;
+console.log("Probando declaracion de variables \n");
 console.log(val1, " ", val2, " ", val3);
+console.log("---------------------------------");
+// COMENTARIO DE UNA LINEA
+
 '''
 
 instrucciones = parse(entrada) #ARBOL AST
