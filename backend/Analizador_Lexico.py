@@ -16,6 +16,7 @@ reserved = {
     'false'       :   'RFALSE',
     'if'          :   'RIF',
     'else'        :   'RELSE',
+    'while'       :   'WHILE',
     'function'    :   'RFUNCTION',
     'return'      :   'RRETURN',
     'continue'    :   'RCONTINUE',
@@ -149,5 +150,5 @@ def test_lexer(lexer):
         if not tok:
             break  # No more input
         print(tok)
-        
+
 lexer = lex.lex(reflags = re.IGNORECASE)

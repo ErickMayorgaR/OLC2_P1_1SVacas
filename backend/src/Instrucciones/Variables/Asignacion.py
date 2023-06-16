@@ -19,7 +19,7 @@ class AsignacionVar(Instruccion):
         if isinstance(value, Excepcion):
             return value
 
-        if self.tipo == None: #Ve si el tipo 
+        if self.tipo == any: #Ve si el tipo 
             self.tipo = self.valor.tipo 
 
         if Tipo[self.tipo.upper()] != self.valor.tipo: #Verifica que el tipo asignado sea el mismo que el del valor
@@ -29,7 +29,6 @@ class AsignacionVar(Instruccion):
         
 
         if simboloVar != None:
-            if simboloVar.globall == False and  simboloVar.local == False:
                 tablaSimbolo = table.getRealTabla(str(self.identificador))
                 ambitoPadreFuncion =  table.getNombreTabla()
                 #Por si se quiere declarar una variable igual en un entorno de funcion que ya exista en la global 
@@ -37,32 +36,14 @@ class AsignacionVar(Instruccion):
                     simboloVar = None
                 elif tablaSimbolo.owner == 'global' and ambitoPadreFuncion == True:
                     simboloVar = None
-
-
-        if simboloVar != None: #Reasigna una variable ya existente
-            if simboloVar.globall: #Si la variable es global
-                simbolo = Simbolo(str(self.identificador), self.tipo, value, False, True, self.fila, self.columna)
-                result = table.actualizarTabla(simbolo) #Actualiza la variable del entorno global
-                if isinstance(result, Excepcion):
-                    return result
-                resultGlobal = tree.getTSGlobal().actualizarTabla(simbolo) #Actualiza la variable global
-                if isinstance(resultGlobal, Excepcion):
-                    return result
             
-            elif simboloVar.local: #Si la variable es local
-                simbolo = Simbolo(str(self.identificador), self.tipo, value, True, False, self.fila, self.columna)
-                result = table.actualizarTabla(simbolo) #Actualiza la variable local mas cercana
-                if isinstance(result, Excepcion):
-                    return result
-            
-            else: #Si se declara normalita
-                simbolo = Simbolo(str(self.identificador), self.tipo, value, False, False, self.fila, self.columna)
+                simbolo = Simbolo(str(self.identificador), self.tipo, value, self.fila, self.columna)
                 result = table.actualizarTabla(simbolo)
                 if isinstance(result, Excepcion):
                     return result
 
         elif simboloVar == None: #Declara una variable
-            simbolo = Simbolo(str(self.identificador), self.tipo, value, False, False, self.fila, self.columna)
+            simbolo = Simbolo(str(self.identificador), self.tipo, value, self.fila, self.columna)
             result = table.setTabla(simbolo)
             if isinstance(result, Excepcion):
                 return result

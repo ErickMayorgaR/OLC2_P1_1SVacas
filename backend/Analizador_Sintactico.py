@@ -231,10 +231,9 @@ def p_condicional_elseif(t):
     t[0] = If(t[4], t[7], None, None, t.lineno(1), find_column(input, t.slice[1]))
 
 # ///////////////////////////////////////////////////// CICLO WHILE
-'''def p_ciclo_While(t):
+def p_ciclo_While(t):
     'ciclo_while : WHILE PARI expresion PARD LLAVEIZQ instrucciones LLAVEDER'
     t[0] = While(t[3], t[6], t.lineno(1), find_column(input, t.slice[1]))
-'''
 
 # ///////////////////////////////////////////////////// TIPOS
 def p_tipo(t):
@@ -394,7 +393,7 @@ console.log(val1, " ", val2, " ", val3);
 console.log("---------------------------------");
 // COMENTARIO DE UNA LINEA
 let a: number = 5;
-console.log(typeof(toString(a))); // llamada a una funcion
+//console.log(typeof(toString(a))); // llamada a una funcion
 '''
 
 instrucciones = parse(entrada) #ARBOL AST

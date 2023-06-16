@@ -50,89 +50,92 @@ Rule 39    condicional_if -> RIF PARI expresion PARD LLAVEIZQ instrucciones LLAV
 Rule 40    condicional_elseifs -> condicional_elseifs condicional_elseif
 Rule 41    condicional_elseifs -> condicional_elseif
 Rule 42    condicional_elseif -> RELSE RIF PARI expresion PARD LLAVEIZQ instrucciones LLAVEDER
-Rule 43    tipo -> STRING
-Rule 44    tipo -> NUMBER
-Rule 45    tipo -> BOOLEAN
-Rule 46    expresion -> expresion MAS expresion
-Rule 47    expresion -> expresion MENOS expresion
-Rule 48    expresion -> expresion POR expresion
-Rule 49    expresion -> expresion DIV expresion
-Rule 50    expresion -> expresion POTENCIA expresion
-Rule 51    expresion -> expresion PORCENTAJE expresion
-Rule 52    expresion -> expresion IGUALIGUAL expresion
-Rule 53    expresion -> expresion DIFERENTE expresion
-Rule 54    expresion -> expresion MENOR expresion
-Rule 55    expresion -> expresion MAYOR expresion
-Rule 56    expresion -> expresion MENORIGUAL expresion
-Rule 57    expresion -> expresion MAYORIGUAL expresion
-Rule 58    expresion -> expresion AND expresion
-Rule 59    expresion -> expresion OR expresion
-Rule 60    expresion -> MENOS expresion
-Rule 61    expresion -> ENTERO
-Rule 62    expresion -> DECIMAL
-Rule 63    expresion -> CADENA
-Rule 64    expresion -> RTRUE
-Rule 65    expresion -> RFALSE
-Rule 66    expresion -> ID
-Rule 67    expresiones_coma -> expresiones_coma COMA expresion
-Rule 68    expresiones_coma -> expresion
+Rule 43    ciclo_while -> WHILE PARI expresion PARD LLAVEIZQ instrucciones LLAVEDER
+Rule 44    tipo -> STRING
+Rule 45    tipo -> NUMBER
+Rule 46    tipo -> BOOLEAN
+Rule 47    expresion -> expresion MAS expresion
+Rule 48    expresion -> expresion MENOS expresion
+Rule 49    expresion -> expresion POR expresion
+Rule 50    expresion -> expresion DIV expresion
+Rule 51    expresion -> expresion POTENCIA expresion
+Rule 52    expresion -> expresion PORCENTAJE expresion
+Rule 53    expresion -> expresion IGUALIGUAL expresion
+Rule 54    expresion -> expresion DIFERENTE expresion
+Rule 55    expresion -> expresion MENOR expresion
+Rule 56    expresion -> expresion MAYOR expresion
+Rule 57    expresion -> expresion MENORIGUAL expresion
+Rule 58    expresion -> expresion MAYORIGUAL expresion
+Rule 59    expresion -> expresion AND expresion
+Rule 60    expresion -> expresion OR expresion
+Rule 61    expresion -> MENOS expresion
+Rule 62    expresion -> ENTERO
+Rule 63    expresion -> DECIMAL
+Rule 64    expresion -> CADENA
+Rule 65    expresion -> RTRUE
+Rule 66    expresion -> RFALSE
+Rule 67    expresion -> ID
+Rule 68    expresiones_coma -> expresiones_coma COMA expresion
+Rule 69    expresiones_coma -> expresion
 
 Terminals, with rules where they appear
 
-AND                  : 58
+AND                  : 59
 ANY                  : 
-BOOLEAN              : 45
-CADENA               : 63
-COMA                 : 17 22 67
-DECIMAL              : 62
-DIFERENTE            : 53
-DIV                  : 49
+BOOLEAN              : 46
+CADENA               : 64
+COMA                 : 17 22 68
+DECIMAL              : 63
+DIFERENTE            : 54
+DIV                  : 50
 DPUNTOS              : 19 20 26 29 30 30
-ENTERO               : 61
-ID                   : 13 14 15 16 19 20 21 26 27 28 29 30 31 66
+ENTERO               : 62
+ID                   : 13 14 15 16 19 20 21 26 27 28 29 30 31 67
 IGUAL                : 26 27 30 31
-IGUALIGUAL           : 52
-LLAVEDER             : 13 14 36 37 37 38 39 39 42
-LLAVEIZQ             : 13 14 36 37 37 38 39 39 42
-MAS                  : 46
-MAYOR                : 55
-MAYORIGUAL           : 57
-MENOR                : 54
-MENORIGUAL           : 56
-MENOS                : 47 60
+IGUALIGUAL           : 53
+LLAVEDER             : 13 14 36 37 37 38 39 39 42 43
+LLAVEIZQ             : 13 14 36 37 37 38 39 39 42 43
+MAS                  : 47
+MAYOR                : 56
+MAYORIGUAL           : 58
+MENOR                : 55
+MENORIGUAL           : 57
+MENOS                : 48 61
 NOT                  : 
-NUMBER               : 44
-OR                   : 59
-PARD                 : 13 14 15 16 25 36 37 38 39 42
-PARI                 : 13 14 15 16 25 36 37 38 39 42
-POR                  : 48
-PORCENTAJE           : 51
-POTENCIA             : 50
+NUMBER               : 45
+OR                   : 60
+PARD                 : 13 14 15 16 25 36 37 38 39 42 43
+PARI                 : 13 14 15 16 25 36 37 38 39 42 43
+POR                  : 49
+PORCENTAJE           : 52
+POTENCIA             : 51
 PTCOMA               : 4 5 6 7 8 9 10 11 12
 PUNTO                : 25
 RBREAK               : 34
 RCONSOLE             : 25
 RCONTINUE            : 35
 RELSE                : 37 39 42
-RFALSE               : 65
+RFALSE               : 66
 RFUNCTION            : 13 14
 RIF                  : 36 37 38 39 42
 RLET                 : 19 26 27 28 29
 RLOG                 : 25
 RRETURN              : 32 33
-RTRUE                : 64
-STRING               : 43
+RTRUE                : 65
+STRING               : 44
+WHILE                : 43
 error                : 
 
 Nonterminals, with rules where they appear
 
 asignacion_normal    : 6
+ciclo_while          : 
 condicional_elseif   : 40 41
 condicional_elseifs  : 37 38 40
 condicional_if       : 7
 declaracion_normal   : 5
-expresion            : 24 26 27 30 31 32 36 37 38 39 42 46 46 47 47 48 48 49 49 50 50 51 51 52 52 53 53 54 54 55 55 56 56 57 57 58 58 59 59 60 67 68
-expresiones_coma     : 67
+expresion            : 24 26 27 30 31 32 36 37 38 39 42 43 47 47 48 48 49 49 50 50 51 51 52 52 53 53 54 54 55 55 56 56 57 57 58 58 59 59 60 60 61 68 69
+expresiones_coma     : 68
 funcion              : 8
 imprimir             : 4
 init                 : 0
@@ -140,7 +143,7 @@ inst_break           : 11
 inst_continue        : 12
 inst_return          : 10
 instruccion          : 2 3
-instrucciones        : 1 2 13 14 36 37 37 38 39 39 42
+instrucciones        : 1 2 13 14 36 37 37 38 39 39 42 43
 llamada_funcion      : 9
 parametro            : 17 18
 parametro_ll         : 22 23
@@ -396,27 +399,27 @@ state 18
 
     (32) inst_return -> RRETURN . expresion
     (33) inst_return -> RRETURN .
-    (46) expresion -> . expresion MAS expresion
-    (47) expresion -> . expresion MENOS expresion
-    (48) expresion -> . expresion POR expresion
-    (49) expresion -> . expresion DIV expresion
-    (50) expresion -> . expresion POTENCIA expresion
-    (51) expresion -> . expresion PORCENTAJE expresion
-    (52) expresion -> . expresion IGUALIGUAL expresion
-    (53) expresion -> . expresion DIFERENTE expresion
-    (54) expresion -> . expresion MENOR expresion
-    (55) expresion -> . expresion MAYOR expresion
-    (56) expresion -> . expresion MENORIGUAL expresion
-    (57) expresion -> . expresion MAYORIGUAL expresion
-    (58) expresion -> . expresion AND expresion
-    (59) expresion -> . expresion OR expresion
-    (60) expresion -> . MENOS expresion
-    (61) expresion -> . ENTERO
-    (62) expresion -> . DECIMAL
-    (63) expresion -> . CADENA
-    (64) expresion -> . RTRUE
-    (65) expresion -> . RFALSE
-    (66) expresion -> . ID
+    (47) expresion -> . expresion MAS expresion
+    (48) expresion -> . expresion MENOS expresion
+    (49) expresion -> . expresion POR expresion
+    (50) expresion -> . expresion DIV expresion
+    (51) expresion -> . expresion POTENCIA expresion
+    (52) expresion -> . expresion PORCENTAJE expresion
+    (53) expresion -> . expresion IGUALIGUAL expresion
+    (54) expresion -> . expresion DIFERENTE expresion
+    (55) expresion -> . expresion MENOR expresion
+    (56) expresion -> . expresion MAYOR expresion
+    (57) expresion -> . expresion MENORIGUAL expresion
+    (58) expresion -> . expresion MAYORIGUAL expresion
+    (59) expresion -> . expresion AND expresion
+    (60) expresion -> . expresion OR expresion
+    (61) expresion -> . MENOS expresion
+    (62) expresion -> . ENTERO
+    (63) expresion -> . DECIMAL
+    (64) expresion -> . CADENA
+    (65) expresion -> . RTRUE
+    (66) expresion -> . RFALSE
+    (67) expresion -> . ID
 
     PTCOMA          reduce using rule 33 (inst_return -> RRETURN .)
     MENOS           shift and go to state 38
@@ -626,27 +629,27 @@ state 33
 
     (30) asignacion_normal -> ID IGUAL . expresion DPUNTOS DPUNTOS tipo
     (31) asignacion_normal -> ID IGUAL . expresion
-    (46) expresion -> . expresion MAS expresion
-    (47) expresion -> . expresion MENOS expresion
-    (48) expresion -> . expresion POR expresion
-    (49) expresion -> . expresion DIV expresion
-    (50) expresion -> . expresion POTENCIA expresion
-    (51) expresion -> . expresion PORCENTAJE expresion
-    (52) expresion -> . expresion IGUALIGUAL expresion
-    (53) expresion -> . expresion DIFERENTE expresion
-    (54) expresion -> . expresion MENOR expresion
-    (55) expresion -> . expresion MAYOR expresion
-    (56) expresion -> . expresion MENORIGUAL expresion
-    (57) expresion -> . expresion MAYORIGUAL expresion
-    (58) expresion -> . expresion AND expresion
-    (59) expresion -> . expresion OR expresion
-    (60) expresion -> . MENOS expresion
-    (61) expresion -> . ENTERO
-    (62) expresion -> . DECIMAL
-    (63) expresion -> . CADENA
-    (64) expresion -> . RTRUE
-    (65) expresion -> . RFALSE
-    (66) expresion -> . ID
+    (47) expresion -> . expresion MAS expresion
+    (48) expresion -> . expresion MENOS expresion
+    (49) expresion -> . expresion POR expresion
+    (50) expresion -> . expresion DIV expresion
+    (51) expresion -> . expresion POTENCIA expresion
+    (52) expresion -> . expresion PORCENTAJE expresion
+    (53) expresion -> . expresion IGUALIGUAL expresion
+    (54) expresion -> . expresion DIFERENTE expresion
+    (55) expresion -> . expresion MENOR expresion
+    (56) expresion -> . expresion MAYOR expresion
+    (57) expresion -> . expresion MENORIGUAL expresion
+    (58) expresion -> . expresion MAYORIGUAL expresion
+    (59) expresion -> . expresion AND expresion
+    (60) expresion -> . expresion OR expresion
+    (61) expresion -> . MENOS expresion
+    (62) expresion -> . ENTERO
+    (63) expresion -> . DECIMAL
+    (64) expresion -> . CADENA
+    (65) expresion -> . RTRUE
+    (66) expresion -> . RFALSE
+    (67) expresion -> . ID
 
     MENOS           shift and go to state 38
     ENTERO          shift and go to state 39
@@ -665,27 +668,27 @@ state 34
     (22) parametros_ll -> . parametros_ll COMA parametro_ll
     (23) parametros_ll -> . parametro_ll
     (24) parametro_ll -> . expresion
-    (46) expresion -> . expresion MAS expresion
-    (47) expresion -> . expresion MENOS expresion
-    (48) expresion -> . expresion POR expresion
-    (49) expresion -> . expresion DIV expresion
-    (50) expresion -> . expresion POTENCIA expresion
-    (51) expresion -> . expresion PORCENTAJE expresion
-    (52) expresion -> . expresion IGUALIGUAL expresion
-    (53) expresion -> . expresion DIFERENTE expresion
-    (54) expresion -> . expresion MENOR expresion
-    (55) expresion -> . expresion MAYOR expresion
-    (56) expresion -> . expresion MENORIGUAL expresion
-    (57) expresion -> . expresion MAYORIGUAL expresion
-    (58) expresion -> . expresion AND expresion
-    (59) expresion -> . expresion OR expresion
-    (60) expresion -> . MENOS expresion
-    (61) expresion -> . ENTERO
-    (62) expresion -> . DECIMAL
-    (63) expresion -> . CADENA
-    (64) expresion -> . RTRUE
-    (65) expresion -> . RFALSE
-    (66) expresion -> . ID
+    (47) expresion -> . expresion MAS expresion
+    (48) expresion -> . expresion MENOS expresion
+    (49) expresion -> . expresion POR expresion
+    (50) expresion -> . expresion DIV expresion
+    (51) expresion -> . expresion POTENCIA expresion
+    (52) expresion -> . expresion PORCENTAJE expresion
+    (53) expresion -> . expresion IGUALIGUAL expresion
+    (54) expresion -> . expresion DIFERENTE expresion
+    (55) expresion -> . expresion MENOR expresion
+    (56) expresion -> . expresion MAYOR expresion
+    (57) expresion -> . expresion MENORIGUAL expresion
+    (58) expresion -> . expresion MAYORIGUAL expresion
+    (59) expresion -> . expresion AND expresion
+    (60) expresion -> . expresion OR expresion
+    (61) expresion -> . MENOS expresion
+    (62) expresion -> . ENTERO
+    (63) expresion -> . DECIMAL
+    (64) expresion -> . CADENA
+    (65) expresion -> . RTRUE
+    (66) expresion -> . RFALSE
+    (67) expresion -> . ID
 
     PARD            shift and go to state 49
     MENOS           shift and go to state 38
@@ -706,27 +709,27 @@ state 35
     (37) condicional_if -> RIF PARI . expresion PARD LLAVEIZQ instrucciones LLAVEDER condicional_elseifs RELSE LLAVEIZQ instrucciones LLAVEDER
     (38) condicional_if -> RIF PARI . expresion PARD LLAVEIZQ instrucciones LLAVEDER condicional_elseifs
     (39) condicional_if -> RIF PARI . expresion PARD LLAVEIZQ instrucciones LLAVEDER RELSE LLAVEIZQ instrucciones LLAVEDER
-    (46) expresion -> . expresion MAS expresion
-    (47) expresion -> . expresion MENOS expresion
-    (48) expresion -> . expresion POR expresion
-    (49) expresion -> . expresion DIV expresion
-    (50) expresion -> . expresion POTENCIA expresion
-    (51) expresion -> . expresion PORCENTAJE expresion
-    (52) expresion -> . expresion IGUALIGUAL expresion
-    (53) expresion -> . expresion DIFERENTE expresion
-    (54) expresion -> . expresion MENOR expresion
-    (55) expresion -> . expresion MAYOR expresion
-    (56) expresion -> . expresion MENORIGUAL expresion
-    (57) expresion -> . expresion MAYORIGUAL expresion
-    (58) expresion -> . expresion AND expresion
-    (59) expresion -> . expresion OR expresion
-    (60) expresion -> . MENOS expresion
-    (61) expresion -> . ENTERO
-    (62) expresion -> . DECIMAL
-    (63) expresion -> . CADENA
-    (64) expresion -> . RTRUE
-    (65) expresion -> . RFALSE
-    (66) expresion -> . ID
+    (47) expresion -> . expresion MAS expresion
+    (48) expresion -> . expresion MENOS expresion
+    (49) expresion -> . expresion POR expresion
+    (50) expresion -> . expresion DIV expresion
+    (51) expresion -> . expresion POTENCIA expresion
+    (52) expresion -> . expresion PORCENTAJE expresion
+    (53) expresion -> . expresion IGUALIGUAL expresion
+    (54) expresion -> . expresion DIFERENTE expresion
+    (55) expresion -> . expresion MENOR expresion
+    (56) expresion -> . expresion MAYOR expresion
+    (57) expresion -> . expresion MENORIGUAL expresion
+    (58) expresion -> . expresion MAYORIGUAL expresion
+    (59) expresion -> . expresion AND expresion
+    (60) expresion -> . expresion OR expresion
+    (61) expresion -> . MENOS expresion
+    (62) expresion -> . ENTERO
+    (63) expresion -> . DECIMAL
+    (64) expresion -> . CADENA
+    (65) expresion -> . RTRUE
+    (66) expresion -> . RFALSE
+    (67) expresion -> . ID
 
     MENOS           shift and go to state 38
     ENTERO          shift and go to state 39
@@ -749,20 +752,20 @@ state 36
 state 37
 
     (32) inst_return -> RRETURN expresion .
-    (46) expresion -> expresion . MAS expresion
-    (47) expresion -> expresion . MENOS expresion
-    (48) expresion -> expresion . POR expresion
-    (49) expresion -> expresion . DIV expresion
-    (50) expresion -> expresion . POTENCIA expresion
-    (51) expresion -> expresion . PORCENTAJE expresion
-    (52) expresion -> expresion . IGUALIGUAL expresion
-    (53) expresion -> expresion . DIFERENTE expresion
-    (54) expresion -> expresion . MENOR expresion
-    (55) expresion -> expresion . MAYOR expresion
-    (56) expresion -> expresion . MENORIGUAL expresion
-    (57) expresion -> expresion . MAYORIGUAL expresion
-    (58) expresion -> expresion . AND expresion
-    (59) expresion -> expresion . OR expresion
+    (47) expresion -> expresion . MAS expresion
+    (48) expresion -> expresion . MENOS expresion
+    (49) expresion -> expresion . POR expresion
+    (50) expresion -> expresion . DIV expresion
+    (51) expresion -> expresion . POTENCIA expresion
+    (52) expresion -> expresion . PORCENTAJE expresion
+    (53) expresion -> expresion . IGUALIGUAL expresion
+    (54) expresion -> expresion . DIFERENTE expresion
+    (55) expresion -> expresion . MENOR expresion
+    (56) expresion -> expresion . MAYOR expresion
+    (57) expresion -> expresion . MENORIGUAL expresion
+    (58) expresion -> expresion . MAYORIGUAL expresion
+    (59) expresion -> expresion . AND expresion
+    (60) expresion -> expresion . OR expresion
 
     PTCOMA          reduce using rule 32 (inst_return -> RRETURN expresion .)
     MAS             shift and go to state 55
@@ -783,28 +786,28 @@ state 37
 
 state 38
 
-    (60) expresion -> MENOS . expresion
-    (46) expresion -> . expresion MAS expresion
-    (47) expresion -> . expresion MENOS expresion
-    (48) expresion -> . expresion POR expresion
-    (49) expresion -> . expresion DIV expresion
-    (50) expresion -> . expresion POTENCIA expresion
-    (51) expresion -> . expresion PORCENTAJE expresion
-    (52) expresion -> . expresion IGUALIGUAL expresion
-    (53) expresion -> . expresion DIFERENTE expresion
-    (54) expresion -> . expresion MENOR expresion
-    (55) expresion -> . expresion MAYOR expresion
-    (56) expresion -> . expresion MENORIGUAL expresion
-    (57) expresion -> . expresion MAYORIGUAL expresion
-    (58) expresion -> . expresion AND expresion
-    (59) expresion -> . expresion OR expresion
-    (60) expresion -> . MENOS expresion
-    (61) expresion -> . ENTERO
-    (62) expresion -> . DECIMAL
-    (63) expresion -> . CADENA
-    (64) expresion -> . RTRUE
-    (65) expresion -> . RFALSE
-    (66) expresion -> . ID
+    (61) expresion -> MENOS . expresion
+    (47) expresion -> . expresion MAS expresion
+    (48) expresion -> . expresion MENOS expresion
+    (49) expresion -> . expresion POR expresion
+    (50) expresion -> . expresion DIV expresion
+    (51) expresion -> . expresion POTENCIA expresion
+    (52) expresion -> . expresion PORCENTAJE expresion
+    (53) expresion -> . expresion IGUALIGUAL expresion
+    (54) expresion -> . expresion DIFERENTE expresion
+    (55) expresion -> . expresion MENOR expresion
+    (56) expresion -> . expresion MAYOR expresion
+    (57) expresion -> . expresion MENORIGUAL expresion
+    (58) expresion -> . expresion MAYORIGUAL expresion
+    (59) expresion -> . expresion AND expresion
+    (60) expresion -> . expresion OR expresion
+    (61) expresion -> . MENOS expresion
+    (62) expresion -> . ENTERO
+    (63) expresion -> . DECIMAL
+    (64) expresion -> . CADENA
+    (65) expresion -> . RTRUE
+    (66) expresion -> . RFALSE
+    (67) expresion -> . ID
 
     MENOS           shift and go to state 38
     ENTERO          shift and go to state 39
@@ -818,146 +821,146 @@ state 38
 
 state 39
 
-    (61) expresion -> ENTERO .
+    (62) expresion -> ENTERO .
 
-    MAS             reduce using rule 61 (expresion -> ENTERO .)
-    MENOS           reduce using rule 61 (expresion -> ENTERO .)
-    POR             reduce using rule 61 (expresion -> ENTERO .)
-    DIV             reduce using rule 61 (expresion -> ENTERO .)
-    POTENCIA        reduce using rule 61 (expresion -> ENTERO .)
-    PORCENTAJE      reduce using rule 61 (expresion -> ENTERO .)
-    IGUALIGUAL      reduce using rule 61 (expresion -> ENTERO .)
-    DIFERENTE       reduce using rule 61 (expresion -> ENTERO .)
-    MENOR           reduce using rule 61 (expresion -> ENTERO .)
-    MAYOR           reduce using rule 61 (expresion -> ENTERO .)
-    MENORIGUAL      reduce using rule 61 (expresion -> ENTERO .)
-    MAYORIGUAL      reduce using rule 61 (expresion -> ENTERO .)
-    AND             reduce using rule 61 (expresion -> ENTERO .)
-    OR              reduce using rule 61 (expresion -> ENTERO .)
-    PTCOMA          reduce using rule 61 (expresion -> ENTERO .)
-    DPUNTOS         reduce using rule 61 (expresion -> ENTERO .)
-    PARD            reduce using rule 61 (expresion -> ENTERO .)
-    COMA            reduce using rule 61 (expresion -> ENTERO .)
+    MAS             reduce using rule 62 (expresion -> ENTERO .)
+    MENOS           reduce using rule 62 (expresion -> ENTERO .)
+    POR             reduce using rule 62 (expresion -> ENTERO .)
+    DIV             reduce using rule 62 (expresion -> ENTERO .)
+    POTENCIA        reduce using rule 62 (expresion -> ENTERO .)
+    PORCENTAJE      reduce using rule 62 (expresion -> ENTERO .)
+    IGUALIGUAL      reduce using rule 62 (expresion -> ENTERO .)
+    DIFERENTE       reduce using rule 62 (expresion -> ENTERO .)
+    MENOR           reduce using rule 62 (expresion -> ENTERO .)
+    MAYOR           reduce using rule 62 (expresion -> ENTERO .)
+    MENORIGUAL      reduce using rule 62 (expresion -> ENTERO .)
+    MAYORIGUAL      reduce using rule 62 (expresion -> ENTERO .)
+    AND             reduce using rule 62 (expresion -> ENTERO .)
+    OR              reduce using rule 62 (expresion -> ENTERO .)
+    PTCOMA          reduce using rule 62 (expresion -> ENTERO .)
+    DPUNTOS         reduce using rule 62 (expresion -> ENTERO .)
+    PARD            reduce using rule 62 (expresion -> ENTERO .)
+    COMA            reduce using rule 62 (expresion -> ENTERO .)
 
 
 state 40
 
-    (62) expresion -> DECIMAL .
+    (63) expresion -> DECIMAL .
 
-    MAS             reduce using rule 62 (expresion -> DECIMAL .)
-    MENOS           reduce using rule 62 (expresion -> DECIMAL .)
-    POR             reduce using rule 62 (expresion -> DECIMAL .)
-    DIV             reduce using rule 62 (expresion -> DECIMAL .)
-    POTENCIA        reduce using rule 62 (expresion -> DECIMAL .)
-    PORCENTAJE      reduce using rule 62 (expresion -> DECIMAL .)
-    IGUALIGUAL      reduce using rule 62 (expresion -> DECIMAL .)
-    DIFERENTE       reduce using rule 62 (expresion -> DECIMAL .)
-    MENOR           reduce using rule 62 (expresion -> DECIMAL .)
-    MAYOR           reduce using rule 62 (expresion -> DECIMAL .)
-    MENORIGUAL      reduce using rule 62 (expresion -> DECIMAL .)
-    MAYORIGUAL      reduce using rule 62 (expresion -> DECIMAL .)
-    AND             reduce using rule 62 (expresion -> DECIMAL .)
-    OR              reduce using rule 62 (expresion -> DECIMAL .)
-    PTCOMA          reduce using rule 62 (expresion -> DECIMAL .)
-    DPUNTOS         reduce using rule 62 (expresion -> DECIMAL .)
-    PARD            reduce using rule 62 (expresion -> DECIMAL .)
-    COMA            reduce using rule 62 (expresion -> DECIMAL .)
+    MAS             reduce using rule 63 (expresion -> DECIMAL .)
+    MENOS           reduce using rule 63 (expresion -> DECIMAL .)
+    POR             reduce using rule 63 (expresion -> DECIMAL .)
+    DIV             reduce using rule 63 (expresion -> DECIMAL .)
+    POTENCIA        reduce using rule 63 (expresion -> DECIMAL .)
+    PORCENTAJE      reduce using rule 63 (expresion -> DECIMAL .)
+    IGUALIGUAL      reduce using rule 63 (expresion -> DECIMAL .)
+    DIFERENTE       reduce using rule 63 (expresion -> DECIMAL .)
+    MENOR           reduce using rule 63 (expresion -> DECIMAL .)
+    MAYOR           reduce using rule 63 (expresion -> DECIMAL .)
+    MENORIGUAL      reduce using rule 63 (expresion -> DECIMAL .)
+    MAYORIGUAL      reduce using rule 63 (expresion -> DECIMAL .)
+    AND             reduce using rule 63 (expresion -> DECIMAL .)
+    OR              reduce using rule 63 (expresion -> DECIMAL .)
+    PTCOMA          reduce using rule 63 (expresion -> DECIMAL .)
+    DPUNTOS         reduce using rule 63 (expresion -> DECIMAL .)
+    PARD            reduce using rule 63 (expresion -> DECIMAL .)
+    COMA            reduce using rule 63 (expresion -> DECIMAL .)
 
 
 state 41
 
-    (63) expresion -> CADENA .
+    (64) expresion -> CADENA .
 
-    MAS             reduce using rule 63 (expresion -> CADENA .)
-    MENOS           reduce using rule 63 (expresion -> CADENA .)
-    POR             reduce using rule 63 (expresion -> CADENA .)
-    DIV             reduce using rule 63 (expresion -> CADENA .)
-    POTENCIA        reduce using rule 63 (expresion -> CADENA .)
-    PORCENTAJE      reduce using rule 63 (expresion -> CADENA .)
-    IGUALIGUAL      reduce using rule 63 (expresion -> CADENA .)
-    DIFERENTE       reduce using rule 63 (expresion -> CADENA .)
-    MENOR           reduce using rule 63 (expresion -> CADENA .)
-    MAYOR           reduce using rule 63 (expresion -> CADENA .)
-    MENORIGUAL      reduce using rule 63 (expresion -> CADENA .)
-    MAYORIGUAL      reduce using rule 63 (expresion -> CADENA .)
-    AND             reduce using rule 63 (expresion -> CADENA .)
-    OR              reduce using rule 63 (expresion -> CADENA .)
-    PTCOMA          reduce using rule 63 (expresion -> CADENA .)
-    DPUNTOS         reduce using rule 63 (expresion -> CADENA .)
-    PARD            reduce using rule 63 (expresion -> CADENA .)
-    COMA            reduce using rule 63 (expresion -> CADENA .)
+    MAS             reduce using rule 64 (expresion -> CADENA .)
+    MENOS           reduce using rule 64 (expresion -> CADENA .)
+    POR             reduce using rule 64 (expresion -> CADENA .)
+    DIV             reduce using rule 64 (expresion -> CADENA .)
+    POTENCIA        reduce using rule 64 (expresion -> CADENA .)
+    PORCENTAJE      reduce using rule 64 (expresion -> CADENA .)
+    IGUALIGUAL      reduce using rule 64 (expresion -> CADENA .)
+    DIFERENTE       reduce using rule 64 (expresion -> CADENA .)
+    MENOR           reduce using rule 64 (expresion -> CADENA .)
+    MAYOR           reduce using rule 64 (expresion -> CADENA .)
+    MENORIGUAL      reduce using rule 64 (expresion -> CADENA .)
+    MAYORIGUAL      reduce using rule 64 (expresion -> CADENA .)
+    AND             reduce using rule 64 (expresion -> CADENA .)
+    OR              reduce using rule 64 (expresion -> CADENA .)
+    PTCOMA          reduce using rule 64 (expresion -> CADENA .)
+    DPUNTOS         reduce using rule 64 (expresion -> CADENA .)
+    PARD            reduce using rule 64 (expresion -> CADENA .)
+    COMA            reduce using rule 64 (expresion -> CADENA .)
 
 
 state 42
 
-    (64) expresion -> RTRUE .
+    (65) expresion -> RTRUE .
 
-    MAS             reduce using rule 64 (expresion -> RTRUE .)
-    MENOS           reduce using rule 64 (expresion -> RTRUE .)
-    POR             reduce using rule 64 (expresion -> RTRUE .)
-    DIV             reduce using rule 64 (expresion -> RTRUE .)
-    POTENCIA        reduce using rule 64 (expresion -> RTRUE .)
-    PORCENTAJE      reduce using rule 64 (expresion -> RTRUE .)
-    IGUALIGUAL      reduce using rule 64 (expresion -> RTRUE .)
-    DIFERENTE       reduce using rule 64 (expresion -> RTRUE .)
-    MENOR           reduce using rule 64 (expresion -> RTRUE .)
-    MAYOR           reduce using rule 64 (expresion -> RTRUE .)
-    MENORIGUAL      reduce using rule 64 (expresion -> RTRUE .)
-    MAYORIGUAL      reduce using rule 64 (expresion -> RTRUE .)
-    AND             reduce using rule 64 (expresion -> RTRUE .)
-    OR              reduce using rule 64 (expresion -> RTRUE .)
-    PTCOMA          reduce using rule 64 (expresion -> RTRUE .)
-    DPUNTOS         reduce using rule 64 (expresion -> RTRUE .)
-    PARD            reduce using rule 64 (expresion -> RTRUE .)
-    COMA            reduce using rule 64 (expresion -> RTRUE .)
+    MAS             reduce using rule 65 (expresion -> RTRUE .)
+    MENOS           reduce using rule 65 (expresion -> RTRUE .)
+    POR             reduce using rule 65 (expresion -> RTRUE .)
+    DIV             reduce using rule 65 (expresion -> RTRUE .)
+    POTENCIA        reduce using rule 65 (expresion -> RTRUE .)
+    PORCENTAJE      reduce using rule 65 (expresion -> RTRUE .)
+    IGUALIGUAL      reduce using rule 65 (expresion -> RTRUE .)
+    DIFERENTE       reduce using rule 65 (expresion -> RTRUE .)
+    MENOR           reduce using rule 65 (expresion -> RTRUE .)
+    MAYOR           reduce using rule 65 (expresion -> RTRUE .)
+    MENORIGUAL      reduce using rule 65 (expresion -> RTRUE .)
+    MAYORIGUAL      reduce using rule 65 (expresion -> RTRUE .)
+    AND             reduce using rule 65 (expresion -> RTRUE .)
+    OR              reduce using rule 65 (expresion -> RTRUE .)
+    PTCOMA          reduce using rule 65 (expresion -> RTRUE .)
+    DPUNTOS         reduce using rule 65 (expresion -> RTRUE .)
+    PARD            reduce using rule 65 (expresion -> RTRUE .)
+    COMA            reduce using rule 65 (expresion -> RTRUE .)
 
 
 state 43
 
-    (65) expresion -> RFALSE .
+    (66) expresion -> RFALSE .
 
-    MAS             reduce using rule 65 (expresion -> RFALSE .)
-    MENOS           reduce using rule 65 (expresion -> RFALSE .)
-    POR             reduce using rule 65 (expresion -> RFALSE .)
-    DIV             reduce using rule 65 (expresion -> RFALSE .)
-    POTENCIA        reduce using rule 65 (expresion -> RFALSE .)
-    PORCENTAJE      reduce using rule 65 (expresion -> RFALSE .)
-    IGUALIGUAL      reduce using rule 65 (expresion -> RFALSE .)
-    DIFERENTE       reduce using rule 65 (expresion -> RFALSE .)
-    MENOR           reduce using rule 65 (expresion -> RFALSE .)
-    MAYOR           reduce using rule 65 (expresion -> RFALSE .)
-    MENORIGUAL      reduce using rule 65 (expresion -> RFALSE .)
-    MAYORIGUAL      reduce using rule 65 (expresion -> RFALSE .)
-    AND             reduce using rule 65 (expresion -> RFALSE .)
-    OR              reduce using rule 65 (expresion -> RFALSE .)
-    PTCOMA          reduce using rule 65 (expresion -> RFALSE .)
-    DPUNTOS         reduce using rule 65 (expresion -> RFALSE .)
-    PARD            reduce using rule 65 (expresion -> RFALSE .)
-    COMA            reduce using rule 65 (expresion -> RFALSE .)
+    MAS             reduce using rule 66 (expresion -> RFALSE .)
+    MENOS           reduce using rule 66 (expresion -> RFALSE .)
+    POR             reduce using rule 66 (expresion -> RFALSE .)
+    DIV             reduce using rule 66 (expresion -> RFALSE .)
+    POTENCIA        reduce using rule 66 (expresion -> RFALSE .)
+    PORCENTAJE      reduce using rule 66 (expresion -> RFALSE .)
+    IGUALIGUAL      reduce using rule 66 (expresion -> RFALSE .)
+    DIFERENTE       reduce using rule 66 (expresion -> RFALSE .)
+    MENOR           reduce using rule 66 (expresion -> RFALSE .)
+    MAYOR           reduce using rule 66 (expresion -> RFALSE .)
+    MENORIGUAL      reduce using rule 66 (expresion -> RFALSE .)
+    MAYORIGUAL      reduce using rule 66 (expresion -> RFALSE .)
+    AND             reduce using rule 66 (expresion -> RFALSE .)
+    OR              reduce using rule 66 (expresion -> RFALSE .)
+    PTCOMA          reduce using rule 66 (expresion -> RFALSE .)
+    DPUNTOS         reduce using rule 66 (expresion -> RFALSE .)
+    PARD            reduce using rule 66 (expresion -> RFALSE .)
+    COMA            reduce using rule 66 (expresion -> RFALSE .)
 
 
 state 44
 
-    (66) expresion -> ID .
+    (67) expresion -> ID .
 
-    MAS             reduce using rule 66 (expresion -> ID .)
-    MENOS           reduce using rule 66 (expresion -> ID .)
-    POR             reduce using rule 66 (expresion -> ID .)
-    DIV             reduce using rule 66 (expresion -> ID .)
-    POTENCIA        reduce using rule 66 (expresion -> ID .)
-    PORCENTAJE      reduce using rule 66 (expresion -> ID .)
-    IGUALIGUAL      reduce using rule 66 (expresion -> ID .)
-    DIFERENTE       reduce using rule 66 (expresion -> ID .)
-    MENOR           reduce using rule 66 (expresion -> ID .)
-    MAYOR           reduce using rule 66 (expresion -> ID .)
-    MENORIGUAL      reduce using rule 66 (expresion -> ID .)
-    MAYORIGUAL      reduce using rule 66 (expresion -> ID .)
-    AND             reduce using rule 66 (expresion -> ID .)
-    OR              reduce using rule 66 (expresion -> ID .)
-    PTCOMA          reduce using rule 66 (expresion -> ID .)
-    DPUNTOS         reduce using rule 66 (expresion -> ID .)
-    PARD            reduce using rule 66 (expresion -> ID .)
-    COMA            reduce using rule 66 (expresion -> ID .)
+    MAS             reduce using rule 67 (expresion -> ID .)
+    MENOS           reduce using rule 67 (expresion -> ID .)
+    POR             reduce using rule 67 (expresion -> ID .)
+    DIV             reduce using rule 67 (expresion -> ID .)
+    POTENCIA        reduce using rule 67 (expresion -> ID .)
+    PORCENTAJE      reduce using rule 67 (expresion -> ID .)
+    IGUALIGUAL      reduce using rule 67 (expresion -> ID .)
+    DIFERENTE       reduce using rule 67 (expresion -> ID .)
+    MENOR           reduce using rule 67 (expresion -> ID .)
+    MAYOR           reduce using rule 67 (expresion -> ID .)
+    MENORIGUAL      reduce using rule 67 (expresion -> ID .)
+    MAYORIGUAL      reduce using rule 67 (expresion -> ID .)
+    AND             reduce using rule 67 (expresion -> ID .)
+    OR              reduce using rule 67 (expresion -> ID .)
+    PTCOMA          reduce using rule 67 (expresion -> ID .)
+    DPUNTOS         reduce using rule 67 (expresion -> ID .)
+    PARD            reduce using rule 67 (expresion -> ID .)
+    COMA            reduce using rule 67 (expresion -> ID .)
 
 
 state 45
@@ -971,9 +974,9 @@ state 46
 
     (26) declaracion_normal -> RLET ID DPUNTOS . tipo IGUAL expresion
     (29) declaracion_normal -> RLET ID DPUNTOS . tipo
-    (43) tipo -> . STRING
-    (44) tipo -> . NUMBER
-    (45) tipo -> . BOOLEAN
+    (44) tipo -> . STRING
+    (45) tipo -> . NUMBER
+    (46) tipo -> . BOOLEAN
 
     STRING          shift and go to state 72
     NUMBER          shift and go to state 73
@@ -984,27 +987,27 @@ state 46
 state 47
 
     (27) declaracion_normal -> RLET ID IGUAL . expresion
-    (46) expresion -> . expresion MAS expresion
-    (47) expresion -> . expresion MENOS expresion
-    (48) expresion -> . expresion POR expresion
-    (49) expresion -> . expresion DIV expresion
-    (50) expresion -> . expresion POTENCIA expresion
-    (51) expresion -> . expresion PORCENTAJE expresion
-    (52) expresion -> . expresion IGUALIGUAL expresion
-    (53) expresion -> . expresion DIFERENTE expresion
-    (54) expresion -> . expresion MENOR expresion
-    (55) expresion -> . expresion MAYOR expresion
-    (56) expresion -> . expresion MENORIGUAL expresion
-    (57) expresion -> . expresion MAYORIGUAL expresion
-    (58) expresion -> . expresion AND expresion
-    (59) expresion -> . expresion OR expresion
-    (60) expresion -> . MENOS expresion
-    (61) expresion -> . ENTERO
-    (62) expresion -> . DECIMAL
-    (63) expresion -> . CADENA
-    (64) expresion -> . RTRUE
-    (65) expresion -> . RFALSE
-    (66) expresion -> . ID
+    (47) expresion -> . expresion MAS expresion
+    (48) expresion -> . expresion MENOS expresion
+    (49) expresion -> . expresion POR expresion
+    (50) expresion -> . expresion DIV expresion
+    (51) expresion -> . expresion POTENCIA expresion
+    (52) expresion -> . expresion PORCENTAJE expresion
+    (53) expresion -> . expresion IGUALIGUAL expresion
+    (54) expresion -> . expresion DIFERENTE expresion
+    (55) expresion -> . expresion MENOR expresion
+    (56) expresion -> . expresion MAYOR expresion
+    (57) expresion -> . expresion MENORIGUAL expresion
+    (58) expresion -> . expresion MAYORIGUAL expresion
+    (59) expresion -> . expresion AND expresion
+    (60) expresion -> . expresion OR expresion
+    (61) expresion -> . MENOS expresion
+    (62) expresion -> . ENTERO
+    (63) expresion -> . DECIMAL
+    (64) expresion -> . CADENA
+    (65) expresion -> . RTRUE
+    (66) expresion -> . RFALSE
+    (67) expresion -> . ID
 
     MENOS           shift and go to state 38
     ENTERO          shift and go to state 39
@@ -1020,20 +1023,20 @@ state 48
 
     (30) asignacion_normal -> ID IGUAL expresion . DPUNTOS DPUNTOS tipo
     (31) asignacion_normal -> ID IGUAL expresion .
-    (46) expresion -> expresion . MAS expresion
-    (47) expresion -> expresion . MENOS expresion
-    (48) expresion -> expresion . POR expresion
-    (49) expresion -> expresion . DIV expresion
-    (50) expresion -> expresion . POTENCIA expresion
-    (51) expresion -> expresion . PORCENTAJE expresion
-    (52) expresion -> expresion . IGUALIGUAL expresion
-    (53) expresion -> expresion . DIFERENTE expresion
-    (54) expresion -> expresion . MENOR expresion
-    (55) expresion -> expresion . MAYOR expresion
-    (56) expresion -> expresion . MENORIGUAL expresion
-    (57) expresion -> expresion . MAYORIGUAL expresion
-    (58) expresion -> expresion . AND expresion
-    (59) expresion -> expresion . OR expresion
+    (47) expresion -> expresion . MAS expresion
+    (48) expresion -> expresion . MENOS expresion
+    (49) expresion -> expresion . POR expresion
+    (50) expresion -> expresion . DIV expresion
+    (51) expresion -> expresion . POTENCIA expresion
+    (52) expresion -> expresion . PORCENTAJE expresion
+    (53) expresion -> expresion . IGUALIGUAL expresion
+    (54) expresion -> expresion . DIFERENTE expresion
+    (55) expresion -> expresion . MENOR expresion
+    (56) expresion -> expresion . MAYOR expresion
+    (57) expresion -> expresion . MENORIGUAL expresion
+    (58) expresion -> expresion . MAYORIGUAL expresion
+    (59) expresion -> expresion . AND expresion
+    (60) expresion -> expresion . OR expresion
 
     DPUNTOS         shift and go to state 76
     PTCOMA          reduce using rule 31 (asignacion_normal -> ID IGUAL expresion .)
@@ -1080,20 +1083,20 @@ state 51
 state 52
 
     (24) parametro_ll -> expresion .
-    (46) expresion -> expresion . MAS expresion
-    (47) expresion -> expresion . MENOS expresion
-    (48) expresion -> expresion . POR expresion
-    (49) expresion -> expresion . DIV expresion
-    (50) expresion -> expresion . POTENCIA expresion
-    (51) expresion -> expresion . PORCENTAJE expresion
-    (52) expresion -> expresion . IGUALIGUAL expresion
-    (53) expresion -> expresion . DIFERENTE expresion
-    (54) expresion -> expresion . MENOR expresion
-    (55) expresion -> expresion . MAYOR expresion
-    (56) expresion -> expresion . MENORIGUAL expresion
-    (57) expresion -> expresion . MAYORIGUAL expresion
-    (58) expresion -> expresion . AND expresion
-    (59) expresion -> expresion . OR expresion
+    (47) expresion -> expresion . MAS expresion
+    (48) expresion -> expresion . MENOS expresion
+    (49) expresion -> expresion . POR expresion
+    (50) expresion -> expresion . DIV expresion
+    (51) expresion -> expresion . POTENCIA expresion
+    (52) expresion -> expresion . PORCENTAJE expresion
+    (53) expresion -> expresion . IGUALIGUAL expresion
+    (54) expresion -> expresion . DIFERENTE expresion
+    (55) expresion -> expresion . MENOR expresion
+    (56) expresion -> expresion . MAYOR expresion
+    (57) expresion -> expresion . MENORIGUAL expresion
+    (58) expresion -> expresion . MAYORIGUAL expresion
+    (59) expresion -> expresion . AND expresion
+    (60) expresion -> expresion . OR expresion
 
     PARD            reduce using rule 24 (parametro_ll -> expresion .)
     COMA            reduce using rule 24 (parametro_ll -> expresion .)
@@ -1119,20 +1122,20 @@ state 53
     (37) condicional_if -> RIF PARI expresion . PARD LLAVEIZQ instrucciones LLAVEDER condicional_elseifs RELSE LLAVEIZQ instrucciones LLAVEDER
     (38) condicional_if -> RIF PARI expresion . PARD LLAVEIZQ instrucciones LLAVEDER condicional_elseifs
     (39) condicional_if -> RIF PARI expresion . PARD LLAVEIZQ instrucciones LLAVEDER RELSE LLAVEIZQ instrucciones LLAVEDER
-    (46) expresion -> expresion . MAS expresion
-    (47) expresion -> expresion . MENOS expresion
-    (48) expresion -> expresion . POR expresion
-    (49) expresion -> expresion . DIV expresion
-    (50) expresion -> expresion . POTENCIA expresion
-    (51) expresion -> expresion . PORCENTAJE expresion
-    (52) expresion -> expresion . IGUALIGUAL expresion
-    (53) expresion -> expresion . DIFERENTE expresion
-    (54) expresion -> expresion . MENOR expresion
-    (55) expresion -> expresion . MAYOR expresion
-    (56) expresion -> expresion . MENORIGUAL expresion
-    (57) expresion -> expresion . MAYORIGUAL expresion
-    (58) expresion -> expresion . AND expresion
-    (59) expresion -> expresion . OR expresion
+    (47) expresion -> expresion . MAS expresion
+    (48) expresion -> expresion . MENOS expresion
+    (49) expresion -> expresion . POR expresion
+    (50) expresion -> expresion . DIV expresion
+    (51) expresion -> expresion . POTENCIA expresion
+    (52) expresion -> expresion . PORCENTAJE expresion
+    (53) expresion -> expresion . IGUALIGUAL expresion
+    (54) expresion -> expresion . DIFERENTE expresion
+    (55) expresion -> expresion . MENOR expresion
+    (56) expresion -> expresion . MAYOR expresion
+    (57) expresion -> expresion . MENORIGUAL expresion
+    (58) expresion -> expresion . MAYORIGUAL expresion
+    (59) expresion -> expresion . AND expresion
+    (60) expresion -> expresion . OR expresion
 
     PARD            shift and go to state 79
     MAS             shift and go to state 55
@@ -1170,28 +1173,28 @@ state 54
 
 state 55
 
-    (46) expresion -> expresion MAS . expresion
-    (46) expresion -> . expresion MAS expresion
-    (47) expresion -> . expresion MENOS expresion
-    (48) expresion -> . expresion POR expresion
-    (49) expresion -> . expresion DIV expresion
-    (50) expresion -> . expresion POTENCIA expresion
-    (51) expresion -> . expresion PORCENTAJE expresion
-    (52) expresion -> . expresion IGUALIGUAL expresion
-    (53) expresion -> . expresion DIFERENTE expresion
-    (54) expresion -> . expresion MENOR expresion
-    (55) expresion -> . expresion MAYOR expresion
-    (56) expresion -> . expresion MENORIGUAL expresion
-    (57) expresion -> . expresion MAYORIGUAL expresion
-    (58) expresion -> . expresion AND expresion
-    (59) expresion -> . expresion OR expresion
-    (60) expresion -> . MENOS expresion
-    (61) expresion -> . ENTERO
-    (62) expresion -> . DECIMAL
-    (63) expresion -> . CADENA
-    (64) expresion -> . RTRUE
-    (65) expresion -> . RFALSE
-    (66) expresion -> . ID
+    (47) expresion -> expresion MAS . expresion
+    (47) expresion -> . expresion MAS expresion
+    (48) expresion -> . expresion MENOS expresion
+    (49) expresion -> . expresion POR expresion
+    (50) expresion -> . expresion DIV expresion
+    (51) expresion -> . expresion POTENCIA expresion
+    (52) expresion -> . expresion PORCENTAJE expresion
+    (53) expresion -> . expresion IGUALIGUAL expresion
+    (54) expresion -> . expresion DIFERENTE expresion
+    (55) expresion -> . expresion MENOR expresion
+    (56) expresion -> . expresion MAYOR expresion
+    (57) expresion -> . expresion MENORIGUAL expresion
+    (58) expresion -> . expresion MAYORIGUAL expresion
+    (59) expresion -> . expresion AND expresion
+    (60) expresion -> . expresion OR expresion
+    (61) expresion -> . MENOS expresion
+    (62) expresion -> . ENTERO
+    (63) expresion -> . DECIMAL
+    (64) expresion -> . CADENA
+    (65) expresion -> . RTRUE
+    (66) expresion -> . RFALSE
+    (67) expresion -> . ID
 
     MENOS           shift and go to state 38
     ENTERO          shift and go to state 39
@@ -1205,28 +1208,28 @@ state 55
 
 state 56
 
-    (47) expresion -> expresion MENOS . expresion
-    (46) expresion -> . expresion MAS expresion
-    (47) expresion -> . expresion MENOS expresion
-    (48) expresion -> . expresion POR expresion
-    (49) expresion -> . expresion DIV expresion
-    (50) expresion -> . expresion POTENCIA expresion
-    (51) expresion -> . expresion PORCENTAJE expresion
-    (52) expresion -> . expresion IGUALIGUAL expresion
-    (53) expresion -> . expresion DIFERENTE expresion
-    (54) expresion -> . expresion MENOR expresion
-    (55) expresion -> . expresion MAYOR expresion
-    (56) expresion -> . expresion MENORIGUAL expresion
-    (57) expresion -> . expresion MAYORIGUAL expresion
-    (58) expresion -> . expresion AND expresion
-    (59) expresion -> . expresion OR expresion
-    (60) expresion -> . MENOS expresion
-    (61) expresion -> . ENTERO
-    (62) expresion -> . DECIMAL
-    (63) expresion -> . CADENA
-    (64) expresion -> . RTRUE
-    (65) expresion -> . RFALSE
-    (66) expresion -> . ID
+    (48) expresion -> expresion MENOS . expresion
+    (47) expresion -> . expresion MAS expresion
+    (48) expresion -> . expresion MENOS expresion
+    (49) expresion -> . expresion POR expresion
+    (50) expresion -> . expresion DIV expresion
+    (51) expresion -> . expresion POTENCIA expresion
+    (52) expresion -> . expresion PORCENTAJE expresion
+    (53) expresion -> . expresion IGUALIGUAL expresion
+    (54) expresion -> . expresion DIFERENTE expresion
+    (55) expresion -> . expresion MENOR expresion
+    (56) expresion -> . expresion MAYOR expresion
+    (57) expresion -> . expresion MENORIGUAL expresion
+    (58) expresion -> . expresion MAYORIGUAL expresion
+    (59) expresion -> . expresion AND expresion
+    (60) expresion -> . expresion OR expresion
+    (61) expresion -> . MENOS expresion
+    (62) expresion -> . ENTERO
+    (63) expresion -> . DECIMAL
+    (64) expresion -> . CADENA
+    (65) expresion -> . RTRUE
+    (66) expresion -> . RFALSE
+    (67) expresion -> . ID
 
     MENOS           shift and go to state 38
     ENTERO          shift and go to state 39
@@ -1240,28 +1243,28 @@ state 56
 
 state 57
 
-    (48) expresion -> expresion POR . expresion
-    (46) expresion -> . expresion MAS expresion
-    (47) expresion -> . expresion MENOS expresion
-    (48) expresion -> . expresion POR expresion
-    (49) expresion -> . expresion DIV expresion
-    (50) expresion -> . expresion POTENCIA expresion
-    (51) expresion -> . expresion PORCENTAJE expresion
-    (52) expresion -> . expresion IGUALIGUAL expresion
-    (53) expresion -> . expresion DIFERENTE expresion
-    (54) expresion -> . expresion MENOR expresion
-    (55) expresion -> . expresion MAYOR expresion
-    (56) expresion -> . expresion MENORIGUAL expresion
-    (57) expresion -> . expresion MAYORIGUAL expresion
-    (58) expresion -> . expresion AND expresion
-    (59) expresion -> . expresion OR expresion
-    (60) expresion -> . MENOS expresion
-    (61) expresion -> . ENTERO
-    (62) expresion -> . DECIMAL
-    (63) expresion -> . CADENA
-    (64) expresion -> . RTRUE
-    (65) expresion -> . RFALSE
-    (66) expresion -> . ID
+    (49) expresion -> expresion POR . expresion
+    (47) expresion -> . expresion MAS expresion
+    (48) expresion -> . expresion MENOS expresion
+    (49) expresion -> . expresion POR expresion
+    (50) expresion -> . expresion DIV expresion
+    (51) expresion -> . expresion POTENCIA expresion
+    (52) expresion -> . expresion PORCENTAJE expresion
+    (53) expresion -> . expresion IGUALIGUAL expresion
+    (54) expresion -> . expresion DIFERENTE expresion
+    (55) expresion -> . expresion MENOR expresion
+    (56) expresion -> . expresion MAYOR expresion
+    (57) expresion -> . expresion MENORIGUAL expresion
+    (58) expresion -> . expresion MAYORIGUAL expresion
+    (59) expresion -> . expresion AND expresion
+    (60) expresion -> . expresion OR expresion
+    (61) expresion -> . MENOS expresion
+    (62) expresion -> . ENTERO
+    (63) expresion -> . DECIMAL
+    (64) expresion -> . CADENA
+    (65) expresion -> . RTRUE
+    (66) expresion -> . RFALSE
+    (67) expresion -> . ID
 
     MENOS           shift and go to state 38
     ENTERO          shift and go to state 39
@@ -1275,28 +1278,28 @@ state 57
 
 state 58
 
-    (49) expresion -> expresion DIV . expresion
-    (46) expresion -> . expresion MAS expresion
-    (47) expresion -> . expresion MENOS expresion
-    (48) expresion -> . expresion POR expresion
-    (49) expresion -> . expresion DIV expresion
-    (50) expresion -> . expresion POTENCIA expresion
-    (51) expresion -> . expresion PORCENTAJE expresion
-    (52) expresion -> . expresion IGUALIGUAL expresion
-    (53) expresion -> . expresion DIFERENTE expresion
-    (54) expresion -> . expresion MENOR expresion
-    (55) expresion -> . expresion MAYOR expresion
-    (56) expresion -> . expresion MENORIGUAL expresion
-    (57) expresion -> . expresion MAYORIGUAL expresion
-    (58) expresion -> . expresion AND expresion
-    (59) expresion -> . expresion OR expresion
-    (60) expresion -> . MENOS expresion
-    (61) expresion -> . ENTERO
-    (62) expresion -> . DECIMAL
-    (63) expresion -> . CADENA
-    (64) expresion -> . RTRUE
-    (65) expresion -> . RFALSE
-    (66) expresion -> . ID
+    (50) expresion -> expresion DIV . expresion
+    (47) expresion -> . expresion MAS expresion
+    (48) expresion -> . expresion MENOS expresion
+    (49) expresion -> . expresion POR expresion
+    (50) expresion -> . expresion DIV expresion
+    (51) expresion -> . expresion POTENCIA expresion
+    (52) expresion -> . expresion PORCENTAJE expresion
+    (53) expresion -> . expresion IGUALIGUAL expresion
+    (54) expresion -> . expresion DIFERENTE expresion
+    (55) expresion -> . expresion MENOR expresion
+    (56) expresion -> . expresion MAYOR expresion
+    (57) expresion -> . expresion MENORIGUAL expresion
+    (58) expresion -> . expresion MAYORIGUAL expresion
+    (59) expresion -> . expresion AND expresion
+    (60) expresion -> . expresion OR expresion
+    (61) expresion -> . MENOS expresion
+    (62) expresion -> . ENTERO
+    (63) expresion -> . DECIMAL
+    (64) expresion -> . CADENA
+    (65) expresion -> . RTRUE
+    (66) expresion -> . RFALSE
+    (67) expresion -> . ID
 
     MENOS           shift and go to state 38
     ENTERO          shift and go to state 39
@@ -1310,28 +1313,28 @@ state 58
 
 state 59
 
-    (50) expresion -> expresion POTENCIA . expresion
-    (46) expresion -> . expresion MAS expresion
-    (47) expresion -> . expresion MENOS expresion
-    (48) expresion -> . expresion POR expresion
-    (49) expresion -> . expresion DIV expresion
-    (50) expresion -> . expresion POTENCIA expresion
-    (51) expresion -> . expresion PORCENTAJE expresion
-    (52) expresion -> . expresion IGUALIGUAL expresion
-    (53) expresion -> . expresion DIFERENTE expresion
-    (54) expresion -> . expresion MENOR expresion
-    (55) expresion -> . expresion MAYOR expresion
-    (56) expresion -> . expresion MENORIGUAL expresion
-    (57) expresion -> . expresion MAYORIGUAL expresion
-    (58) expresion -> . expresion AND expresion
-    (59) expresion -> . expresion OR expresion
-    (60) expresion -> . MENOS expresion
-    (61) expresion -> . ENTERO
-    (62) expresion -> . DECIMAL
-    (63) expresion -> . CADENA
-    (64) expresion -> . RTRUE
-    (65) expresion -> . RFALSE
-    (66) expresion -> . ID
+    (51) expresion -> expresion POTENCIA . expresion
+    (47) expresion -> . expresion MAS expresion
+    (48) expresion -> . expresion MENOS expresion
+    (49) expresion -> . expresion POR expresion
+    (50) expresion -> . expresion DIV expresion
+    (51) expresion -> . expresion POTENCIA expresion
+    (52) expresion -> . expresion PORCENTAJE expresion
+    (53) expresion -> . expresion IGUALIGUAL expresion
+    (54) expresion -> . expresion DIFERENTE expresion
+    (55) expresion -> . expresion MENOR expresion
+    (56) expresion -> . expresion MAYOR expresion
+    (57) expresion -> . expresion MENORIGUAL expresion
+    (58) expresion -> . expresion MAYORIGUAL expresion
+    (59) expresion -> . expresion AND expresion
+    (60) expresion -> . expresion OR expresion
+    (61) expresion -> . MENOS expresion
+    (62) expresion -> . ENTERO
+    (63) expresion -> . DECIMAL
+    (64) expresion -> . CADENA
+    (65) expresion -> . RTRUE
+    (66) expresion -> . RFALSE
+    (67) expresion -> . ID
 
     MENOS           shift and go to state 38
     ENTERO          shift and go to state 39
@@ -1345,28 +1348,28 @@ state 59
 
 state 60
 
-    (51) expresion -> expresion PORCENTAJE . expresion
-    (46) expresion -> . expresion MAS expresion
-    (47) expresion -> . expresion MENOS expresion
-    (48) expresion -> . expresion POR expresion
-    (49) expresion -> . expresion DIV expresion
-    (50) expresion -> . expresion POTENCIA expresion
-    (51) expresion -> . expresion PORCENTAJE expresion
-    (52) expresion -> . expresion IGUALIGUAL expresion
-    (53) expresion -> . expresion DIFERENTE expresion
-    (54) expresion -> . expresion MENOR expresion
-    (55) expresion -> . expresion MAYOR expresion
-    (56) expresion -> . expresion MENORIGUAL expresion
-    (57) expresion -> . expresion MAYORIGUAL expresion
-    (58) expresion -> . expresion AND expresion
-    (59) expresion -> . expresion OR expresion
-    (60) expresion -> . MENOS expresion
-    (61) expresion -> . ENTERO
-    (62) expresion -> . DECIMAL
-    (63) expresion -> . CADENA
-    (64) expresion -> . RTRUE
-    (65) expresion -> . RFALSE
-    (66) expresion -> . ID
+    (52) expresion -> expresion PORCENTAJE . expresion
+    (47) expresion -> . expresion MAS expresion
+    (48) expresion -> . expresion MENOS expresion
+    (49) expresion -> . expresion POR expresion
+    (50) expresion -> . expresion DIV expresion
+    (51) expresion -> . expresion POTENCIA expresion
+    (52) expresion -> . expresion PORCENTAJE expresion
+    (53) expresion -> . expresion IGUALIGUAL expresion
+    (54) expresion -> . expresion DIFERENTE expresion
+    (55) expresion -> . expresion MENOR expresion
+    (56) expresion -> . expresion MAYOR expresion
+    (57) expresion -> . expresion MENORIGUAL expresion
+    (58) expresion -> . expresion MAYORIGUAL expresion
+    (59) expresion -> . expresion AND expresion
+    (60) expresion -> . expresion OR expresion
+    (61) expresion -> . MENOS expresion
+    (62) expresion -> . ENTERO
+    (63) expresion -> . DECIMAL
+    (64) expresion -> . CADENA
+    (65) expresion -> . RTRUE
+    (66) expresion -> . RFALSE
+    (67) expresion -> . ID
 
     MENOS           shift and go to state 38
     ENTERO          shift and go to state 39
@@ -1380,28 +1383,28 @@ state 60
 
 state 61
 
-    (52) expresion -> expresion IGUALIGUAL . expresion
-    (46) expresion -> . expresion MAS expresion
-    (47) expresion -> . expresion MENOS expresion
-    (48) expresion -> . expresion POR expresion
-    (49) expresion -> . expresion DIV expresion
-    (50) expresion -> . expresion POTENCIA expresion
-    (51) expresion -> . expresion PORCENTAJE expresion
-    (52) expresion -> . expresion IGUALIGUAL expresion
-    (53) expresion -> . expresion DIFERENTE expresion
-    (54) expresion -> . expresion MENOR expresion
-    (55) expresion -> . expresion MAYOR expresion
-    (56) expresion -> . expresion MENORIGUAL expresion
-    (57) expresion -> . expresion MAYORIGUAL expresion
-    (58) expresion -> . expresion AND expresion
-    (59) expresion -> . expresion OR expresion
-    (60) expresion -> . MENOS expresion
-    (61) expresion -> . ENTERO
-    (62) expresion -> . DECIMAL
-    (63) expresion -> . CADENA
-    (64) expresion -> . RTRUE
-    (65) expresion -> . RFALSE
-    (66) expresion -> . ID
+    (53) expresion -> expresion IGUALIGUAL . expresion
+    (47) expresion -> . expresion MAS expresion
+    (48) expresion -> . expresion MENOS expresion
+    (49) expresion -> . expresion POR expresion
+    (50) expresion -> . expresion DIV expresion
+    (51) expresion -> . expresion POTENCIA expresion
+    (52) expresion -> . expresion PORCENTAJE expresion
+    (53) expresion -> . expresion IGUALIGUAL expresion
+    (54) expresion -> . expresion DIFERENTE expresion
+    (55) expresion -> . expresion MENOR expresion
+    (56) expresion -> . expresion MAYOR expresion
+    (57) expresion -> . expresion MENORIGUAL expresion
+    (58) expresion -> . expresion MAYORIGUAL expresion
+    (59) expresion -> . expresion AND expresion
+    (60) expresion -> . expresion OR expresion
+    (61) expresion -> . MENOS expresion
+    (62) expresion -> . ENTERO
+    (63) expresion -> . DECIMAL
+    (64) expresion -> . CADENA
+    (65) expresion -> . RTRUE
+    (66) expresion -> . RFALSE
+    (67) expresion -> . ID
 
     MENOS           shift and go to state 38
     ENTERO          shift and go to state 39
@@ -1415,28 +1418,28 @@ state 61
 
 state 62
 
-    (53) expresion -> expresion DIFERENTE . expresion
-    (46) expresion -> . expresion MAS expresion
-    (47) expresion -> . expresion MENOS expresion
-    (48) expresion -> . expresion POR expresion
-    (49) expresion -> . expresion DIV expresion
-    (50) expresion -> . expresion POTENCIA expresion
-    (51) expresion -> . expresion PORCENTAJE expresion
-    (52) expresion -> . expresion IGUALIGUAL expresion
-    (53) expresion -> . expresion DIFERENTE expresion
-    (54) expresion -> . expresion MENOR expresion
-    (55) expresion -> . expresion MAYOR expresion
-    (56) expresion -> . expresion MENORIGUAL expresion
-    (57) expresion -> . expresion MAYORIGUAL expresion
-    (58) expresion -> . expresion AND expresion
-    (59) expresion -> . expresion OR expresion
-    (60) expresion -> . MENOS expresion
-    (61) expresion -> . ENTERO
-    (62) expresion -> . DECIMAL
-    (63) expresion -> . CADENA
-    (64) expresion -> . RTRUE
-    (65) expresion -> . RFALSE
-    (66) expresion -> . ID
+    (54) expresion -> expresion DIFERENTE . expresion
+    (47) expresion -> . expresion MAS expresion
+    (48) expresion -> . expresion MENOS expresion
+    (49) expresion -> . expresion POR expresion
+    (50) expresion -> . expresion DIV expresion
+    (51) expresion -> . expresion POTENCIA expresion
+    (52) expresion -> . expresion PORCENTAJE expresion
+    (53) expresion -> . expresion IGUALIGUAL expresion
+    (54) expresion -> . expresion DIFERENTE expresion
+    (55) expresion -> . expresion MENOR expresion
+    (56) expresion -> . expresion MAYOR expresion
+    (57) expresion -> . expresion MENORIGUAL expresion
+    (58) expresion -> . expresion MAYORIGUAL expresion
+    (59) expresion -> . expresion AND expresion
+    (60) expresion -> . expresion OR expresion
+    (61) expresion -> . MENOS expresion
+    (62) expresion -> . ENTERO
+    (63) expresion -> . DECIMAL
+    (64) expresion -> . CADENA
+    (65) expresion -> . RTRUE
+    (66) expresion -> . RFALSE
+    (67) expresion -> . ID
 
     MENOS           shift and go to state 38
     ENTERO          shift and go to state 39
@@ -1450,28 +1453,28 @@ state 62
 
 state 63
 
-    (54) expresion -> expresion MENOR . expresion
-    (46) expresion -> . expresion MAS expresion
-    (47) expresion -> . expresion MENOS expresion
-    (48) expresion -> . expresion POR expresion
-    (49) expresion -> . expresion DIV expresion
-    (50) expresion -> . expresion POTENCIA expresion
-    (51) expresion -> . expresion PORCENTAJE expresion
-    (52) expresion -> . expresion IGUALIGUAL expresion
-    (53) expresion -> . expresion DIFERENTE expresion
-    (54) expresion -> . expresion MENOR expresion
-    (55) expresion -> . expresion MAYOR expresion
-    (56) expresion -> . expresion MENORIGUAL expresion
-    (57) expresion -> . expresion MAYORIGUAL expresion
-    (58) expresion -> . expresion AND expresion
-    (59) expresion -> . expresion OR expresion
-    (60) expresion -> . MENOS expresion
-    (61) expresion -> . ENTERO
-    (62) expresion -> . DECIMAL
-    (63) expresion -> . CADENA
-    (64) expresion -> . RTRUE
-    (65) expresion -> . RFALSE
-    (66) expresion -> . ID
+    (55) expresion -> expresion MENOR . expresion
+    (47) expresion -> . expresion MAS expresion
+    (48) expresion -> . expresion MENOS expresion
+    (49) expresion -> . expresion POR expresion
+    (50) expresion -> . expresion DIV expresion
+    (51) expresion -> . expresion POTENCIA expresion
+    (52) expresion -> . expresion PORCENTAJE expresion
+    (53) expresion -> . expresion IGUALIGUAL expresion
+    (54) expresion -> . expresion DIFERENTE expresion
+    (55) expresion -> . expresion MENOR expresion
+    (56) expresion -> . expresion MAYOR expresion
+    (57) expresion -> . expresion MENORIGUAL expresion
+    (58) expresion -> . expresion MAYORIGUAL expresion
+    (59) expresion -> . expresion AND expresion
+    (60) expresion -> . expresion OR expresion
+    (61) expresion -> . MENOS expresion
+    (62) expresion -> . ENTERO
+    (63) expresion -> . DECIMAL
+    (64) expresion -> . CADENA
+    (65) expresion -> . RTRUE
+    (66) expresion -> . RFALSE
+    (67) expresion -> . ID
 
     MENOS           shift and go to state 38
     ENTERO          shift and go to state 39
@@ -1485,28 +1488,28 @@ state 63
 
 state 64
 
-    (55) expresion -> expresion MAYOR . expresion
-    (46) expresion -> . expresion MAS expresion
-    (47) expresion -> . expresion MENOS expresion
-    (48) expresion -> . expresion POR expresion
-    (49) expresion -> . expresion DIV expresion
-    (50) expresion -> . expresion POTENCIA expresion
-    (51) expresion -> . expresion PORCENTAJE expresion
-    (52) expresion -> . expresion IGUALIGUAL expresion
-    (53) expresion -> . expresion DIFERENTE expresion
-    (54) expresion -> . expresion MENOR expresion
-    (55) expresion -> . expresion MAYOR expresion
-    (56) expresion -> . expresion MENORIGUAL expresion
-    (57) expresion -> . expresion MAYORIGUAL expresion
-    (58) expresion -> . expresion AND expresion
-    (59) expresion -> . expresion OR expresion
-    (60) expresion -> . MENOS expresion
-    (61) expresion -> . ENTERO
-    (62) expresion -> . DECIMAL
-    (63) expresion -> . CADENA
-    (64) expresion -> . RTRUE
-    (65) expresion -> . RFALSE
-    (66) expresion -> . ID
+    (56) expresion -> expresion MAYOR . expresion
+    (47) expresion -> . expresion MAS expresion
+    (48) expresion -> . expresion MENOS expresion
+    (49) expresion -> . expresion POR expresion
+    (50) expresion -> . expresion DIV expresion
+    (51) expresion -> . expresion POTENCIA expresion
+    (52) expresion -> . expresion PORCENTAJE expresion
+    (53) expresion -> . expresion IGUALIGUAL expresion
+    (54) expresion -> . expresion DIFERENTE expresion
+    (55) expresion -> . expresion MENOR expresion
+    (56) expresion -> . expresion MAYOR expresion
+    (57) expresion -> . expresion MENORIGUAL expresion
+    (58) expresion -> . expresion MAYORIGUAL expresion
+    (59) expresion -> . expresion AND expresion
+    (60) expresion -> . expresion OR expresion
+    (61) expresion -> . MENOS expresion
+    (62) expresion -> . ENTERO
+    (63) expresion -> . DECIMAL
+    (64) expresion -> . CADENA
+    (65) expresion -> . RTRUE
+    (66) expresion -> . RFALSE
+    (67) expresion -> . ID
 
     MENOS           shift and go to state 38
     ENTERO          shift and go to state 39
@@ -1520,28 +1523,28 @@ state 64
 
 state 65
 
-    (56) expresion -> expresion MENORIGUAL . expresion
-    (46) expresion -> . expresion MAS expresion
-    (47) expresion -> . expresion MENOS expresion
-    (48) expresion -> . expresion POR expresion
-    (49) expresion -> . expresion DIV expresion
-    (50) expresion -> . expresion POTENCIA expresion
-    (51) expresion -> . expresion PORCENTAJE expresion
-    (52) expresion -> . expresion IGUALIGUAL expresion
-    (53) expresion -> . expresion DIFERENTE expresion
-    (54) expresion -> . expresion MENOR expresion
-    (55) expresion -> . expresion MAYOR expresion
-    (56) expresion -> . expresion MENORIGUAL expresion
-    (57) expresion -> . expresion MAYORIGUAL expresion
-    (58) expresion -> . expresion AND expresion
-    (59) expresion -> . expresion OR expresion
-    (60) expresion -> . MENOS expresion
-    (61) expresion -> . ENTERO
-    (62) expresion -> . DECIMAL
-    (63) expresion -> . CADENA
-    (64) expresion -> . RTRUE
-    (65) expresion -> . RFALSE
-    (66) expresion -> . ID
+    (57) expresion -> expresion MENORIGUAL . expresion
+    (47) expresion -> . expresion MAS expresion
+    (48) expresion -> . expresion MENOS expresion
+    (49) expresion -> . expresion POR expresion
+    (50) expresion -> . expresion DIV expresion
+    (51) expresion -> . expresion POTENCIA expresion
+    (52) expresion -> . expresion PORCENTAJE expresion
+    (53) expresion -> . expresion IGUALIGUAL expresion
+    (54) expresion -> . expresion DIFERENTE expresion
+    (55) expresion -> . expresion MENOR expresion
+    (56) expresion -> . expresion MAYOR expresion
+    (57) expresion -> . expresion MENORIGUAL expresion
+    (58) expresion -> . expresion MAYORIGUAL expresion
+    (59) expresion -> . expresion AND expresion
+    (60) expresion -> . expresion OR expresion
+    (61) expresion -> . MENOS expresion
+    (62) expresion -> . ENTERO
+    (63) expresion -> . DECIMAL
+    (64) expresion -> . CADENA
+    (65) expresion -> . RTRUE
+    (66) expresion -> . RFALSE
+    (67) expresion -> . ID
 
     MENOS           shift and go to state 38
     ENTERO          shift and go to state 39
@@ -1555,28 +1558,28 @@ state 65
 
 state 66
 
-    (57) expresion -> expresion MAYORIGUAL . expresion
-    (46) expresion -> . expresion MAS expresion
-    (47) expresion -> . expresion MENOS expresion
-    (48) expresion -> . expresion POR expresion
-    (49) expresion -> . expresion DIV expresion
-    (50) expresion -> . expresion POTENCIA expresion
-    (51) expresion -> . expresion PORCENTAJE expresion
-    (52) expresion -> . expresion IGUALIGUAL expresion
-    (53) expresion -> . expresion DIFERENTE expresion
-    (54) expresion -> . expresion MENOR expresion
-    (55) expresion -> . expresion MAYOR expresion
-    (56) expresion -> . expresion MENORIGUAL expresion
-    (57) expresion -> . expresion MAYORIGUAL expresion
-    (58) expresion -> . expresion AND expresion
-    (59) expresion -> . expresion OR expresion
-    (60) expresion -> . MENOS expresion
-    (61) expresion -> . ENTERO
-    (62) expresion -> . DECIMAL
-    (63) expresion -> . CADENA
-    (64) expresion -> . RTRUE
-    (65) expresion -> . RFALSE
-    (66) expresion -> . ID
+    (58) expresion -> expresion MAYORIGUAL . expresion
+    (47) expresion -> . expresion MAS expresion
+    (48) expresion -> . expresion MENOS expresion
+    (49) expresion -> . expresion POR expresion
+    (50) expresion -> . expresion DIV expresion
+    (51) expresion -> . expresion POTENCIA expresion
+    (52) expresion -> . expresion PORCENTAJE expresion
+    (53) expresion -> . expresion IGUALIGUAL expresion
+    (54) expresion -> . expresion DIFERENTE expresion
+    (55) expresion -> . expresion MENOR expresion
+    (56) expresion -> . expresion MAYOR expresion
+    (57) expresion -> . expresion MENORIGUAL expresion
+    (58) expresion -> . expresion MAYORIGUAL expresion
+    (59) expresion -> . expresion AND expresion
+    (60) expresion -> . expresion OR expresion
+    (61) expresion -> . MENOS expresion
+    (62) expresion -> . ENTERO
+    (63) expresion -> . DECIMAL
+    (64) expresion -> . CADENA
+    (65) expresion -> . RTRUE
+    (66) expresion -> . RFALSE
+    (67) expresion -> . ID
 
     MENOS           shift and go to state 38
     ENTERO          shift and go to state 39
@@ -1590,28 +1593,28 @@ state 66
 
 state 67
 
-    (58) expresion -> expresion AND . expresion
-    (46) expresion -> . expresion MAS expresion
-    (47) expresion -> . expresion MENOS expresion
-    (48) expresion -> . expresion POR expresion
-    (49) expresion -> . expresion DIV expresion
-    (50) expresion -> . expresion POTENCIA expresion
-    (51) expresion -> . expresion PORCENTAJE expresion
-    (52) expresion -> . expresion IGUALIGUAL expresion
-    (53) expresion -> . expresion DIFERENTE expresion
-    (54) expresion -> . expresion MENOR expresion
-    (55) expresion -> . expresion MAYOR expresion
-    (56) expresion -> . expresion MENORIGUAL expresion
-    (57) expresion -> . expresion MAYORIGUAL expresion
-    (58) expresion -> . expresion AND expresion
-    (59) expresion -> . expresion OR expresion
-    (60) expresion -> . MENOS expresion
-    (61) expresion -> . ENTERO
-    (62) expresion -> . DECIMAL
-    (63) expresion -> . CADENA
-    (64) expresion -> . RTRUE
-    (65) expresion -> . RFALSE
-    (66) expresion -> . ID
+    (59) expresion -> expresion AND . expresion
+    (47) expresion -> . expresion MAS expresion
+    (48) expresion -> . expresion MENOS expresion
+    (49) expresion -> . expresion POR expresion
+    (50) expresion -> . expresion DIV expresion
+    (51) expresion -> . expresion POTENCIA expresion
+    (52) expresion -> . expresion PORCENTAJE expresion
+    (53) expresion -> . expresion IGUALIGUAL expresion
+    (54) expresion -> . expresion DIFERENTE expresion
+    (55) expresion -> . expresion MENOR expresion
+    (56) expresion -> . expresion MAYOR expresion
+    (57) expresion -> . expresion MENORIGUAL expresion
+    (58) expresion -> . expresion MAYORIGUAL expresion
+    (59) expresion -> . expresion AND expresion
+    (60) expresion -> . expresion OR expresion
+    (61) expresion -> . MENOS expresion
+    (62) expresion -> . ENTERO
+    (63) expresion -> . DECIMAL
+    (64) expresion -> . CADENA
+    (65) expresion -> . RTRUE
+    (66) expresion -> . RFALSE
+    (67) expresion -> . ID
 
     MENOS           shift and go to state 38
     ENTERO          shift and go to state 39
@@ -1625,28 +1628,28 @@ state 67
 
 state 68
 
-    (59) expresion -> expresion OR . expresion
-    (46) expresion -> . expresion MAS expresion
-    (47) expresion -> . expresion MENOS expresion
-    (48) expresion -> . expresion POR expresion
-    (49) expresion -> . expresion DIV expresion
-    (50) expresion -> . expresion POTENCIA expresion
-    (51) expresion -> . expresion PORCENTAJE expresion
-    (52) expresion -> . expresion IGUALIGUAL expresion
-    (53) expresion -> . expresion DIFERENTE expresion
-    (54) expresion -> . expresion MENOR expresion
-    (55) expresion -> . expresion MAYOR expresion
-    (56) expresion -> . expresion MENORIGUAL expresion
-    (57) expresion -> . expresion MAYORIGUAL expresion
-    (58) expresion -> . expresion AND expresion
-    (59) expresion -> . expresion OR expresion
-    (60) expresion -> . MENOS expresion
-    (61) expresion -> . ENTERO
-    (62) expresion -> . DECIMAL
-    (63) expresion -> . CADENA
-    (64) expresion -> . RTRUE
-    (65) expresion -> . RFALSE
-    (66) expresion -> . ID
+    (60) expresion -> expresion OR . expresion
+    (47) expresion -> . expresion MAS expresion
+    (48) expresion -> . expresion MENOS expresion
+    (49) expresion -> . expresion POR expresion
+    (50) expresion -> . expresion DIV expresion
+    (51) expresion -> . expresion POTENCIA expresion
+    (52) expresion -> . expresion PORCENTAJE expresion
+    (53) expresion -> . expresion IGUALIGUAL expresion
+    (54) expresion -> . expresion DIFERENTE expresion
+    (55) expresion -> . expresion MENOR expresion
+    (56) expresion -> . expresion MAYOR expresion
+    (57) expresion -> . expresion MENORIGUAL expresion
+    (58) expresion -> . expresion MAYORIGUAL expresion
+    (59) expresion -> . expresion AND expresion
+    (60) expresion -> . expresion OR expresion
+    (61) expresion -> . MENOS expresion
+    (62) expresion -> . ENTERO
+    (63) expresion -> . DECIMAL
+    (64) expresion -> . CADENA
+    (65) expresion -> . RTRUE
+    (66) expresion -> . RFALSE
+    (67) expresion -> . ID
 
     MENOS           shift and go to state 38
     ENTERO          shift and go to state 39
@@ -1660,40 +1663,40 @@ state 68
 
 state 69
 
-    (60) expresion -> MENOS expresion .
-    (46) expresion -> expresion . MAS expresion
-    (47) expresion -> expresion . MENOS expresion
-    (48) expresion -> expresion . POR expresion
-    (49) expresion -> expresion . DIV expresion
-    (50) expresion -> expresion . POTENCIA expresion
-    (51) expresion -> expresion . PORCENTAJE expresion
-    (52) expresion -> expresion . IGUALIGUAL expresion
-    (53) expresion -> expresion . DIFERENTE expresion
-    (54) expresion -> expresion . MENOR expresion
-    (55) expresion -> expresion . MAYOR expresion
-    (56) expresion -> expresion . MENORIGUAL expresion
-    (57) expresion -> expresion . MAYORIGUAL expresion
-    (58) expresion -> expresion . AND expresion
-    (59) expresion -> expresion . OR expresion
+    (61) expresion -> MENOS expresion .
+    (47) expresion -> expresion . MAS expresion
+    (48) expresion -> expresion . MENOS expresion
+    (49) expresion -> expresion . POR expresion
+    (50) expresion -> expresion . DIV expresion
+    (51) expresion -> expresion . POTENCIA expresion
+    (52) expresion -> expresion . PORCENTAJE expresion
+    (53) expresion -> expresion . IGUALIGUAL expresion
+    (54) expresion -> expresion . DIFERENTE expresion
+    (55) expresion -> expresion . MENOR expresion
+    (56) expresion -> expresion . MAYOR expresion
+    (57) expresion -> expresion . MENORIGUAL expresion
+    (58) expresion -> expresion . MAYORIGUAL expresion
+    (59) expresion -> expresion . AND expresion
+    (60) expresion -> expresion . OR expresion
 
-    MAS             reduce using rule 60 (expresion -> MENOS expresion .)
-    MENOS           reduce using rule 60 (expresion -> MENOS expresion .)
-    POR             reduce using rule 60 (expresion -> MENOS expresion .)
-    DIV             reduce using rule 60 (expresion -> MENOS expresion .)
-    POTENCIA        reduce using rule 60 (expresion -> MENOS expresion .)
-    PORCENTAJE      reduce using rule 60 (expresion -> MENOS expresion .)
-    IGUALIGUAL      reduce using rule 60 (expresion -> MENOS expresion .)
-    DIFERENTE       reduce using rule 60 (expresion -> MENOS expresion .)
-    MENOR           reduce using rule 60 (expresion -> MENOS expresion .)
-    MAYOR           reduce using rule 60 (expresion -> MENOS expresion .)
-    MENORIGUAL      reduce using rule 60 (expresion -> MENOS expresion .)
-    MAYORIGUAL      reduce using rule 60 (expresion -> MENOS expresion .)
-    AND             reduce using rule 60 (expresion -> MENOS expresion .)
-    OR              reduce using rule 60 (expresion -> MENOS expresion .)
-    PTCOMA          reduce using rule 60 (expresion -> MENOS expresion .)
-    DPUNTOS         reduce using rule 60 (expresion -> MENOS expresion .)
-    PARD            reduce using rule 60 (expresion -> MENOS expresion .)
-    COMA            reduce using rule 60 (expresion -> MENOS expresion .)
+    MAS             reduce using rule 61 (expresion -> MENOS expresion .)
+    MENOS           reduce using rule 61 (expresion -> MENOS expresion .)
+    POR             reduce using rule 61 (expresion -> MENOS expresion .)
+    DIV             reduce using rule 61 (expresion -> MENOS expresion .)
+    POTENCIA        reduce using rule 61 (expresion -> MENOS expresion .)
+    PORCENTAJE      reduce using rule 61 (expresion -> MENOS expresion .)
+    IGUALIGUAL      reduce using rule 61 (expresion -> MENOS expresion .)
+    DIFERENTE       reduce using rule 61 (expresion -> MENOS expresion .)
+    MENOR           reduce using rule 61 (expresion -> MENOS expresion .)
+    MAYOR           reduce using rule 61 (expresion -> MENOS expresion .)
+    MENORIGUAL      reduce using rule 61 (expresion -> MENOS expresion .)
+    MAYORIGUAL      reduce using rule 61 (expresion -> MENOS expresion .)
+    AND             reduce using rule 61 (expresion -> MENOS expresion .)
+    OR              reduce using rule 61 (expresion -> MENOS expresion .)
+    PTCOMA          reduce using rule 61 (expresion -> MENOS expresion .)
+    DPUNTOS         reduce using rule 61 (expresion -> MENOS expresion .)
+    PARD            reduce using rule 61 (expresion -> MENOS expresion .)
+    COMA            reduce using rule 61 (expresion -> MENOS expresion .)
 
   ! MAS             [ shift and go to state 55 ]
   ! MENOS           [ shift and go to state 56 ]
@@ -1717,27 +1720,27 @@ state 70
     (22) parametros_ll -> . parametros_ll COMA parametro_ll
     (23) parametros_ll -> . parametro_ll
     (24) parametro_ll -> . expresion
-    (46) expresion -> . expresion MAS expresion
-    (47) expresion -> . expresion MENOS expresion
-    (48) expresion -> . expresion POR expresion
-    (49) expresion -> . expresion DIV expresion
-    (50) expresion -> . expresion POTENCIA expresion
-    (51) expresion -> . expresion PORCENTAJE expresion
-    (52) expresion -> . expresion IGUALIGUAL expresion
-    (53) expresion -> . expresion DIFERENTE expresion
-    (54) expresion -> . expresion MENOR expresion
-    (55) expresion -> . expresion MAYOR expresion
-    (56) expresion -> . expresion MENORIGUAL expresion
-    (57) expresion -> . expresion MAYORIGUAL expresion
-    (58) expresion -> . expresion AND expresion
-    (59) expresion -> . expresion OR expresion
-    (60) expresion -> . MENOS expresion
-    (61) expresion -> . ENTERO
-    (62) expresion -> . DECIMAL
-    (63) expresion -> . CADENA
-    (64) expresion -> . RTRUE
-    (65) expresion -> . RFALSE
-    (66) expresion -> . ID
+    (47) expresion -> . expresion MAS expresion
+    (48) expresion -> . expresion MENOS expresion
+    (49) expresion -> . expresion POR expresion
+    (50) expresion -> . expresion DIV expresion
+    (51) expresion -> . expresion POTENCIA expresion
+    (52) expresion -> . expresion PORCENTAJE expresion
+    (53) expresion -> . expresion IGUALIGUAL expresion
+    (54) expresion -> . expresion DIFERENTE expresion
+    (55) expresion -> . expresion MENOR expresion
+    (56) expresion -> . expresion MAYOR expresion
+    (57) expresion -> . expresion MENORIGUAL expresion
+    (58) expresion -> . expresion MAYORIGUAL expresion
+    (59) expresion -> . expresion AND expresion
+    (60) expresion -> . expresion OR expresion
+    (61) expresion -> . MENOS expresion
+    (62) expresion -> . ENTERO
+    (63) expresion -> . DECIMAL
+    (64) expresion -> . CADENA
+    (65) expresion -> . RTRUE
+    (66) expresion -> . RFALSE
+    (67) expresion -> . ID
 
     MENOS           shift and go to state 38
     ENTERO          shift and go to state 39
@@ -1762,51 +1765,51 @@ state 71
 
 state 72
 
-    (43) tipo -> STRING .
+    (44) tipo -> STRING .
 
-    IGUAL           reduce using rule 43 (tipo -> STRING .)
-    PTCOMA          reduce using rule 43 (tipo -> STRING .)
-    PARD            reduce using rule 43 (tipo -> STRING .)
-    COMA            reduce using rule 43 (tipo -> STRING .)
+    IGUAL           reduce using rule 44 (tipo -> STRING .)
+    PTCOMA          reduce using rule 44 (tipo -> STRING .)
+    PARD            reduce using rule 44 (tipo -> STRING .)
+    COMA            reduce using rule 44 (tipo -> STRING .)
 
 
 state 73
 
-    (44) tipo -> NUMBER .
+    (45) tipo -> NUMBER .
 
-    IGUAL           reduce using rule 44 (tipo -> NUMBER .)
-    PTCOMA          reduce using rule 44 (tipo -> NUMBER .)
-    PARD            reduce using rule 44 (tipo -> NUMBER .)
-    COMA            reduce using rule 44 (tipo -> NUMBER .)
+    IGUAL           reduce using rule 45 (tipo -> NUMBER .)
+    PTCOMA          reduce using rule 45 (tipo -> NUMBER .)
+    PARD            reduce using rule 45 (tipo -> NUMBER .)
+    COMA            reduce using rule 45 (tipo -> NUMBER .)
 
 
 state 74
 
-    (45) tipo -> BOOLEAN .
+    (46) tipo -> BOOLEAN .
 
-    IGUAL           reduce using rule 45 (tipo -> BOOLEAN .)
-    PTCOMA          reduce using rule 45 (tipo -> BOOLEAN .)
-    PARD            reduce using rule 45 (tipo -> BOOLEAN .)
-    COMA            reduce using rule 45 (tipo -> BOOLEAN .)
+    IGUAL           reduce using rule 46 (tipo -> BOOLEAN .)
+    PTCOMA          reduce using rule 46 (tipo -> BOOLEAN .)
+    PARD            reduce using rule 46 (tipo -> BOOLEAN .)
+    COMA            reduce using rule 46 (tipo -> BOOLEAN .)
 
 
 state 75
 
     (27) declaracion_normal -> RLET ID IGUAL expresion .
-    (46) expresion -> expresion . MAS expresion
-    (47) expresion -> expresion . MENOS expresion
-    (48) expresion -> expresion . POR expresion
-    (49) expresion -> expresion . DIV expresion
-    (50) expresion -> expresion . POTENCIA expresion
-    (51) expresion -> expresion . PORCENTAJE expresion
-    (52) expresion -> expresion . IGUALIGUAL expresion
-    (53) expresion -> expresion . DIFERENTE expresion
-    (54) expresion -> expresion . MENOR expresion
-    (55) expresion -> expresion . MAYOR expresion
-    (56) expresion -> expresion . MENORIGUAL expresion
-    (57) expresion -> expresion . MAYORIGUAL expresion
-    (58) expresion -> expresion . AND expresion
-    (59) expresion -> expresion . OR expresion
+    (47) expresion -> expresion . MAS expresion
+    (48) expresion -> expresion . MENOS expresion
+    (49) expresion -> expresion . POR expresion
+    (50) expresion -> expresion . DIV expresion
+    (51) expresion -> expresion . POTENCIA expresion
+    (52) expresion -> expresion . PORCENTAJE expresion
+    (53) expresion -> expresion . IGUALIGUAL expresion
+    (54) expresion -> expresion . DIFERENTE expresion
+    (55) expresion -> expresion . MENOR expresion
+    (56) expresion -> expresion . MAYOR expresion
+    (57) expresion -> expresion . MENORIGUAL expresion
+    (58) expresion -> expresion . MAYORIGUAL expresion
+    (59) expresion -> expresion . AND expresion
+    (60) expresion -> expresion . OR expresion
 
     PTCOMA          reduce using rule 27 (declaracion_normal -> RLET ID IGUAL expresion .)
     MAS             shift and go to state 55
@@ -1843,27 +1846,27 @@ state 78
 
     (22) parametros_ll -> parametros_ll COMA . parametro_ll
     (24) parametro_ll -> . expresion
-    (46) expresion -> . expresion MAS expresion
-    (47) expresion -> . expresion MENOS expresion
-    (48) expresion -> . expresion POR expresion
-    (49) expresion -> . expresion DIV expresion
-    (50) expresion -> . expresion POTENCIA expresion
-    (51) expresion -> . expresion PORCENTAJE expresion
-    (52) expresion -> . expresion IGUALIGUAL expresion
-    (53) expresion -> . expresion DIFERENTE expresion
-    (54) expresion -> . expresion MENOR expresion
-    (55) expresion -> . expresion MAYOR expresion
-    (56) expresion -> . expresion MENORIGUAL expresion
-    (57) expresion -> . expresion MAYORIGUAL expresion
-    (58) expresion -> . expresion AND expresion
-    (59) expresion -> . expresion OR expresion
-    (60) expresion -> . MENOS expresion
-    (61) expresion -> . ENTERO
-    (62) expresion -> . DECIMAL
-    (63) expresion -> . CADENA
-    (64) expresion -> . RTRUE
-    (65) expresion -> . RFALSE
-    (66) expresion -> . ID
+    (47) expresion -> . expresion MAS expresion
+    (48) expresion -> . expresion MENOS expresion
+    (49) expresion -> . expresion POR expresion
+    (50) expresion -> . expresion DIV expresion
+    (51) expresion -> . expresion POTENCIA expresion
+    (52) expresion -> . expresion PORCENTAJE expresion
+    (53) expresion -> . expresion IGUALIGUAL expresion
+    (54) expresion -> . expresion DIFERENTE expresion
+    (55) expresion -> . expresion MENOR expresion
+    (56) expresion -> . expresion MAYOR expresion
+    (57) expresion -> . expresion MENORIGUAL expresion
+    (58) expresion -> . expresion MAYORIGUAL expresion
+    (59) expresion -> . expresion AND expresion
+    (60) expresion -> . expresion OR expresion
+    (61) expresion -> . MENOS expresion
+    (62) expresion -> . ENTERO
+    (63) expresion -> . DECIMAL
+    (64) expresion -> . CADENA
+    (65) expresion -> . RTRUE
+    (66) expresion -> . RFALSE
+    (67) expresion -> . ID
 
     MENOS           shift and go to state 38
     ENTERO          shift and go to state 39
@@ -1929,45 +1932,45 @@ state 84
 
 state 85
 
-    (46) expresion -> expresion MAS expresion .
-    (46) expresion -> expresion . MAS expresion
-    (47) expresion -> expresion . MENOS expresion
-    (48) expresion -> expresion . POR expresion
-    (49) expresion -> expresion . DIV expresion
-    (50) expresion -> expresion . POTENCIA expresion
-    (51) expresion -> expresion . PORCENTAJE expresion
-    (52) expresion -> expresion . IGUALIGUAL expresion
-    (53) expresion -> expresion . DIFERENTE expresion
-    (54) expresion -> expresion . MENOR expresion
-    (55) expresion -> expresion . MAYOR expresion
-    (56) expresion -> expresion . MENORIGUAL expresion
-    (57) expresion -> expresion . MAYORIGUAL expresion
-    (58) expresion -> expresion . AND expresion
-    (59) expresion -> expresion . OR expresion
+    (47) expresion -> expresion MAS expresion .
+    (47) expresion -> expresion . MAS expresion
+    (48) expresion -> expresion . MENOS expresion
+    (49) expresion -> expresion . POR expresion
+    (50) expresion -> expresion . DIV expresion
+    (51) expresion -> expresion . POTENCIA expresion
+    (52) expresion -> expresion . PORCENTAJE expresion
+    (53) expresion -> expresion . IGUALIGUAL expresion
+    (54) expresion -> expresion . DIFERENTE expresion
+    (55) expresion -> expresion . MENOR expresion
+    (56) expresion -> expresion . MAYOR expresion
+    (57) expresion -> expresion . MENORIGUAL expresion
+    (58) expresion -> expresion . MAYORIGUAL expresion
+    (59) expresion -> expresion . AND expresion
+    (60) expresion -> expresion . OR expresion
 
-    MAS             reduce using rule 46 (expresion -> expresion MAS expresion .)
-    MENOS           reduce using rule 46 (expresion -> expresion MAS expresion .)
-    IGUALIGUAL      reduce using rule 46 (expresion -> expresion MAS expresion .)
-    DIFERENTE       reduce using rule 46 (expresion -> expresion MAS expresion .)
-    MENOR           reduce using rule 46 (expresion -> expresion MAS expresion .)
-    MAYOR           reduce using rule 46 (expresion -> expresion MAS expresion .)
-    MENORIGUAL      reduce using rule 46 (expresion -> expresion MAS expresion .)
-    MAYORIGUAL      reduce using rule 46 (expresion -> expresion MAS expresion .)
-    AND             reduce using rule 46 (expresion -> expresion MAS expresion .)
-    OR              reduce using rule 46 (expresion -> expresion MAS expresion .)
-    PTCOMA          reduce using rule 46 (expresion -> expresion MAS expresion .)
-    DPUNTOS         reduce using rule 46 (expresion -> expresion MAS expresion .)
-    PARD            reduce using rule 46 (expresion -> expresion MAS expresion .)
-    COMA            reduce using rule 46 (expresion -> expresion MAS expresion .)
+    MAS             reduce using rule 47 (expresion -> expresion MAS expresion .)
+    MENOS           reduce using rule 47 (expresion -> expresion MAS expresion .)
+    IGUALIGUAL      reduce using rule 47 (expresion -> expresion MAS expresion .)
+    DIFERENTE       reduce using rule 47 (expresion -> expresion MAS expresion .)
+    MENOR           reduce using rule 47 (expresion -> expresion MAS expresion .)
+    MAYOR           reduce using rule 47 (expresion -> expresion MAS expresion .)
+    MENORIGUAL      reduce using rule 47 (expresion -> expresion MAS expresion .)
+    MAYORIGUAL      reduce using rule 47 (expresion -> expresion MAS expresion .)
+    AND             reduce using rule 47 (expresion -> expresion MAS expresion .)
+    OR              reduce using rule 47 (expresion -> expresion MAS expresion .)
+    PTCOMA          reduce using rule 47 (expresion -> expresion MAS expresion .)
+    DPUNTOS         reduce using rule 47 (expresion -> expresion MAS expresion .)
+    PARD            reduce using rule 47 (expresion -> expresion MAS expresion .)
+    COMA            reduce using rule 47 (expresion -> expresion MAS expresion .)
     POR             shift and go to state 57
     DIV             shift and go to state 58
     POTENCIA        shift and go to state 59
     PORCENTAJE      shift and go to state 60
 
-  ! POR             [ reduce using rule 46 (expresion -> expresion MAS expresion .) ]
-  ! DIV             [ reduce using rule 46 (expresion -> expresion MAS expresion .) ]
-  ! POTENCIA        [ reduce using rule 46 (expresion -> expresion MAS expresion .) ]
-  ! PORCENTAJE      [ reduce using rule 46 (expresion -> expresion MAS expresion .) ]
+  ! POR             [ reduce using rule 47 (expresion -> expresion MAS expresion .) ]
+  ! DIV             [ reduce using rule 47 (expresion -> expresion MAS expresion .) ]
+  ! POTENCIA        [ reduce using rule 47 (expresion -> expresion MAS expresion .) ]
+  ! PORCENTAJE      [ reduce using rule 47 (expresion -> expresion MAS expresion .) ]
   ! MAS             [ shift and go to state 55 ]
   ! MENOS           [ shift and go to state 56 ]
   ! IGUALIGUAL      [ shift and go to state 61 ]
@@ -1982,45 +1985,45 @@ state 85
 
 state 86
 
-    (47) expresion -> expresion MENOS expresion .
-    (46) expresion -> expresion . MAS expresion
-    (47) expresion -> expresion . MENOS expresion
-    (48) expresion -> expresion . POR expresion
-    (49) expresion -> expresion . DIV expresion
-    (50) expresion -> expresion . POTENCIA expresion
-    (51) expresion -> expresion . PORCENTAJE expresion
-    (52) expresion -> expresion . IGUALIGUAL expresion
-    (53) expresion -> expresion . DIFERENTE expresion
-    (54) expresion -> expresion . MENOR expresion
-    (55) expresion -> expresion . MAYOR expresion
-    (56) expresion -> expresion . MENORIGUAL expresion
-    (57) expresion -> expresion . MAYORIGUAL expresion
-    (58) expresion -> expresion . AND expresion
-    (59) expresion -> expresion . OR expresion
+    (48) expresion -> expresion MENOS expresion .
+    (47) expresion -> expresion . MAS expresion
+    (48) expresion -> expresion . MENOS expresion
+    (49) expresion -> expresion . POR expresion
+    (50) expresion -> expresion . DIV expresion
+    (51) expresion -> expresion . POTENCIA expresion
+    (52) expresion -> expresion . PORCENTAJE expresion
+    (53) expresion -> expresion . IGUALIGUAL expresion
+    (54) expresion -> expresion . DIFERENTE expresion
+    (55) expresion -> expresion . MENOR expresion
+    (56) expresion -> expresion . MAYOR expresion
+    (57) expresion -> expresion . MENORIGUAL expresion
+    (58) expresion -> expresion . MAYORIGUAL expresion
+    (59) expresion -> expresion . AND expresion
+    (60) expresion -> expresion . OR expresion
 
-    MAS             reduce using rule 47 (expresion -> expresion MENOS expresion .)
-    MENOS           reduce using rule 47 (expresion -> expresion MENOS expresion .)
-    IGUALIGUAL      reduce using rule 47 (expresion -> expresion MENOS expresion .)
-    DIFERENTE       reduce using rule 47 (expresion -> expresion MENOS expresion .)
-    MENOR           reduce using rule 47 (expresion -> expresion MENOS expresion .)
-    MAYOR           reduce using rule 47 (expresion -> expresion MENOS expresion .)
-    MENORIGUAL      reduce using rule 47 (expresion -> expresion MENOS expresion .)
-    MAYORIGUAL      reduce using rule 47 (expresion -> expresion MENOS expresion .)
-    AND             reduce using rule 47 (expresion -> expresion MENOS expresion .)
-    OR              reduce using rule 47 (expresion -> expresion MENOS expresion .)
-    PTCOMA          reduce using rule 47 (expresion -> expresion MENOS expresion .)
-    DPUNTOS         reduce using rule 47 (expresion -> expresion MENOS expresion .)
-    PARD            reduce using rule 47 (expresion -> expresion MENOS expresion .)
-    COMA            reduce using rule 47 (expresion -> expresion MENOS expresion .)
+    MAS             reduce using rule 48 (expresion -> expresion MENOS expresion .)
+    MENOS           reduce using rule 48 (expresion -> expresion MENOS expresion .)
+    IGUALIGUAL      reduce using rule 48 (expresion -> expresion MENOS expresion .)
+    DIFERENTE       reduce using rule 48 (expresion -> expresion MENOS expresion .)
+    MENOR           reduce using rule 48 (expresion -> expresion MENOS expresion .)
+    MAYOR           reduce using rule 48 (expresion -> expresion MENOS expresion .)
+    MENORIGUAL      reduce using rule 48 (expresion -> expresion MENOS expresion .)
+    MAYORIGUAL      reduce using rule 48 (expresion -> expresion MENOS expresion .)
+    AND             reduce using rule 48 (expresion -> expresion MENOS expresion .)
+    OR              reduce using rule 48 (expresion -> expresion MENOS expresion .)
+    PTCOMA          reduce using rule 48 (expresion -> expresion MENOS expresion .)
+    DPUNTOS         reduce using rule 48 (expresion -> expresion MENOS expresion .)
+    PARD            reduce using rule 48 (expresion -> expresion MENOS expresion .)
+    COMA            reduce using rule 48 (expresion -> expresion MENOS expresion .)
     POR             shift and go to state 57
     DIV             shift and go to state 58
     POTENCIA        shift and go to state 59
     PORCENTAJE      shift and go to state 60
 
-  ! POR             [ reduce using rule 47 (expresion -> expresion MENOS expresion .) ]
-  ! DIV             [ reduce using rule 47 (expresion -> expresion MENOS expresion .) ]
-  ! POTENCIA        [ reduce using rule 47 (expresion -> expresion MENOS expresion .) ]
-  ! PORCENTAJE      [ reduce using rule 47 (expresion -> expresion MENOS expresion .) ]
+  ! POR             [ reduce using rule 48 (expresion -> expresion MENOS expresion .) ]
+  ! DIV             [ reduce using rule 48 (expresion -> expresion MENOS expresion .) ]
+  ! POTENCIA        [ reduce using rule 48 (expresion -> expresion MENOS expresion .) ]
+  ! PORCENTAJE      [ reduce using rule 48 (expresion -> expresion MENOS expresion .) ]
   ! MAS             [ shift and go to state 55 ]
   ! MENOS           [ shift and go to state 56 ]
   ! IGUALIGUAL      [ shift and go to state 61 ]
@@ -2035,42 +2038,42 @@ state 86
 
 state 87
 
-    (48) expresion -> expresion POR expresion .
-    (46) expresion -> expresion . MAS expresion
-    (47) expresion -> expresion . MENOS expresion
-    (48) expresion -> expresion . POR expresion
-    (49) expresion -> expresion . DIV expresion
-    (50) expresion -> expresion . POTENCIA expresion
-    (51) expresion -> expresion . PORCENTAJE expresion
-    (52) expresion -> expresion . IGUALIGUAL expresion
-    (53) expresion -> expresion . DIFERENTE expresion
-    (54) expresion -> expresion . MENOR expresion
-    (55) expresion -> expresion . MAYOR expresion
-    (56) expresion -> expresion . MENORIGUAL expresion
-    (57) expresion -> expresion . MAYORIGUAL expresion
-    (58) expresion -> expresion . AND expresion
-    (59) expresion -> expresion . OR expresion
+    (49) expresion -> expresion POR expresion .
+    (47) expresion -> expresion . MAS expresion
+    (48) expresion -> expresion . MENOS expresion
+    (49) expresion -> expresion . POR expresion
+    (50) expresion -> expresion . DIV expresion
+    (51) expresion -> expresion . POTENCIA expresion
+    (52) expresion -> expresion . PORCENTAJE expresion
+    (53) expresion -> expresion . IGUALIGUAL expresion
+    (54) expresion -> expresion . DIFERENTE expresion
+    (55) expresion -> expresion . MENOR expresion
+    (56) expresion -> expresion . MAYOR expresion
+    (57) expresion -> expresion . MENORIGUAL expresion
+    (58) expresion -> expresion . MAYORIGUAL expresion
+    (59) expresion -> expresion . AND expresion
+    (60) expresion -> expresion . OR expresion
 
-    MAS             reduce using rule 48 (expresion -> expresion POR expresion .)
-    MENOS           reduce using rule 48 (expresion -> expresion POR expresion .)
-    POR             reduce using rule 48 (expresion -> expresion POR expresion .)
-    DIV             reduce using rule 48 (expresion -> expresion POR expresion .)
-    PORCENTAJE      reduce using rule 48 (expresion -> expresion POR expresion .)
-    IGUALIGUAL      reduce using rule 48 (expresion -> expresion POR expresion .)
-    DIFERENTE       reduce using rule 48 (expresion -> expresion POR expresion .)
-    MENOR           reduce using rule 48 (expresion -> expresion POR expresion .)
-    MAYOR           reduce using rule 48 (expresion -> expresion POR expresion .)
-    MENORIGUAL      reduce using rule 48 (expresion -> expresion POR expresion .)
-    MAYORIGUAL      reduce using rule 48 (expresion -> expresion POR expresion .)
-    AND             reduce using rule 48 (expresion -> expresion POR expresion .)
-    OR              reduce using rule 48 (expresion -> expresion POR expresion .)
-    PTCOMA          reduce using rule 48 (expresion -> expresion POR expresion .)
-    DPUNTOS         reduce using rule 48 (expresion -> expresion POR expresion .)
-    PARD            reduce using rule 48 (expresion -> expresion POR expresion .)
-    COMA            reduce using rule 48 (expresion -> expresion POR expresion .)
+    MAS             reduce using rule 49 (expresion -> expresion POR expresion .)
+    MENOS           reduce using rule 49 (expresion -> expresion POR expresion .)
+    POR             reduce using rule 49 (expresion -> expresion POR expresion .)
+    DIV             reduce using rule 49 (expresion -> expresion POR expresion .)
+    PORCENTAJE      reduce using rule 49 (expresion -> expresion POR expresion .)
+    IGUALIGUAL      reduce using rule 49 (expresion -> expresion POR expresion .)
+    DIFERENTE       reduce using rule 49 (expresion -> expresion POR expresion .)
+    MENOR           reduce using rule 49 (expresion -> expresion POR expresion .)
+    MAYOR           reduce using rule 49 (expresion -> expresion POR expresion .)
+    MENORIGUAL      reduce using rule 49 (expresion -> expresion POR expresion .)
+    MAYORIGUAL      reduce using rule 49 (expresion -> expresion POR expresion .)
+    AND             reduce using rule 49 (expresion -> expresion POR expresion .)
+    OR              reduce using rule 49 (expresion -> expresion POR expresion .)
+    PTCOMA          reduce using rule 49 (expresion -> expresion POR expresion .)
+    DPUNTOS         reduce using rule 49 (expresion -> expresion POR expresion .)
+    PARD            reduce using rule 49 (expresion -> expresion POR expresion .)
+    COMA            reduce using rule 49 (expresion -> expresion POR expresion .)
     POTENCIA        shift and go to state 59
 
-  ! POTENCIA        [ reduce using rule 48 (expresion -> expresion POR expresion .) ]
+  ! POTENCIA        [ reduce using rule 49 (expresion -> expresion POR expresion .) ]
   ! MAS             [ shift and go to state 55 ]
   ! MENOS           [ shift and go to state 56 ]
   ! POR             [ shift and go to state 57 ]
@@ -2088,42 +2091,42 @@ state 87
 
 state 88
 
-    (49) expresion -> expresion DIV expresion .
-    (46) expresion -> expresion . MAS expresion
-    (47) expresion -> expresion . MENOS expresion
-    (48) expresion -> expresion . POR expresion
-    (49) expresion -> expresion . DIV expresion
-    (50) expresion -> expresion . POTENCIA expresion
-    (51) expresion -> expresion . PORCENTAJE expresion
-    (52) expresion -> expresion . IGUALIGUAL expresion
-    (53) expresion -> expresion . DIFERENTE expresion
-    (54) expresion -> expresion . MENOR expresion
-    (55) expresion -> expresion . MAYOR expresion
-    (56) expresion -> expresion . MENORIGUAL expresion
-    (57) expresion -> expresion . MAYORIGUAL expresion
-    (58) expresion -> expresion . AND expresion
-    (59) expresion -> expresion . OR expresion
+    (50) expresion -> expresion DIV expresion .
+    (47) expresion -> expresion . MAS expresion
+    (48) expresion -> expresion . MENOS expresion
+    (49) expresion -> expresion . POR expresion
+    (50) expresion -> expresion . DIV expresion
+    (51) expresion -> expresion . POTENCIA expresion
+    (52) expresion -> expresion . PORCENTAJE expresion
+    (53) expresion -> expresion . IGUALIGUAL expresion
+    (54) expresion -> expresion . DIFERENTE expresion
+    (55) expresion -> expresion . MENOR expresion
+    (56) expresion -> expresion . MAYOR expresion
+    (57) expresion -> expresion . MENORIGUAL expresion
+    (58) expresion -> expresion . MAYORIGUAL expresion
+    (59) expresion -> expresion . AND expresion
+    (60) expresion -> expresion . OR expresion
 
-    MAS             reduce using rule 49 (expresion -> expresion DIV expresion .)
-    MENOS           reduce using rule 49 (expresion -> expresion DIV expresion .)
-    POR             reduce using rule 49 (expresion -> expresion DIV expresion .)
-    DIV             reduce using rule 49 (expresion -> expresion DIV expresion .)
-    PORCENTAJE      reduce using rule 49 (expresion -> expresion DIV expresion .)
-    IGUALIGUAL      reduce using rule 49 (expresion -> expresion DIV expresion .)
-    DIFERENTE       reduce using rule 49 (expresion -> expresion DIV expresion .)
-    MENOR           reduce using rule 49 (expresion -> expresion DIV expresion .)
-    MAYOR           reduce using rule 49 (expresion -> expresion DIV expresion .)
-    MENORIGUAL      reduce using rule 49 (expresion -> expresion DIV expresion .)
-    MAYORIGUAL      reduce using rule 49 (expresion -> expresion DIV expresion .)
-    AND             reduce using rule 49 (expresion -> expresion DIV expresion .)
-    OR              reduce using rule 49 (expresion -> expresion DIV expresion .)
-    PTCOMA          reduce using rule 49 (expresion -> expresion DIV expresion .)
-    DPUNTOS         reduce using rule 49 (expresion -> expresion DIV expresion .)
-    PARD            reduce using rule 49 (expresion -> expresion DIV expresion .)
-    COMA            reduce using rule 49 (expresion -> expresion DIV expresion .)
+    MAS             reduce using rule 50 (expresion -> expresion DIV expresion .)
+    MENOS           reduce using rule 50 (expresion -> expresion DIV expresion .)
+    POR             reduce using rule 50 (expresion -> expresion DIV expresion .)
+    DIV             reduce using rule 50 (expresion -> expresion DIV expresion .)
+    PORCENTAJE      reduce using rule 50 (expresion -> expresion DIV expresion .)
+    IGUALIGUAL      reduce using rule 50 (expresion -> expresion DIV expresion .)
+    DIFERENTE       reduce using rule 50 (expresion -> expresion DIV expresion .)
+    MENOR           reduce using rule 50 (expresion -> expresion DIV expresion .)
+    MAYOR           reduce using rule 50 (expresion -> expresion DIV expresion .)
+    MENORIGUAL      reduce using rule 50 (expresion -> expresion DIV expresion .)
+    MAYORIGUAL      reduce using rule 50 (expresion -> expresion DIV expresion .)
+    AND             reduce using rule 50 (expresion -> expresion DIV expresion .)
+    OR              reduce using rule 50 (expresion -> expresion DIV expresion .)
+    PTCOMA          reduce using rule 50 (expresion -> expresion DIV expresion .)
+    DPUNTOS         reduce using rule 50 (expresion -> expresion DIV expresion .)
+    PARD            reduce using rule 50 (expresion -> expresion DIV expresion .)
+    COMA            reduce using rule 50 (expresion -> expresion DIV expresion .)
     POTENCIA        shift and go to state 59
 
-  ! POTENCIA        [ reduce using rule 49 (expresion -> expresion DIV expresion .) ]
+  ! POTENCIA        [ reduce using rule 50 (expresion -> expresion DIV expresion .) ]
   ! MAS             [ shift and go to state 55 ]
   ! MENOS           [ shift and go to state 56 ]
   ! POR             [ shift and go to state 57 ]
@@ -2141,40 +2144,40 @@ state 88
 
 state 89
 
-    (50) expresion -> expresion POTENCIA expresion .
-    (46) expresion -> expresion . MAS expresion
-    (47) expresion -> expresion . MENOS expresion
-    (48) expresion -> expresion . POR expresion
-    (49) expresion -> expresion . DIV expresion
-    (50) expresion -> expresion . POTENCIA expresion
-    (51) expresion -> expresion . PORCENTAJE expresion
-    (52) expresion -> expresion . IGUALIGUAL expresion
-    (53) expresion -> expresion . DIFERENTE expresion
-    (54) expresion -> expresion . MENOR expresion
-    (55) expresion -> expresion . MAYOR expresion
-    (56) expresion -> expresion . MENORIGUAL expresion
-    (57) expresion -> expresion . MAYORIGUAL expresion
-    (58) expresion -> expresion . AND expresion
-    (59) expresion -> expresion . OR expresion
+    (51) expresion -> expresion POTENCIA expresion .
+    (47) expresion -> expresion . MAS expresion
+    (48) expresion -> expresion . MENOS expresion
+    (49) expresion -> expresion . POR expresion
+    (50) expresion -> expresion . DIV expresion
+    (51) expresion -> expresion . POTENCIA expresion
+    (52) expresion -> expresion . PORCENTAJE expresion
+    (53) expresion -> expresion . IGUALIGUAL expresion
+    (54) expresion -> expresion . DIFERENTE expresion
+    (55) expresion -> expresion . MENOR expresion
+    (56) expresion -> expresion . MAYOR expresion
+    (57) expresion -> expresion . MENORIGUAL expresion
+    (58) expresion -> expresion . MAYORIGUAL expresion
+    (59) expresion -> expresion . AND expresion
+    (60) expresion -> expresion . OR expresion
 
-    MAS             reduce using rule 50 (expresion -> expresion POTENCIA expresion .)
-    MENOS           reduce using rule 50 (expresion -> expresion POTENCIA expresion .)
-    POR             reduce using rule 50 (expresion -> expresion POTENCIA expresion .)
-    DIV             reduce using rule 50 (expresion -> expresion POTENCIA expresion .)
-    POTENCIA        reduce using rule 50 (expresion -> expresion POTENCIA expresion .)
-    PORCENTAJE      reduce using rule 50 (expresion -> expresion POTENCIA expresion .)
-    IGUALIGUAL      reduce using rule 50 (expresion -> expresion POTENCIA expresion .)
-    DIFERENTE       reduce using rule 50 (expresion -> expresion POTENCIA expresion .)
-    MENOR           reduce using rule 50 (expresion -> expresion POTENCIA expresion .)
-    MAYOR           reduce using rule 50 (expresion -> expresion POTENCIA expresion .)
-    MENORIGUAL      reduce using rule 50 (expresion -> expresion POTENCIA expresion .)
-    MAYORIGUAL      reduce using rule 50 (expresion -> expresion POTENCIA expresion .)
-    AND             reduce using rule 50 (expresion -> expresion POTENCIA expresion .)
-    OR              reduce using rule 50 (expresion -> expresion POTENCIA expresion .)
-    PTCOMA          reduce using rule 50 (expresion -> expresion POTENCIA expresion .)
-    DPUNTOS         reduce using rule 50 (expresion -> expresion POTENCIA expresion .)
-    PARD            reduce using rule 50 (expresion -> expresion POTENCIA expresion .)
-    COMA            reduce using rule 50 (expresion -> expresion POTENCIA expresion .)
+    MAS             reduce using rule 51 (expresion -> expresion POTENCIA expresion .)
+    MENOS           reduce using rule 51 (expresion -> expresion POTENCIA expresion .)
+    POR             reduce using rule 51 (expresion -> expresion POTENCIA expresion .)
+    DIV             reduce using rule 51 (expresion -> expresion POTENCIA expresion .)
+    POTENCIA        reduce using rule 51 (expresion -> expresion POTENCIA expresion .)
+    PORCENTAJE      reduce using rule 51 (expresion -> expresion POTENCIA expresion .)
+    IGUALIGUAL      reduce using rule 51 (expresion -> expresion POTENCIA expresion .)
+    DIFERENTE       reduce using rule 51 (expresion -> expresion POTENCIA expresion .)
+    MENOR           reduce using rule 51 (expresion -> expresion POTENCIA expresion .)
+    MAYOR           reduce using rule 51 (expresion -> expresion POTENCIA expresion .)
+    MENORIGUAL      reduce using rule 51 (expresion -> expresion POTENCIA expresion .)
+    MAYORIGUAL      reduce using rule 51 (expresion -> expresion POTENCIA expresion .)
+    AND             reduce using rule 51 (expresion -> expresion POTENCIA expresion .)
+    OR              reduce using rule 51 (expresion -> expresion POTENCIA expresion .)
+    PTCOMA          reduce using rule 51 (expresion -> expresion POTENCIA expresion .)
+    DPUNTOS         reduce using rule 51 (expresion -> expresion POTENCIA expresion .)
+    PARD            reduce using rule 51 (expresion -> expresion POTENCIA expresion .)
+    COMA            reduce using rule 51 (expresion -> expresion POTENCIA expresion .)
 
   ! MAS             [ shift and go to state 55 ]
   ! MENOS           [ shift and go to state 56 ]
@@ -2194,42 +2197,42 @@ state 89
 
 state 90
 
-    (51) expresion -> expresion PORCENTAJE expresion .
-    (46) expresion -> expresion . MAS expresion
-    (47) expresion -> expresion . MENOS expresion
-    (48) expresion -> expresion . POR expresion
-    (49) expresion -> expresion . DIV expresion
-    (50) expresion -> expresion . POTENCIA expresion
-    (51) expresion -> expresion . PORCENTAJE expresion
-    (52) expresion -> expresion . IGUALIGUAL expresion
-    (53) expresion -> expresion . DIFERENTE expresion
-    (54) expresion -> expresion . MENOR expresion
-    (55) expresion -> expresion . MAYOR expresion
-    (56) expresion -> expresion . MENORIGUAL expresion
-    (57) expresion -> expresion . MAYORIGUAL expresion
-    (58) expresion -> expresion . AND expresion
-    (59) expresion -> expresion . OR expresion
+    (52) expresion -> expresion PORCENTAJE expresion .
+    (47) expresion -> expresion . MAS expresion
+    (48) expresion -> expresion . MENOS expresion
+    (49) expresion -> expresion . POR expresion
+    (50) expresion -> expresion . DIV expresion
+    (51) expresion -> expresion . POTENCIA expresion
+    (52) expresion -> expresion . PORCENTAJE expresion
+    (53) expresion -> expresion . IGUALIGUAL expresion
+    (54) expresion -> expresion . DIFERENTE expresion
+    (55) expresion -> expresion . MENOR expresion
+    (56) expresion -> expresion . MAYOR expresion
+    (57) expresion -> expresion . MENORIGUAL expresion
+    (58) expresion -> expresion . MAYORIGUAL expresion
+    (59) expresion -> expresion . AND expresion
+    (60) expresion -> expresion . OR expresion
 
-    MAS             reduce using rule 51 (expresion -> expresion PORCENTAJE expresion .)
-    MENOS           reduce using rule 51 (expresion -> expresion PORCENTAJE expresion .)
-    POR             reduce using rule 51 (expresion -> expresion PORCENTAJE expresion .)
-    DIV             reduce using rule 51 (expresion -> expresion PORCENTAJE expresion .)
-    PORCENTAJE      reduce using rule 51 (expresion -> expresion PORCENTAJE expresion .)
-    IGUALIGUAL      reduce using rule 51 (expresion -> expresion PORCENTAJE expresion .)
-    DIFERENTE       reduce using rule 51 (expresion -> expresion PORCENTAJE expresion .)
-    MENOR           reduce using rule 51 (expresion -> expresion PORCENTAJE expresion .)
-    MAYOR           reduce using rule 51 (expresion -> expresion PORCENTAJE expresion .)
-    MENORIGUAL      reduce using rule 51 (expresion -> expresion PORCENTAJE expresion .)
-    MAYORIGUAL      reduce using rule 51 (expresion -> expresion PORCENTAJE expresion .)
-    AND             reduce using rule 51 (expresion -> expresion PORCENTAJE expresion .)
-    OR              reduce using rule 51 (expresion -> expresion PORCENTAJE expresion .)
-    PTCOMA          reduce using rule 51 (expresion -> expresion PORCENTAJE expresion .)
-    DPUNTOS         reduce using rule 51 (expresion -> expresion PORCENTAJE expresion .)
-    PARD            reduce using rule 51 (expresion -> expresion PORCENTAJE expresion .)
-    COMA            reduce using rule 51 (expresion -> expresion PORCENTAJE expresion .)
+    MAS             reduce using rule 52 (expresion -> expresion PORCENTAJE expresion .)
+    MENOS           reduce using rule 52 (expresion -> expresion PORCENTAJE expresion .)
+    POR             reduce using rule 52 (expresion -> expresion PORCENTAJE expresion .)
+    DIV             reduce using rule 52 (expresion -> expresion PORCENTAJE expresion .)
+    PORCENTAJE      reduce using rule 52 (expresion -> expresion PORCENTAJE expresion .)
+    IGUALIGUAL      reduce using rule 52 (expresion -> expresion PORCENTAJE expresion .)
+    DIFERENTE       reduce using rule 52 (expresion -> expresion PORCENTAJE expresion .)
+    MENOR           reduce using rule 52 (expresion -> expresion PORCENTAJE expresion .)
+    MAYOR           reduce using rule 52 (expresion -> expresion PORCENTAJE expresion .)
+    MENORIGUAL      reduce using rule 52 (expresion -> expresion PORCENTAJE expresion .)
+    MAYORIGUAL      reduce using rule 52 (expresion -> expresion PORCENTAJE expresion .)
+    AND             reduce using rule 52 (expresion -> expresion PORCENTAJE expresion .)
+    OR              reduce using rule 52 (expresion -> expresion PORCENTAJE expresion .)
+    PTCOMA          reduce using rule 52 (expresion -> expresion PORCENTAJE expresion .)
+    DPUNTOS         reduce using rule 52 (expresion -> expresion PORCENTAJE expresion .)
+    PARD            reduce using rule 52 (expresion -> expresion PORCENTAJE expresion .)
+    COMA            reduce using rule 52 (expresion -> expresion PORCENTAJE expresion .)
     POTENCIA        shift and go to state 59
 
-  ! POTENCIA        [ reduce using rule 51 (expresion -> expresion PORCENTAJE expresion .) ]
+  ! POTENCIA        [ reduce using rule 52 (expresion -> expresion PORCENTAJE expresion .) ]
   ! MAS             [ shift and go to state 55 ]
   ! MENOS           [ shift and go to state 56 ]
   ! POR             [ shift and go to state 57 ]
@@ -2247,34 +2250,34 @@ state 90
 
 state 91
 
-    (52) expresion -> expresion IGUALIGUAL expresion .
-    (46) expresion -> expresion . MAS expresion
-    (47) expresion -> expresion . MENOS expresion
-    (48) expresion -> expresion . POR expresion
-    (49) expresion -> expresion . DIV expresion
-    (50) expresion -> expresion . POTENCIA expresion
-    (51) expresion -> expresion . PORCENTAJE expresion
-    (52) expresion -> expresion . IGUALIGUAL expresion
-    (53) expresion -> expresion . DIFERENTE expresion
-    (54) expresion -> expresion . MENOR expresion
-    (55) expresion -> expresion . MAYOR expresion
-    (56) expresion -> expresion . MENORIGUAL expresion
-    (57) expresion -> expresion . MAYORIGUAL expresion
-    (58) expresion -> expresion . AND expresion
-    (59) expresion -> expresion . OR expresion
+    (53) expresion -> expresion IGUALIGUAL expresion .
+    (47) expresion -> expresion . MAS expresion
+    (48) expresion -> expresion . MENOS expresion
+    (49) expresion -> expresion . POR expresion
+    (50) expresion -> expresion . DIV expresion
+    (51) expresion -> expresion . POTENCIA expresion
+    (52) expresion -> expresion . PORCENTAJE expresion
+    (53) expresion -> expresion . IGUALIGUAL expresion
+    (54) expresion -> expresion . DIFERENTE expresion
+    (55) expresion -> expresion . MENOR expresion
+    (56) expresion -> expresion . MAYOR expresion
+    (57) expresion -> expresion . MENORIGUAL expresion
+    (58) expresion -> expresion . MAYORIGUAL expresion
+    (59) expresion -> expresion . AND expresion
+    (60) expresion -> expresion . OR expresion
 
-    IGUALIGUAL      reduce using rule 52 (expresion -> expresion IGUALIGUAL expresion .)
-    DIFERENTE       reduce using rule 52 (expresion -> expresion IGUALIGUAL expresion .)
-    MENOR           reduce using rule 52 (expresion -> expresion IGUALIGUAL expresion .)
-    MAYOR           reduce using rule 52 (expresion -> expresion IGUALIGUAL expresion .)
-    MENORIGUAL      reduce using rule 52 (expresion -> expresion IGUALIGUAL expresion .)
-    MAYORIGUAL      reduce using rule 52 (expresion -> expresion IGUALIGUAL expresion .)
-    AND             reduce using rule 52 (expresion -> expresion IGUALIGUAL expresion .)
-    OR              reduce using rule 52 (expresion -> expresion IGUALIGUAL expresion .)
-    PTCOMA          reduce using rule 52 (expresion -> expresion IGUALIGUAL expresion .)
-    DPUNTOS         reduce using rule 52 (expresion -> expresion IGUALIGUAL expresion .)
-    PARD            reduce using rule 52 (expresion -> expresion IGUALIGUAL expresion .)
-    COMA            reduce using rule 52 (expresion -> expresion IGUALIGUAL expresion .)
+    IGUALIGUAL      reduce using rule 53 (expresion -> expresion IGUALIGUAL expresion .)
+    DIFERENTE       reduce using rule 53 (expresion -> expresion IGUALIGUAL expresion .)
+    MENOR           reduce using rule 53 (expresion -> expresion IGUALIGUAL expresion .)
+    MAYOR           reduce using rule 53 (expresion -> expresion IGUALIGUAL expresion .)
+    MENORIGUAL      reduce using rule 53 (expresion -> expresion IGUALIGUAL expresion .)
+    MAYORIGUAL      reduce using rule 53 (expresion -> expresion IGUALIGUAL expresion .)
+    AND             reduce using rule 53 (expresion -> expresion IGUALIGUAL expresion .)
+    OR              reduce using rule 53 (expresion -> expresion IGUALIGUAL expresion .)
+    PTCOMA          reduce using rule 53 (expresion -> expresion IGUALIGUAL expresion .)
+    DPUNTOS         reduce using rule 53 (expresion -> expresion IGUALIGUAL expresion .)
+    PARD            reduce using rule 53 (expresion -> expresion IGUALIGUAL expresion .)
+    COMA            reduce using rule 53 (expresion -> expresion IGUALIGUAL expresion .)
     MAS             shift and go to state 55
     MENOS           shift and go to state 56
     POR             shift and go to state 57
@@ -2282,12 +2285,12 @@ state 91
     POTENCIA        shift and go to state 59
     PORCENTAJE      shift and go to state 60
 
-  ! MAS             [ reduce using rule 52 (expresion -> expresion IGUALIGUAL expresion .) ]
-  ! MENOS           [ reduce using rule 52 (expresion -> expresion IGUALIGUAL expresion .) ]
-  ! POR             [ reduce using rule 52 (expresion -> expresion IGUALIGUAL expresion .) ]
-  ! DIV             [ reduce using rule 52 (expresion -> expresion IGUALIGUAL expresion .) ]
-  ! POTENCIA        [ reduce using rule 52 (expresion -> expresion IGUALIGUAL expresion .) ]
-  ! PORCENTAJE      [ reduce using rule 52 (expresion -> expresion IGUALIGUAL expresion .) ]
+  ! MAS             [ reduce using rule 53 (expresion -> expresion IGUALIGUAL expresion .) ]
+  ! MENOS           [ reduce using rule 53 (expresion -> expresion IGUALIGUAL expresion .) ]
+  ! POR             [ reduce using rule 53 (expresion -> expresion IGUALIGUAL expresion .) ]
+  ! DIV             [ reduce using rule 53 (expresion -> expresion IGUALIGUAL expresion .) ]
+  ! POTENCIA        [ reduce using rule 53 (expresion -> expresion IGUALIGUAL expresion .) ]
+  ! PORCENTAJE      [ reduce using rule 53 (expresion -> expresion IGUALIGUAL expresion .) ]
   ! IGUALIGUAL      [ shift and go to state 61 ]
   ! DIFERENTE       [ shift and go to state 62 ]
   ! MENOR           [ shift and go to state 63 ]
@@ -2300,34 +2303,34 @@ state 91
 
 state 92
 
-    (53) expresion -> expresion DIFERENTE expresion .
-    (46) expresion -> expresion . MAS expresion
-    (47) expresion -> expresion . MENOS expresion
-    (48) expresion -> expresion . POR expresion
-    (49) expresion -> expresion . DIV expresion
-    (50) expresion -> expresion . POTENCIA expresion
-    (51) expresion -> expresion . PORCENTAJE expresion
-    (52) expresion -> expresion . IGUALIGUAL expresion
-    (53) expresion -> expresion . DIFERENTE expresion
-    (54) expresion -> expresion . MENOR expresion
-    (55) expresion -> expresion . MAYOR expresion
-    (56) expresion -> expresion . MENORIGUAL expresion
-    (57) expresion -> expresion . MAYORIGUAL expresion
-    (58) expresion -> expresion . AND expresion
-    (59) expresion -> expresion . OR expresion
+    (54) expresion -> expresion DIFERENTE expresion .
+    (47) expresion -> expresion . MAS expresion
+    (48) expresion -> expresion . MENOS expresion
+    (49) expresion -> expresion . POR expresion
+    (50) expresion -> expresion . DIV expresion
+    (51) expresion -> expresion . POTENCIA expresion
+    (52) expresion -> expresion . PORCENTAJE expresion
+    (53) expresion -> expresion . IGUALIGUAL expresion
+    (54) expresion -> expresion . DIFERENTE expresion
+    (55) expresion -> expresion . MENOR expresion
+    (56) expresion -> expresion . MAYOR expresion
+    (57) expresion -> expresion . MENORIGUAL expresion
+    (58) expresion -> expresion . MAYORIGUAL expresion
+    (59) expresion -> expresion . AND expresion
+    (60) expresion -> expresion . OR expresion
 
-    IGUALIGUAL      reduce using rule 53 (expresion -> expresion DIFERENTE expresion .)
-    DIFERENTE       reduce using rule 53 (expresion -> expresion DIFERENTE expresion .)
-    MENOR           reduce using rule 53 (expresion -> expresion DIFERENTE expresion .)
-    MAYOR           reduce using rule 53 (expresion -> expresion DIFERENTE expresion .)
-    MENORIGUAL      reduce using rule 53 (expresion -> expresion DIFERENTE expresion .)
-    MAYORIGUAL      reduce using rule 53 (expresion -> expresion DIFERENTE expresion .)
-    AND             reduce using rule 53 (expresion -> expresion DIFERENTE expresion .)
-    OR              reduce using rule 53 (expresion -> expresion DIFERENTE expresion .)
-    PTCOMA          reduce using rule 53 (expresion -> expresion DIFERENTE expresion .)
-    DPUNTOS         reduce using rule 53 (expresion -> expresion DIFERENTE expresion .)
-    PARD            reduce using rule 53 (expresion -> expresion DIFERENTE expresion .)
-    COMA            reduce using rule 53 (expresion -> expresion DIFERENTE expresion .)
+    IGUALIGUAL      reduce using rule 54 (expresion -> expresion DIFERENTE expresion .)
+    DIFERENTE       reduce using rule 54 (expresion -> expresion DIFERENTE expresion .)
+    MENOR           reduce using rule 54 (expresion -> expresion DIFERENTE expresion .)
+    MAYOR           reduce using rule 54 (expresion -> expresion DIFERENTE expresion .)
+    MENORIGUAL      reduce using rule 54 (expresion -> expresion DIFERENTE expresion .)
+    MAYORIGUAL      reduce using rule 54 (expresion -> expresion DIFERENTE expresion .)
+    AND             reduce using rule 54 (expresion -> expresion DIFERENTE expresion .)
+    OR              reduce using rule 54 (expresion -> expresion DIFERENTE expresion .)
+    PTCOMA          reduce using rule 54 (expresion -> expresion DIFERENTE expresion .)
+    DPUNTOS         reduce using rule 54 (expresion -> expresion DIFERENTE expresion .)
+    PARD            reduce using rule 54 (expresion -> expresion DIFERENTE expresion .)
+    COMA            reduce using rule 54 (expresion -> expresion DIFERENTE expresion .)
     MAS             shift and go to state 55
     MENOS           shift and go to state 56
     POR             shift and go to state 57
@@ -2335,12 +2338,12 @@ state 92
     POTENCIA        shift and go to state 59
     PORCENTAJE      shift and go to state 60
 
-  ! MAS             [ reduce using rule 53 (expresion -> expresion DIFERENTE expresion .) ]
-  ! MENOS           [ reduce using rule 53 (expresion -> expresion DIFERENTE expresion .) ]
-  ! POR             [ reduce using rule 53 (expresion -> expresion DIFERENTE expresion .) ]
-  ! DIV             [ reduce using rule 53 (expresion -> expresion DIFERENTE expresion .) ]
-  ! POTENCIA        [ reduce using rule 53 (expresion -> expresion DIFERENTE expresion .) ]
-  ! PORCENTAJE      [ reduce using rule 53 (expresion -> expresion DIFERENTE expresion .) ]
+  ! MAS             [ reduce using rule 54 (expresion -> expresion DIFERENTE expresion .) ]
+  ! MENOS           [ reduce using rule 54 (expresion -> expresion DIFERENTE expresion .) ]
+  ! POR             [ reduce using rule 54 (expresion -> expresion DIFERENTE expresion .) ]
+  ! DIV             [ reduce using rule 54 (expresion -> expresion DIFERENTE expresion .) ]
+  ! POTENCIA        [ reduce using rule 54 (expresion -> expresion DIFERENTE expresion .) ]
+  ! PORCENTAJE      [ reduce using rule 54 (expresion -> expresion DIFERENTE expresion .) ]
   ! IGUALIGUAL      [ shift and go to state 61 ]
   ! DIFERENTE       [ shift and go to state 62 ]
   ! MENOR           [ shift and go to state 63 ]
@@ -2353,34 +2356,34 @@ state 92
 
 state 93
 
-    (54) expresion -> expresion MENOR expresion .
-    (46) expresion -> expresion . MAS expresion
-    (47) expresion -> expresion . MENOS expresion
-    (48) expresion -> expresion . POR expresion
-    (49) expresion -> expresion . DIV expresion
-    (50) expresion -> expresion . POTENCIA expresion
-    (51) expresion -> expresion . PORCENTAJE expresion
-    (52) expresion -> expresion . IGUALIGUAL expresion
-    (53) expresion -> expresion . DIFERENTE expresion
-    (54) expresion -> expresion . MENOR expresion
-    (55) expresion -> expresion . MAYOR expresion
-    (56) expresion -> expresion . MENORIGUAL expresion
-    (57) expresion -> expresion . MAYORIGUAL expresion
-    (58) expresion -> expresion . AND expresion
-    (59) expresion -> expresion . OR expresion
+    (55) expresion -> expresion MENOR expresion .
+    (47) expresion -> expresion . MAS expresion
+    (48) expresion -> expresion . MENOS expresion
+    (49) expresion -> expresion . POR expresion
+    (50) expresion -> expresion . DIV expresion
+    (51) expresion -> expresion . POTENCIA expresion
+    (52) expresion -> expresion . PORCENTAJE expresion
+    (53) expresion -> expresion . IGUALIGUAL expresion
+    (54) expresion -> expresion . DIFERENTE expresion
+    (55) expresion -> expresion . MENOR expresion
+    (56) expresion -> expresion . MAYOR expresion
+    (57) expresion -> expresion . MENORIGUAL expresion
+    (58) expresion -> expresion . MAYORIGUAL expresion
+    (59) expresion -> expresion . AND expresion
+    (60) expresion -> expresion . OR expresion
 
-    IGUALIGUAL      reduce using rule 54 (expresion -> expresion MENOR expresion .)
-    DIFERENTE       reduce using rule 54 (expresion -> expresion MENOR expresion .)
-    MENOR           reduce using rule 54 (expresion -> expresion MENOR expresion .)
-    MAYOR           reduce using rule 54 (expresion -> expresion MENOR expresion .)
-    MENORIGUAL      reduce using rule 54 (expresion -> expresion MENOR expresion .)
-    MAYORIGUAL      reduce using rule 54 (expresion -> expresion MENOR expresion .)
-    AND             reduce using rule 54 (expresion -> expresion MENOR expresion .)
-    OR              reduce using rule 54 (expresion -> expresion MENOR expresion .)
-    PTCOMA          reduce using rule 54 (expresion -> expresion MENOR expresion .)
-    DPUNTOS         reduce using rule 54 (expresion -> expresion MENOR expresion .)
-    PARD            reduce using rule 54 (expresion -> expresion MENOR expresion .)
-    COMA            reduce using rule 54 (expresion -> expresion MENOR expresion .)
+    IGUALIGUAL      reduce using rule 55 (expresion -> expresion MENOR expresion .)
+    DIFERENTE       reduce using rule 55 (expresion -> expresion MENOR expresion .)
+    MENOR           reduce using rule 55 (expresion -> expresion MENOR expresion .)
+    MAYOR           reduce using rule 55 (expresion -> expresion MENOR expresion .)
+    MENORIGUAL      reduce using rule 55 (expresion -> expresion MENOR expresion .)
+    MAYORIGUAL      reduce using rule 55 (expresion -> expresion MENOR expresion .)
+    AND             reduce using rule 55 (expresion -> expresion MENOR expresion .)
+    OR              reduce using rule 55 (expresion -> expresion MENOR expresion .)
+    PTCOMA          reduce using rule 55 (expresion -> expresion MENOR expresion .)
+    DPUNTOS         reduce using rule 55 (expresion -> expresion MENOR expresion .)
+    PARD            reduce using rule 55 (expresion -> expresion MENOR expresion .)
+    COMA            reduce using rule 55 (expresion -> expresion MENOR expresion .)
     MAS             shift and go to state 55
     MENOS           shift and go to state 56
     POR             shift and go to state 57
@@ -2388,12 +2391,12 @@ state 93
     POTENCIA        shift and go to state 59
     PORCENTAJE      shift and go to state 60
 
-  ! MAS             [ reduce using rule 54 (expresion -> expresion MENOR expresion .) ]
-  ! MENOS           [ reduce using rule 54 (expresion -> expresion MENOR expresion .) ]
-  ! POR             [ reduce using rule 54 (expresion -> expresion MENOR expresion .) ]
-  ! DIV             [ reduce using rule 54 (expresion -> expresion MENOR expresion .) ]
-  ! POTENCIA        [ reduce using rule 54 (expresion -> expresion MENOR expresion .) ]
-  ! PORCENTAJE      [ reduce using rule 54 (expresion -> expresion MENOR expresion .) ]
+  ! MAS             [ reduce using rule 55 (expresion -> expresion MENOR expresion .) ]
+  ! MENOS           [ reduce using rule 55 (expresion -> expresion MENOR expresion .) ]
+  ! POR             [ reduce using rule 55 (expresion -> expresion MENOR expresion .) ]
+  ! DIV             [ reduce using rule 55 (expresion -> expresion MENOR expresion .) ]
+  ! POTENCIA        [ reduce using rule 55 (expresion -> expresion MENOR expresion .) ]
+  ! PORCENTAJE      [ reduce using rule 55 (expresion -> expresion MENOR expresion .) ]
   ! IGUALIGUAL      [ shift and go to state 61 ]
   ! DIFERENTE       [ shift and go to state 62 ]
   ! MENOR           [ shift and go to state 63 ]
@@ -2406,34 +2409,34 @@ state 93
 
 state 94
 
-    (55) expresion -> expresion MAYOR expresion .
-    (46) expresion -> expresion . MAS expresion
-    (47) expresion -> expresion . MENOS expresion
-    (48) expresion -> expresion . POR expresion
-    (49) expresion -> expresion . DIV expresion
-    (50) expresion -> expresion . POTENCIA expresion
-    (51) expresion -> expresion . PORCENTAJE expresion
-    (52) expresion -> expresion . IGUALIGUAL expresion
-    (53) expresion -> expresion . DIFERENTE expresion
-    (54) expresion -> expresion . MENOR expresion
-    (55) expresion -> expresion . MAYOR expresion
-    (56) expresion -> expresion . MENORIGUAL expresion
-    (57) expresion -> expresion . MAYORIGUAL expresion
-    (58) expresion -> expresion . AND expresion
-    (59) expresion -> expresion . OR expresion
+    (56) expresion -> expresion MAYOR expresion .
+    (47) expresion -> expresion . MAS expresion
+    (48) expresion -> expresion . MENOS expresion
+    (49) expresion -> expresion . POR expresion
+    (50) expresion -> expresion . DIV expresion
+    (51) expresion -> expresion . POTENCIA expresion
+    (52) expresion -> expresion . PORCENTAJE expresion
+    (53) expresion -> expresion . IGUALIGUAL expresion
+    (54) expresion -> expresion . DIFERENTE expresion
+    (55) expresion -> expresion . MENOR expresion
+    (56) expresion -> expresion . MAYOR expresion
+    (57) expresion -> expresion . MENORIGUAL expresion
+    (58) expresion -> expresion . MAYORIGUAL expresion
+    (59) expresion -> expresion . AND expresion
+    (60) expresion -> expresion . OR expresion
 
-    IGUALIGUAL      reduce using rule 55 (expresion -> expresion MAYOR expresion .)
-    DIFERENTE       reduce using rule 55 (expresion -> expresion MAYOR expresion .)
-    MENOR           reduce using rule 55 (expresion -> expresion MAYOR expresion .)
-    MAYOR           reduce using rule 55 (expresion -> expresion MAYOR expresion .)
-    MENORIGUAL      reduce using rule 55 (expresion -> expresion MAYOR expresion .)
-    MAYORIGUAL      reduce using rule 55 (expresion -> expresion MAYOR expresion .)
-    AND             reduce using rule 55 (expresion -> expresion MAYOR expresion .)
-    OR              reduce using rule 55 (expresion -> expresion MAYOR expresion .)
-    PTCOMA          reduce using rule 55 (expresion -> expresion MAYOR expresion .)
-    DPUNTOS         reduce using rule 55 (expresion -> expresion MAYOR expresion .)
-    PARD            reduce using rule 55 (expresion -> expresion MAYOR expresion .)
-    COMA            reduce using rule 55 (expresion -> expresion MAYOR expresion .)
+    IGUALIGUAL      reduce using rule 56 (expresion -> expresion MAYOR expresion .)
+    DIFERENTE       reduce using rule 56 (expresion -> expresion MAYOR expresion .)
+    MENOR           reduce using rule 56 (expresion -> expresion MAYOR expresion .)
+    MAYOR           reduce using rule 56 (expresion -> expresion MAYOR expresion .)
+    MENORIGUAL      reduce using rule 56 (expresion -> expresion MAYOR expresion .)
+    MAYORIGUAL      reduce using rule 56 (expresion -> expresion MAYOR expresion .)
+    AND             reduce using rule 56 (expresion -> expresion MAYOR expresion .)
+    OR              reduce using rule 56 (expresion -> expresion MAYOR expresion .)
+    PTCOMA          reduce using rule 56 (expresion -> expresion MAYOR expresion .)
+    DPUNTOS         reduce using rule 56 (expresion -> expresion MAYOR expresion .)
+    PARD            reduce using rule 56 (expresion -> expresion MAYOR expresion .)
+    COMA            reduce using rule 56 (expresion -> expresion MAYOR expresion .)
     MAS             shift and go to state 55
     MENOS           shift and go to state 56
     POR             shift and go to state 57
@@ -2441,12 +2444,12 @@ state 94
     POTENCIA        shift and go to state 59
     PORCENTAJE      shift and go to state 60
 
-  ! MAS             [ reduce using rule 55 (expresion -> expresion MAYOR expresion .) ]
-  ! MENOS           [ reduce using rule 55 (expresion -> expresion MAYOR expresion .) ]
-  ! POR             [ reduce using rule 55 (expresion -> expresion MAYOR expresion .) ]
-  ! DIV             [ reduce using rule 55 (expresion -> expresion MAYOR expresion .) ]
-  ! POTENCIA        [ reduce using rule 55 (expresion -> expresion MAYOR expresion .) ]
-  ! PORCENTAJE      [ reduce using rule 55 (expresion -> expresion MAYOR expresion .) ]
+  ! MAS             [ reduce using rule 56 (expresion -> expresion MAYOR expresion .) ]
+  ! MENOS           [ reduce using rule 56 (expresion -> expresion MAYOR expresion .) ]
+  ! POR             [ reduce using rule 56 (expresion -> expresion MAYOR expresion .) ]
+  ! DIV             [ reduce using rule 56 (expresion -> expresion MAYOR expresion .) ]
+  ! POTENCIA        [ reduce using rule 56 (expresion -> expresion MAYOR expresion .) ]
+  ! PORCENTAJE      [ reduce using rule 56 (expresion -> expresion MAYOR expresion .) ]
   ! IGUALIGUAL      [ shift and go to state 61 ]
   ! DIFERENTE       [ shift and go to state 62 ]
   ! MENOR           [ shift and go to state 63 ]
@@ -2459,34 +2462,34 @@ state 94
 
 state 95
 
-    (56) expresion -> expresion MENORIGUAL expresion .
-    (46) expresion -> expresion . MAS expresion
-    (47) expresion -> expresion . MENOS expresion
-    (48) expresion -> expresion . POR expresion
-    (49) expresion -> expresion . DIV expresion
-    (50) expresion -> expresion . POTENCIA expresion
-    (51) expresion -> expresion . PORCENTAJE expresion
-    (52) expresion -> expresion . IGUALIGUAL expresion
-    (53) expresion -> expresion . DIFERENTE expresion
-    (54) expresion -> expresion . MENOR expresion
-    (55) expresion -> expresion . MAYOR expresion
-    (56) expresion -> expresion . MENORIGUAL expresion
-    (57) expresion -> expresion . MAYORIGUAL expresion
-    (58) expresion -> expresion . AND expresion
-    (59) expresion -> expresion . OR expresion
+    (57) expresion -> expresion MENORIGUAL expresion .
+    (47) expresion -> expresion . MAS expresion
+    (48) expresion -> expresion . MENOS expresion
+    (49) expresion -> expresion . POR expresion
+    (50) expresion -> expresion . DIV expresion
+    (51) expresion -> expresion . POTENCIA expresion
+    (52) expresion -> expresion . PORCENTAJE expresion
+    (53) expresion -> expresion . IGUALIGUAL expresion
+    (54) expresion -> expresion . DIFERENTE expresion
+    (55) expresion -> expresion . MENOR expresion
+    (56) expresion -> expresion . MAYOR expresion
+    (57) expresion -> expresion . MENORIGUAL expresion
+    (58) expresion -> expresion . MAYORIGUAL expresion
+    (59) expresion -> expresion . AND expresion
+    (60) expresion -> expresion . OR expresion
 
-    IGUALIGUAL      reduce using rule 56 (expresion -> expresion MENORIGUAL expresion .)
-    DIFERENTE       reduce using rule 56 (expresion -> expresion MENORIGUAL expresion .)
-    MENOR           reduce using rule 56 (expresion -> expresion MENORIGUAL expresion .)
-    MAYOR           reduce using rule 56 (expresion -> expresion MENORIGUAL expresion .)
-    MENORIGUAL      reduce using rule 56 (expresion -> expresion MENORIGUAL expresion .)
-    MAYORIGUAL      reduce using rule 56 (expresion -> expresion MENORIGUAL expresion .)
-    AND             reduce using rule 56 (expresion -> expresion MENORIGUAL expresion .)
-    OR              reduce using rule 56 (expresion -> expresion MENORIGUAL expresion .)
-    PTCOMA          reduce using rule 56 (expresion -> expresion MENORIGUAL expresion .)
-    DPUNTOS         reduce using rule 56 (expresion -> expresion MENORIGUAL expresion .)
-    PARD            reduce using rule 56 (expresion -> expresion MENORIGUAL expresion .)
-    COMA            reduce using rule 56 (expresion -> expresion MENORIGUAL expresion .)
+    IGUALIGUAL      reduce using rule 57 (expresion -> expresion MENORIGUAL expresion .)
+    DIFERENTE       reduce using rule 57 (expresion -> expresion MENORIGUAL expresion .)
+    MENOR           reduce using rule 57 (expresion -> expresion MENORIGUAL expresion .)
+    MAYOR           reduce using rule 57 (expresion -> expresion MENORIGUAL expresion .)
+    MENORIGUAL      reduce using rule 57 (expresion -> expresion MENORIGUAL expresion .)
+    MAYORIGUAL      reduce using rule 57 (expresion -> expresion MENORIGUAL expresion .)
+    AND             reduce using rule 57 (expresion -> expresion MENORIGUAL expresion .)
+    OR              reduce using rule 57 (expresion -> expresion MENORIGUAL expresion .)
+    PTCOMA          reduce using rule 57 (expresion -> expresion MENORIGUAL expresion .)
+    DPUNTOS         reduce using rule 57 (expresion -> expresion MENORIGUAL expresion .)
+    PARD            reduce using rule 57 (expresion -> expresion MENORIGUAL expresion .)
+    COMA            reduce using rule 57 (expresion -> expresion MENORIGUAL expresion .)
     MAS             shift and go to state 55
     MENOS           shift and go to state 56
     POR             shift and go to state 57
@@ -2494,12 +2497,12 @@ state 95
     POTENCIA        shift and go to state 59
     PORCENTAJE      shift and go to state 60
 
-  ! MAS             [ reduce using rule 56 (expresion -> expresion MENORIGUAL expresion .) ]
-  ! MENOS           [ reduce using rule 56 (expresion -> expresion MENORIGUAL expresion .) ]
-  ! POR             [ reduce using rule 56 (expresion -> expresion MENORIGUAL expresion .) ]
-  ! DIV             [ reduce using rule 56 (expresion -> expresion MENORIGUAL expresion .) ]
-  ! POTENCIA        [ reduce using rule 56 (expresion -> expresion MENORIGUAL expresion .) ]
-  ! PORCENTAJE      [ reduce using rule 56 (expresion -> expresion MENORIGUAL expresion .) ]
+  ! MAS             [ reduce using rule 57 (expresion -> expresion MENORIGUAL expresion .) ]
+  ! MENOS           [ reduce using rule 57 (expresion -> expresion MENORIGUAL expresion .) ]
+  ! POR             [ reduce using rule 57 (expresion -> expresion MENORIGUAL expresion .) ]
+  ! DIV             [ reduce using rule 57 (expresion -> expresion MENORIGUAL expresion .) ]
+  ! POTENCIA        [ reduce using rule 57 (expresion -> expresion MENORIGUAL expresion .) ]
+  ! PORCENTAJE      [ reduce using rule 57 (expresion -> expresion MENORIGUAL expresion .) ]
   ! IGUALIGUAL      [ shift and go to state 61 ]
   ! DIFERENTE       [ shift and go to state 62 ]
   ! MENOR           [ shift and go to state 63 ]
@@ -2512,34 +2515,34 @@ state 95
 
 state 96
 
-    (57) expresion -> expresion MAYORIGUAL expresion .
-    (46) expresion -> expresion . MAS expresion
-    (47) expresion -> expresion . MENOS expresion
-    (48) expresion -> expresion . POR expresion
-    (49) expresion -> expresion . DIV expresion
-    (50) expresion -> expresion . POTENCIA expresion
-    (51) expresion -> expresion . PORCENTAJE expresion
-    (52) expresion -> expresion . IGUALIGUAL expresion
-    (53) expresion -> expresion . DIFERENTE expresion
-    (54) expresion -> expresion . MENOR expresion
-    (55) expresion -> expresion . MAYOR expresion
-    (56) expresion -> expresion . MENORIGUAL expresion
-    (57) expresion -> expresion . MAYORIGUAL expresion
-    (58) expresion -> expresion . AND expresion
-    (59) expresion -> expresion . OR expresion
+    (58) expresion -> expresion MAYORIGUAL expresion .
+    (47) expresion -> expresion . MAS expresion
+    (48) expresion -> expresion . MENOS expresion
+    (49) expresion -> expresion . POR expresion
+    (50) expresion -> expresion . DIV expresion
+    (51) expresion -> expresion . POTENCIA expresion
+    (52) expresion -> expresion . PORCENTAJE expresion
+    (53) expresion -> expresion . IGUALIGUAL expresion
+    (54) expresion -> expresion . DIFERENTE expresion
+    (55) expresion -> expresion . MENOR expresion
+    (56) expresion -> expresion . MAYOR expresion
+    (57) expresion -> expresion . MENORIGUAL expresion
+    (58) expresion -> expresion . MAYORIGUAL expresion
+    (59) expresion -> expresion . AND expresion
+    (60) expresion -> expresion . OR expresion
 
-    IGUALIGUAL      reduce using rule 57 (expresion -> expresion MAYORIGUAL expresion .)
-    DIFERENTE       reduce using rule 57 (expresion -> expresion MAYORIGUAL expresion .)
-    MENOR           reduce using rule 57 (expresion -> expresion MAYORIGUAL expresion .)
-    MAYOR           reduce using rule 57 (expresion -> expresion MAYORIGUAL expresion .)
-    MENORIGUAL      reduce using rule 57 (expresion -> expresion MAYORIGUAL expresion .)
-    MAYORIGUAL      reduce using rule 57 (expresion -> expresion MAYORIGUAL expresion .)
-    AND             reduce using rule 57 (expresion -> expresion MAYORIGUAL expresion .)
-    OR              reduce using rule 57 (expresion -> expresion MAYORIGUAL expresion .)
-    PTCOMA          reduce using rule 57 (expresion -> expresion MAYORIGUAL expresion .)
-    DPUNTOS         reduce using rule 57 (expresion -> expresion MAYORIGUAL expresion .)
-    PARD            reduce using rule 57 (expresion -> expresion MAYORIGUAL expresion .)
-    COMA            reduce using rule 57 (expresion -> expresion MAYORIGUAL expresion .)
+    IGUALIGUAL      reduce using rule 58 (expresion -> expresion MAYORIGUAL expresion .)
+    DIFERENTE       reduce using rule 58 (expresion -> expresion MAYORIGUAL expresion .)
+    MENOR           reduce using rule 58 (expresion -> expresion MAYORIGUAL expresion .)
+    MAYOR           reduce using rule 58 (expresion -> expresion MAYORIGUAL expresion .)
+    MENORIGUAL      reduce using rule 58 (expresion -> expresion MAYORIGUAL expresion .)
+    MAYORIGUAL      reduce using rule 58 (expresion -> expresion MAYORIGUAL expresion .)
+    AND             reduce using rule 58 (expresion -> expresion MAYORIGUAL expresion .)
+    OR              reduce using rule 58 (expresion -> expresion MAYORIGUAL expresion .)
+    PTCOMA          reduce using rule 58 (expresion -> expresion MAYORIGUAL expresion .)
+    DPUNTOS         reduce using rule 58 (expresion -> expresion MAYORIGUAL expresion .)
+    PARD            reduce using rule 58 (expresion -> expresion MAYORIGUAL expresion .)
+    COMA            reduce using rule 58 (expresion -> expresion MAYORIGUAL expresion .)
     MAS             shift and go to state 55
     MENOS           shift and go to state 56
     POR             shift and go to state 57
@@ -2547,12 +2550,12 @@ state 96
     POTENCIA        shift and go to state 59
     PORCENTAJE      shift and go to state 60
 
-  ! MAS             [ reduce using rule 57 (expresion -> expresion MAYORIGUAL expresion .) ]
-  ! MENOS           [ reduce using rule 57 (expresion -> expresion MAYORIGUAL expresion .) ]
-  ! POR             [ reduce using rule 57 (expresion -> expresion MAYORIGUAL expresion .) ]
-  ! DIV             [ reduce using rule 57 (expresion -> expresion MAYORIGUAL expresion .) ]
-  ! POTENCIA        [ reduce using rule 57 (expresion -> expresion MAYORIGUAL expresion .) ]
-  ! PORCENTAJE      [ reduce using rule 57 (expresion -> expresion MAYORIGUAL expresion .) ]
+  ! MAS             [ reduce using rule 58 (expresion -> expresion MAYORIGUAL expresion .) ]
+  ! MENOS           [ reduce using rule 58 (expresion -> expresion MAYORIGUAL expresion .) ]
+  ! POR             [ reduce using rule 58 (expresion -> expresion MAYORIGUAL expresion .) ]
+  ! DIV             [ reduce using rule 58 (expresion -> expresion MAYORIGUAL expresion .) ]
+  ! POTENCIA        [ reduce using rule 58 (expresion -> expresion MAYORIGUAL expresion .) ]
+  ! PORCENTAJE      [ reduce using rule 58 (expresion -> expresion MAYORIGUAL expresion .) ]
   ! IGUALIGUAL      [ shift and go to state 61 ]
   ! DIFERENTE       [ shift and go to state 62 ]
   ! MENOR           [ shift and go to state 63 ]
@@ -2565,28 +2568,28 @@ state 96
 
 state 97
 
-    (58) expresion -> expresion AND expresion .
-    (46) expresion -> expresion . MAS expresion
-    (47) expresion -> expresion . MENOS expresion
-    (48) expresion -> expresion . POR expresion
-    (49) expresion -> expresion . DIV expresion
-    (50) expresion -> expresion . POTENCIA expresion
-    (51) expresion -> expresion . PORCENTAJE expresion
-    (52) expresion -> expresion . IGUALIGUAL expresion
-    (53) expresion -> expresion . DIFERENTE expresion
-    (54) expresion -> expresion . MENOR expresion
-    (55) expresion -> expresion . MAYOR expresion
-    (56) expresion -> expresion . MENORIGUAL expresion
-    (57) expresion -> expresion . MAYORIGUAL expresion
-    (58) expresion -> expresion . AND expresion
-    (59) expresion -> expresion . OR expresion
+    (59) expresion -> expresion AND expresion .
+    (47) expresion -> expresion . MAS expresion
+    (48) expresion -> expresion . MENOS expresion
+    (49) expresion -> expresion . POR expresion
+    (50) expresion -> expresion . DIV expresion
+    (51) expresion -> expresion . POTENCIA expresion
+    (52) expresion -> expresion . PORCENTAJE expresion
+    (53) expresion -> expresion . IGUALIGUAL expresion
+    (54) expresion -> expresion . DIFERENTE expresion
+    (55) expresion -> expresion . MENOR expresion
+    (56) expresion -> expresion . MAYOR expresion
+    (57) expresion -> expresion . MENORIGUAL expresion
+    (58) expresion -> expresion . MAYORIGUAL expresion
+    (59) expresion -> expresion . AND expresion
+    (60) expresion -> expresion . OR expresion
 
-    AND             reduce using rule 58 (expresion -> expresion AND expresion .)
-    OR              reduce using rule 58 (expresion -> expresion AND expresion .)
-    PTCOMA          reduce using rule 58 (expresion -> expresion AND expresion .)
-    DPUNTOS         reduce using rule 58 (expresion -> expresion AND expresion .)
-    PARD            reduce using rule 58 (expresion -> expresion AND expresion .)
-    COMA            reduce using rule 58 (expresion -> expresion AND expresion .)
+    AND             reduce using rule 59 (expresion -> expresion AND expresion .)
+    OR              reduce using rule 59 (expresion -> expresion AND expresion .)
+    PTCOMA          reduce using rule 59 (expresion -> expresion AND expresion .)
+    DPUNTOS         reduce using rule 59 (expresion -> expresion AND expresion .)
+    PARD            reduce using rule 59 (expresion -> expresion AND expresion .)
+    COMA            reduce using rule 59 (expresion -> expresion AND expresion .)
     MAS             shift and go to state 55
     MENOS           shift and go to state 56
     POR             shift and go to state 57
@@ -2600,45 +2603,45 @@ state 97
     MENORIGUAL      shift and go to state 65
     MAYORIGUAL      shift and go to state 66
 
-  ! MAS             [ reduce using rule 58 (expresion -> expresion AND expresion .) ]
-  ! MENOS           [ reduce using rule 58 (expresion -> expresion AND expresion .) ]
-  ! POR             [ reduce using rule 58 (expresion -> expresion AND expresion .) ]
-  ! DIV             [ reduce using rule 58 (expresion -> expresion AND expresion .) ]
-  ! POTENCIA        [ reduce using rule 58 (expresion -> expresion AND expresion .) ]
-  ! PORCENTAJE      [ reduce using rule 58 (expresion -> expresion AND expresion .) ]
-  ! IGUALIGUAL      [ reduce using rule 58 (expresion -> expresion AND expresion .) ]
-  ! DIFERENTE       [ reduce using rule 58 (expresion -> expresion AND expresion .) ]
-  ! MENOR           [ reduce using rule 58 (expresion -> expresion AND expresion .) ]
-  ! MAYOR           [ reduce using rule 58 (expresion -> expresion AND expresion .) ]
-  ! MENORIGUAL      [ reduce using rule 58 (expresion -> expresion AND expresion .) ]
-  ! MAYORIGUAL      [ reduce using rule 58 (expresion -> expresion AND expresion .) ]
+  ! MAS             [ reduce using rule 59 (expresion -> expresion AND expresion .) ]
+  ! MENOS           [ reduce using rule 59 (expresion -> expresion AND expresion .) ]
+  ! POR             [ reduce using rule 59 (expresion -> expresion AND expresion .) ]
+  ! DIV             [ reduce using rule 59 (expresion -> expresion AND expresion .) ]
+  ! POTENCIA        [ reduce using rule 59 (expresion -> expresion AND expresion .) ]
+  ! PORCENTAJE      [ reduce using rule 59 (expresion -> expresion AND expresion .) ]
+  ! IGUALIGUAL      [ reduce using rule 59 (expresion -> expresion AND expresion .) ]
+  ! DIFERENTE       [ reduce using rule 59 (expresion -> expresion AND expresion .) ]
+  ! MENOR           [ reduce using rule 59 (expresion -> expresion AND expresion .) ]
+  ! MAYOR           [ reduce using rule 59 (expresion -> expresion AND expresion .) ]
+  ! MENORIGUAL      [ reduce using rule 59 (expresion -> expresion AND expresion .) ]
+  ! MAYORIGUAL      [ reduce using rule 59 (expresion -> expresion AND expresion .) ]
   ! AND             [ shift and go to state 67 ]
   ! OR              [ shift and go to state 68 ]
 
 
 state 98
 
-    (59) expresion -> expresion OR expresion .
-    (46) expresion -> expresion . MAS expresion
-    (47) expresion -> expresion . MENOS expresion
-    (48) expresion -> expresion . POR expresion
-    (49) expresion -> expresion . DIV expresion
-    (50) expresion -> expresion . POTENCIA expresion
-    (51) expresion -> expresion . PORCENTAJE expresion
-    (52) expresion -> expresion . IGUALIGUAL expresion
-    (53) expresion -> expresion . DIFERENTE expresion
-    (54) expresion -> expresion . MENOR expresion
-    (55) expresion -> expresion . MAYOR expresion
-    (56) expresion -> expresion . MENORIGUAL expresion
-    (57) expresion -> expresion . MAYORIGUAL expresion
-    (58) expresion -> expresion . AND expresion
-    (59) expresion -> expresion . OR expresion
+    (60) expresion -> expresion OR expresion .
+    (47) expresion -> expresion . MAS expresion
+    (48) expresion -> expresion . MENOS expresion
+    (49) expresion -> expresion . POR expresion
+    (50) expresion -> expresion . DIV expresion
+    (51) expresion -> expresion . POTENCIA expresion
+    (52) expresion -> expresion . PORCENTAJE expresion
+    (53) expresion -> expresion . IGUALIGUAL expresion
+    (54) expresion -> expresion . DIFERENTE expresion
+    (55) expresion -> expresion . MENOR expresion
+    (56) expresion -> expresion . MAYOR expresion
+    (57) expresion -> expresion . MENORIGUAL expresion
+    (58) expresion -> expresion . MAYORIGUAL expresion
+    (59) expresion -> expresion . AND expresion
+    (60) expresion -> expresion . OR expresion
 
-    OR              reduce using rule 59 (expresion -> expresion OR expresion .)
-    PTCOMA          reduce using rule 59 (expresion -> expresion OR expresion .)
-    DPUNTOS         reduce using rule 59 (expresion -> expresion OR expresion .)
-    PARD            reduce using rule 59 (expresion -> expresion OR expresion .)
-    COMA            reduce using rule 59 (expresion -> expresion OR expresion .)
+    OR              reduce using rule 60 (expresion -> expresion OR expresion .)
+    PTCOMA          reduce using rule 60 (expresion -> expresion OR expresion .)
+    DPUNTOS         reduce using rule 60 (expresion -> expresion OR expresion .)
+    PARD            reduce using rule 60 (expresion -> expresion OR expresion .)
+    COMA            reduce using rule 60 (expresion -> expresion OR expresion .)
     MAS             shift and go to state 55
     MENOS           shift and go to state 56
     POR             shift and go to state 57
@@ -2653,19 +2656,19 @@ state 98
     MAYORIGUAL      shift and go to state 66
     AND             shift and go to state 67
 
-  ! MAS             [ reduce using rule 59 (expresion -> expresion OR expresion .) ]
-  ! MENOS           [ reduce using rule 59 (expresion -> expresion OR expresion .) ]
-  ! POR             [ reduce using rule 59 (expresion -> expresion OR expresion .) ]
-  ! DIV             [ reduce using rule 59 (expresion -> expresion OR expresion .) ]
-  ! POTENCIA        [ reduce using rule 59 (expresion -> expresion OR expresion .) ]
-  ! PORCENTAJE      [ reduce using rule 59 (expresion -> expresion OR expresion .) ]
-  ! IGUALIGUAL      [ reduce using rule 59 (expresion -> expresion OR expresion .) ]
-  ! DIFERENTE       [ reduce using rule 59 (expresion -> expresion OR expresion .) ]
-  ! MENOR           [ reduce using rule 59 (expresion -> expresion OR expresion .) ]
-  ! MAYOR           [ reduce using rule 59 (expresion -> expresion OR expresion .) ]
-  ! MENORIGUAL      [ reduce using rule 59 (expresion -> expresion OR expresion .) ]
-  ! MAYORIGUAL      [ reduce using rule 59 (expresion -> expresion OR expresion .) ]
-  ! AND             [ reduce using rule 59 (expresion -> expresion OR expresion .) ]
+  ! MAS             [ reduce using rule 60 (expresion -> expresion OR expresion .) ]
+  ! MENOS           [ reduce using rule 60 (expresion -> expresion OR expresion .) ]
+  ! POR             [ reduce using rule 60 (expresion -> expresion OR expresion .) ]
+  ! DIV             [ reduce using rule 60 (expresion -> expresion OR expresion .) ]
+  ! POTENCIA        [ reduce using rule 60 (expresion -> expresion OR expresion .) ]
+  ! PORCENTAJE      [ reduce using rule 60 (expresion -> expresion OR expresion .) ]
+  ! IGUALIGUAL      [ reduce using rule 60 (expresion -> expresion OR expresion .) ]
+  ! DIFERENTE       [ reduce using rule 60 (expresion -> expresion OR expresion .) ]
+  ! MENOR           [ reduce using rule 60 (expresion -> expresion OR expresion .) ]
+  ! MAYOR           [ reduce using rule 60 (expresion -> expresion OR expresion .) ]
+  ! MENORIGUAL      [ reduce using rule 60 (expresion -> expresion OR expresion .) ]
+  ! MAYORIGUAL      [ reduce using rule 60 (expresion -> expresion OR expresion .) ]
+  ! AND             [ reduce using rule 60 (expresion -> expresion OR expresion .) ]
   ! OR              [ shift and go to state 68 ]
 
 
@@ -2681,27 +2684,27 @@ state 99
 state 100
 
     (26) declaracion_normal -> RLET ID DPUNTOS tipo IGUAL . expresion
-    (46) expresion -> . expresion MAS expresion
-    (47) expresion -> . expresion MENOS expresion
-    (48) expresion -> . expresion POR expresion
-    (49) expresion -> . expresion DIV expresion
-    (50) expresion -> . expresion POTENCIA expresion
-    (51) expresion -> . expresion PORCENTAJE expresion
-    (52) expresion -> . expresion IGUALIGUAL expresion
-    (53) expresion -> . expresion DIFERENTE expresion
-    (54) expresion -> . expresion MENOR expresion
-    (55) expresion -> . expresion MAYOR expresion
-    (56) expresion -> . expresion MENORIGUAL expresion
-    (57) expresion -> . expresion MAYORIGUAL expresion
-    (58) expresion -> . expresion AND expresion
-    (59) expresion -> . expresion OR expresion
-    (60) expresion -> . MENOS expresion
-    (61) expresion -> . ENTERO
-    (62) expresion -> . DECIMAL
-    (63) expresion -> . CADENA
-    (64) expresion -> . RTRUE
-    (65) expresion -> . RFALSE
-    (66) expresion -> . ID
+    (47) expresion -> . expresion MAS expresion
+    (48) expresion -> . expresion MENOS expresion
+    (49) expresion -> . expresion POR expresion
+    (50) expresion -> . expresion DIV expresion
+    (51) expresion -> . expresion POTENCIA expresion
+    (52) expresion -> . expresion PORCENTAJE expresion
+    (53) expresion -> . expresion IGUALIGUAL expresion
+    (54) expresion -> . expresion DIFERENTE expresion
+    (55) expresion -> . expresion MENOR expresion
+    (56) expresion -> . expresion MAYOR expresion
+    (57) expresion -> . expresion MENORIGUAL expresion
+    (58) expresion -> . expresion MAYORIGUAL expresion
+    (59) expresion -> . expresion AND expresion
+    (60) expresion -> . expresion OR expresion
+    (61) expresion -> . MENOS expresion
+    (62) expresion -> . ENTERO
+    (63) expresion -> . DECIMAL
+    (64) expresion -> . CADENA
+    (65) expresion -> . RTRUE
+    (66) expresion -> . RFALSE
+    (67) expresion -> . ID
 
     MENOS           shift and go to state 38
     ENTERO          shift and go to state 39
@@ -2716,9 +2719,9 @@ state 100
 state 101
 
     (30) asignacion_normal -> ID IGUAL expresion DPUNTOS DPUNTOS . tipo
-    (43) tipo -> . STRING
-    (44) tipo -> . NUMBER
-    (45) tipo -> . BOOLEAN
+    (44) tipo -> . STRING
+    (45) tipo -> . NUMBER
+    (46) tipo -> . BOOLEAN
 
     STRING          shift and go to state 72
     NUMBER          shift and go to state 73
@@ -2795,9 +2798,9 @@ state 103
 state 104
 
     (20) parametro -> ID DPUNTOS . tipo
-    (43) tipo -> . STRING
-    (44) tipo -> . NUMBER
-    (45) tipo -> . BOOLEAN
+    (44) tipo -> . STRING
+    (45) tipo -> . NUMBER
+    (46) tipo -> . BOOLEAN
 
     STRING          shift and go to state 72
     NUMBER          shift and go to state 73
@@ -2896,20 +2899,20 @@ state 109
 state 110
 
     (26) declaracion_normal -> RLET ID DPUNTOS tipo IGUAL expresion .
-    (46) expresion -> expresion . MAS expresion
-    (47) expresion -> expresion . MENOS expresion
-    (48) expresion -> expresion . POR expresion
-    (49) expresion -> expresion . DIV expresion
-    (50) expresion -> expresion . POTENCIA expresion
-    (51) expresion -> expresion . PORCENTAJE expresion
-    (52) expresion -> expresion . IGUALIGUAL expresion
-    (53) expresion -> expresion . DIFERENTE expresion
-    (54) expresion -> expresion . MENOR expresion
-    (55) expresion -> expresion . MAYOR expresion
-    (56) expresion -> expresion . MENORIGUAL expresion
-    (57) expresion -> expresion . MAYORIGUAL expresion
-    (58) expresion -> expresion . AND expresion
-    (59) expresion -> expresion . OR expresion
+    (47) expresion -> expresion . MAS expresion
+    (48) expresion -> expresion . MENOS expresion
+    (49) expresion -> expresion . POR expresion
+    (50) expresion -> expresion . DIV expresion
+    (51) expresion -> expresion . POTENCIA expresion
+    (52) expresion -> expresion . PORCENTAJE expresion
+    (53) expresion -> expresion . IGUALIGUAL expresion
+    (54) expresion -> expresion . DIFERENTE expresion
+    (55) expresion -> expresion . MENOR expresion
+    (56) expresion -> expresion . MAYOR expresion
+    (57) expresion -> expresion . MENORIGUAL expresion
+    (58) expresion -> expresion . MAYORIGUAL expresion
+    (59) expresion -> expresion . AND expresion
+    (60) expresion -> expresion . OR expresion
 
     PTCOMA          reduce using rule 26 (declaracion_normal -> RLET ID DPUNTOS tipo IGUAL expresion .)
     MAS             shift and go to state 55
@@ -3120,9 +3123,9 @@ state 116
 state 117
 
     (19) parametro -> RLET ID DPUNTOS . tipo
-    (43) tipo -> . STRING
-    (44) tipo -> . NUMBER
-    (45) tipo -> . BOOLEAN
+    (44) tipo -> . STRING
+    (45) tipo -> . NUMBER
+    (46) tipo -> . BOOLEAN
 
     STRING          shift and go to state 72
     NUMBER          shift and go to state 73
@@ -3388,27 +3391,27 @@ state 130
 state 131
 
     (42) condicional_elseif -> RELSE RIF PARI . expresion PARD LLAVEIZQ instrucciones LLAVEDER
-    (46) expresion -> . expresion MAS expresion
-    (47) expresion -> . expresion MENOS expresion
-    (48) expresion -> . expresion POR expresion
-    (49) expresion -> . expresion DIV expresion
-    (50) expresion -> . expresion POTENCIA expresion
-    (51) expresion -> . expresion PORCENTAJE expresion
-    (52) expresion -> . expresion IGUALIGUAL expresion
-    (53) expresion -> . expresion DIFERENTE expresion
-    (54) expresion -> . expresion MENOR expresion
-    (55) expresion -> . expresion MAYOR expresion
-    (56) expresion -> . expresion MENORIGUAL expresion
-    (57) expresion -> . expresion MAYORIGUAL expresion
-    (58) expresion -> . expresion AND expresion
-    (59) expresion -> . expresion OR expresion
-    (60) expresion -> . MENOS expresion
-    (61) expresion -> . ENTERO
-    (62) expresion -> . DECIMAL
-    (63) expresion -> . CADENA
-    (64) expresion -> . RTRUE
-    (65) expresion -> . RFALSE
-    (66) expresion -> . ID
+    (47) expresion -> . expresion MAS expresion
+    (48) expresion -> . expresion MENOS expresion
+    (49) expresion -> . expresion POR expresion
+    (50) expresion -> . expresion DIV expresion
+    (51) expresion -> . expresion POTENCIA expresion
+    (52) expresion -> . expresion PORCENTAJE expresion
+    (53) expresion -> . expresion IGUALIGUAL expresion
+    (54) expresion -> . expresion DIFERENTE expresion
+    (55) expresion -> . expresion MENOR expresion
+    (56) expresion -> . expresion MAYOR expresion
+    (57) expresion -> . expresion MENORIGUAL expresion
+    (58) expresion -> . expresion MAYORIGUAL expresion
+    (59) expresion -> . expresion AND expresion
+    (60) expresion -> . expresion OR expresion
+    (61) expresion -> . MENOS expresion
+    (62) expresion -> . ENTERO
+    (63) expresion -> . DECIMAL
+    (64) expresion -> . CADENA
+    (65) expresion -> . RTRUE
+    (66) expresion -> . RFALSE
+    (67) expresion -> . ID
 
     MENOS           shift and go to state 38
     ENTERO          shift and go to state 39
@@ -3531,20 +3534,20 @@ state 133
 state 134
 
     (42) condicional_elseif -> RELSE RIF PARI expresion . PARD LLAVEIZQ instrucciones LLAVEDER
-    (46) expresion -> expresion . MAS expresion
-    (47) expresion -> expresion . MENOS expresion
-    (48) expresion -> expresion . POR expresion
-    (49) expresion -> expresion . DIV expresion
-    (50) expresion -> expresion . POTENCIA expresion
-    (51) expresion -> expresion . PORCENTAJE expresion
-    (52) expresion -> expresion . IGUALIGUAL expresion
-    (53) expresion -> expresion . DIFERENTE expresion
-    (54) expresion -> expresion . MENOR expresion
-    (55) expresion -> expresion . MAYOR expresion
-    (56) expresion -> expresion . MENORIGUAL expresion
-    (57) expresion -> expresion . MAYORIGUAL expresion
-    (58) expresion -> expresion . AND expresion
-    (59) expresion -> expresion . OR expresion
+    (47) expresion -> expresion . MAS expresion
+    (48) expresion -> expresion . MENOS expresion
+    (49) expresion -> expresion . POR expresion
+    (50) expresion -> expresion . DIV expresion
+    (51) expresion -> expresion . POTENCIA expresion
+    (52) expresion -> expresion . PORCENTAJE expresion
+    (53) expresion -> expresion . IGUALIGUAL expresion
+    (54) expresion -> expresion . DIFERENTE expresion
+    (55) expresion -> expresion . MENOR expresion
+    (56) expresion -> expresion . MAYOR expresion
+    (57) expresion -> expresion . MENORIGUAL expresion
+    (58) expresion -> expresion . MAYORIGUAL expresion
+    (59) expresion -> expresion . AND expresion
+    (60) expresion -> expresion . OR expresion
 
     PARD            shift and go to state 137
     MAS             shift and go to state 55
