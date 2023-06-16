@@ -22,16 +22,16 @@ class Typeof(Funcion):
         self.tipo = self.calcularTipo(simbolo.getValor())
         return self.tipo
 
-    def calcularTipo(self, valor):
+    def calcularTipo(self, type):
         # Reconocer el tipo de dato del valor 
-        if (type(valor) == int):
-            return 'number'
-        elif (type(valor) == float):
-            return  'number'
-        elif (type(valor) == str):
-            return 'string'
-        elif (type(valor) == bool):
-            return 'boolean'
+        if type == Tipo.NUMBER:
+            return "number"
+        elif type == Tipo.NUMBER:
+            return "number"
+        elif type == Tipo.BANDERA:
+            return "boolean"
+        elif type == Tipo.CADENA:
+            return "string"
 
     def getNode(self):
         nodo = NodeCst("nativas_instr")

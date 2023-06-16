@@ -101,16 +101,6 @@ def t_ENTERO(n):
         n.value = 0
     return n
 
-#Cadena
-# def t_CADENA(t):
-#     r'(\".*?\")'
-#     t.value = t.value[1:-1] #Se remueven las comillas de la entrada
-#     t.value = t.value.replace('\\t','\t')
-#     t.value = t.value.replace('\\n','\n')
-#     t.value = t.value.replace('\\"','\"')
-#     t.value = t.value.replace("\\'","\'")
-#     t.value = t.value.replace('\\\\','\\')
-#     return t
 def t_CADENA(t):
     r'(\"([^\\]|(\\.))*?\")'
     t.value = t.value[1:-1] #Se remueven las comillas de la entrada
@@ -153,4 +143,11 @@ def find_column(inp, tk):
     line_start = inp.rfind('\n', 0, tk.lexpos) + 1
     return (tk.lexpos - line_start) + 1
 
+def test_lexer(lexer):
+    while True:
+        tok = lexer.token()
+        if not tok:
+            break  # No more input
+        print(tok)
+        
 lexer = lex.lex(reflags = re.IGNORECASE)

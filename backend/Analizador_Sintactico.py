@@ -29,6 +29,8 @@ from src.TS.Excepcion import Excepcion
 from src.TS.Arbol import Arbol
 from src.TS.TablaSimbolos import TablaSimbolos
 from copy import copy
+import sys
+sys.setrecursionlimit(10000000)
 
 precedence = (
     ('left', 'OR'),
@@ -81,8 +83,7 @@ def p_instrucciones_evaluar(t):
 
 def p_error(t):
     'instruccion : error PTCOMA'
-    errores.append(Excepcion("Sintáctico", "Error sintáctico, " + str(t[1].value), t.lineno(1), find_column(input, t.slice[1])))
-    t[0] = "" 
+    print(" Error sintáctico en '%s'" % t.value)
 
 #///////////////////////////////////////////////////////////FUNCIONES
 def p_funcion(t):
@@ -141,7 +142,7 @@ def p_parametro_ll(t):
 
 # ///////////////////////////////////////////////////// IMPRIMIR
 def p_imprimir(t):
-    'imprimir : RCONSOLE PUNTO RLOG PARI expresiones_coma PARD'
+    'imprimir : RCONSOLE PUNTO RLOG PARI parametros_ll PARD'
     t[0] = Imprimir(t[5], t.lineno(1), find_column(input, t.slice[1]))
 
 # ///////////////////////////////////////////////////// DECLARACION VARIABLES

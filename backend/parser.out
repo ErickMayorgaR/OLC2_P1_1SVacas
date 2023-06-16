@@ -32,7 +32,7 @@ Rule 21    parametro -> ID
 Rule 22    parametros_ll -> parametros_ll COMA parametro_ll
 Rule 23    parametros_ll -> parametro_ll
 Rule 24    parametro_ll -> expresion
-Rule 25    imprimir -> RCONSOLE PUNTO RLOG PARI expresiones_coma PARD
+Rule 25    imprimir -> RCONSOLE PUNTO RLOG PARI parametros_ll PARD
 Rule 26    declaracion_normal -> RLET ID DPUNTOS tipo IGUAL expresion
 Rule 27    declaracion_normal -> RLET ID IGUAL expresion
 Rule 28    declaracion_normal -> RLET ID
@@ -132,7 +132,7 @@ condicional_elseifs  : 37 38 40
 condicional_if       : 7
 declaracion_normal   : 5
 expresion            : 24 26 27 30 31 32 36 37 38 39 42 46 46 47 47 48 48 49 49 50 50 51 51 52 52 53 53 54 54 55 55 56 56 57 57 58 58 59 59 60 67 68
-expresiones_coma     : 25 67
+expresiones_coma     : 67
 funcion              : 8
 imprimir             : 4
 init                 : 0
@@ -145,7 +145,7 @@ llamada_funcion      : 9
 parametro            : 17 18
 parametro_ll         : 22 23
 parametros           : 14 17
-parametros_ll        : 16 22
+parametros_ll        : 16 22 25
 tipo                 : 19 20 26 29 30
 
 Parsing method: LALR
@@ -165,7 +165,7 @@ state 0
     (10) instruccion -> . inst_return PTCOMA
     (11) instruccion -> . inst_break PTCOMA
     (12) instruccion -> . inst_continue PTCOMA
-    (25) imprimir -> . RCONSOLE PUNTO RLOG PARI expresiones_coma PARD
+    (25) imprimir -> . RCONSOLE PUNTO RLOG PARI parametros_ll PARD
     (26) declaracion_normal -> . RLET ID DPUNTOS tipo IGUAL expresion
     (27) declaracion_normal -> . RLET ID IGUAL expresion
     (28) declaracion_normal -> . RLET ID
@@ -226,7 +226,7 @@ state 2
     (10) instruccion -> . inst_return PTCOMA
     (11) instruccion -> . inst_break PTCOMA
     (12) instruccion -> . inst_continue PTCOMA
-    (25) imprimir -> . RCONSOLE PUNTO RLOG PARI expresiones_coma PARD
+    (25) imprimir -> . RCONSOLE PUNTO RLOG PARI parametros_ll PARD
     (26) declaracion_normal -> . RLET ID DPUNTOS tipo IGUAL expresion
     (27) declaracion_normal -> . RLET ID IGUAL expresion
     (28) declaracion_normal -> . RLET ID
@@ -348,7 +348,7 @@ state 12
 
 state 13
 
-    (25) imprimir -> RCONSOLE . PUNTO RLOG PARI expresiones_coma PARD
+    (25) imprimir -> RCONSOLE . PUNTO RLOG PARI parametros_ll PARD
 
     PUNTO           shift and go to state 31
 
@@ -605,7 +605,7 @@ state 30
 
 state 31
 
-    (25) imprimir -> RCONSOLE PUNTO . RLOG PARI expresiones_coma PARD
+    (25) imprimir -> RCONSOLE PUNTO . RLOG PARI parametros_ll PARD
 
     RLOG            shift and go to state 45
 
@@ -962,7 +962,7 @@ state 44
 
 state 45
 
-    (25) imprimir -> RCONSOLE PUNTO RLOG . PARI expresiones_coma PARD
+    (25) imprimir -> RCONSOLE PUNTO RLOG . PARI parametros_ll PARD
 
     PARI            shift and go to state 70
 
@@ -1713,9 +1713,10 @@ state 69
 
 state 70
 
-    (25) imprimir -> RCONSOLE PUNTO RLOG PARI . expresiones_coma PARD
-    (67) expresiones_coma -> . expresiones_coma COMA expresion
-    (68) expresiones_coma -> . expresion
+    (25) imprimir -> RCONSOLE PUNTO RLOG PARI . parametros_ll PARD
+    (22) parametros_ll -> . parametros_ll COMA parametro_ll
+    (23) parametros_ll -> . parametro_ll
+    (24) parametro_ll -> . expresion
     (46) expresion -> . expresion MAS expresion
     (47) expresion -> . expresion MENOS expresion
     (48) expresion -> . expresion POR expresion
@@ -1746,15 +1747,16 @@ state 70
     RFALSE          shift and go to state 43
     ID              shift and go to state 44
 
-    expresiones_coma               shift and go to state 99
-    expresion                      shift and go to state 100
+    parametros_ll                  shift and go to state 99
+    parametro_ll                   shift and go to state 51
+    expresion                      shift and go to state 52
 
 state 71
 
     (26) declaracion_normal -> RLET ID DPUNTOS tipo . IGUAL expresion
     (29) declaracion_normal -> RLET ID DPUNTOS tipo .
 
-    IGUAL           shift and go to state 101
+    IGUAL           shift and go to state 100
     PTCOMA          reduce using rule 29 (declaracion_normal -> RLET ID DPUNTOS tipo .)
 
 
@@ -1827,7 +1829,7 @@ state 76
 
     (30) asignacion_normal -> ID IGUAL expresion DPUNTOS . DPUNTOS tipo
 
-    DPUNTOS         shift and go to state 102
+    DPUNTOS         shift and go to state 101
 
 
 state 77
@@ -1871,7 +1873,7 @@ state 78
     RFALSE          shift and go to state 43
     ID              shift and go to state 44
 
-    parametro_ll                   shift and go to state 103
+    parametro_ll                   shift and go to state 102
     expresion                      shift and go to state 52
 
 state 79
@@ -1881,7 +1883,7 @@ state 79
     (38) condicional_if -> RIF PARI expresion PARD . LLAVEIZQ instrucciones LLAVEDER condicional_elseifs
     (39) condicional_if -> RIF PARI expresion PARD . LLAVEIZQ instrucciones LLAVEDER RELSE LLAVEIZQ instrucciones LLAVEDER
 
-    LLAVEIZQ        shift and go to state 104
+    LLAVEIZQ        shift and go to state 103
 
 
 state 80
@@ -1889,7 +1891,7 @@ state 80
     (20) parametro -> ID . DPUNTOS tipo
     (21) parametro -> ID .
 
-    DPUNTOS         shift and go to state 105
+    DPUNTOS         shift and go to state 104
     PARD            reduce using rule 21 (parametro -> ID .)
     COMA            reduce using rule 21 (parametro -> ID .)
 
@@ -1898,7 +1900,7 @@ state 81
 
     (13) funcion -> RFUNCTION ID PARI PARD . LLAVEIZQ instrucciones LLAVEDER
 
-    LLAVEIZQ        shift and go to state 106
+    LLAVEIZQ        shift and go to state 105
 
 
 state 82
@@ -1906,8 +1908,8 @@ state 82
     (14) funcion -> RFUNCTION ID PARI parametros . PARD LLAVEIZQ instrucciones LLAVEDER
     (17) parametros -> parametros . COMA parametro
 
-    PARD            shift and go to state 107
-    COMA            shift and go to state 108
+    PARD            shift and go to state 106
+    COMA            shift and go to state 107
 
 
 state 83
@@ -1922,7 +1924,7 @@ state 84
 
     (19) parametro -> RLET . ID DPUNTOS tipo
 
-    ID              shift and go to state 109
+    ID              shift and go to state 108
 
 
 state 85
@@ -2669,50 +2671,14 @@ state 98
 
 state 99
 
-    (25) imprimir -> RCONSOLE PUNTO RLOG PARI expresiones_coma . PARD
-    (67) expresiones_coma -> expresiones_coma . COMA expresion
+    (25) imprimir -> RCONSOLE PUNTO RLOG PARI parametros_ll . PARD
+    (22) parametros_ll -> parametros_ll . COMA parametro_ll
 
-    PARD            shift and go to state 110
-    COMA            shift and go to state 111
+    PARD            shift and go to state 109
+    COMA            shift and go to state 78
 
 
 state 100
-
-    (68) expresiones_coma -> expresion .
-    (46) expresion -> expresion . MAS expresion
-    (47) expresion -> expresion . MENOS expresion
-    (48) expresion -> expresion . POR expresion
-    (49) expresion -> expresion . DIV expresion
-    (50) expresion -> expresion . POTENCIA expresion
-    (51) expresion -> expresion . PORCENTAJE expresion
-    (52) expresion -> expresion . IGUALIGUAL expresion
-    (53) expresion -> expresion . DIFERENTE expresion
-    (54) expresion -> expresion . MENOR expresion
-    (55) expresion -> expresion . MAYOR expresion
-    (56) expresion -> expresion . MENORIGUAL expresion
-    (57) expresion -> expresion . MAYORIGUAL expresion
-    (58) expresion -> expresion . AND expresion
-    (59) expresion -> expresion . OR expresion
-
-    PARD            reduce using rule 68 (expresiones_coma -> expresion .)
-    COMA            reduce using rule 68 (expresiones_coma -> expresion .)
-    MAS             shift and go to state 55
-    MENOS           shift and go to state 56
-    POR             shift and go to state 57
-    DIV             shift and go to state 58
-    POTENCIA        shift and go to state 59
-    PORCENTAJE      shift and go to state 60
-    IGUALIGUAL      shift and go to state 61
-    DIFERENTE       shift and go to state 62
-    MENOR           shift and go to state 63
-    MAYOR           shift and go to state 64
-    MENORIGUAL      shift and go to state 65
-    MAYORIGUAL      shift and go to state 66
-    AND             shift and go to state 67
-    OR              shift and go to state 68
-
-
-state 101
 
     (26) declaracion_normal -> RLET ID DPUNTOS tipo IGUAL . expresion
     (46) expresion -> . expresion MAS expresion
@@ -2745,9 +2711,9 @@ state 101
     RFALSE          shift and go to state 43
     ID              shift and go to state 44
 
-    expresion                      shift and go to state 112
+    expresion                      shift and go to state 110
 
-state 102
+state 101
 
     (30) asignacion_normal -> ID IGUAL expresion DPUNTOS DPUNTOS . tipo
     (43) tipo -> . STRING
@@ -2758,9 +2724,9 @@ state 102
     NUMBER          shift and go to state 73
     BOOLEAN         shift and go to state 74
 
-    tipo                           shift and go to state 113
+    tipo                           shift and go to state 111
 
-state 103
+state 102
 
     (22) parametros_ll -> parametros_ll COMA parametro_ll .
 
@@ -2768,7 +2734,7 @@ state 103
     COMA            reduce using rule 22 (parametros_ll -> parametros_ll COMA parametro_ll .)
 
 
-state 104
+state 103
 
     (36) condicional_if -> RIF PARI expresion PARD LLAVEIZQ . instrucciones LLAVEDER
     (37) condicional_if -> RIF PARI expresion PARD LLAVEIZQ . instrucciones LLAVEDER condicional_elseifs RELSE LLAVEIZQ instrucciones LLAVEDER
@@ -2785,7 +2751,75 @@ state 104
     (10) instruccion -> . inst_return PTCOMA
     (11) instruccion -> . inst_break PTCOMA
     (12) instruccion -> . inst_continue PTCOMA
-    (25) imprimir -> . RCONSOLE PUNTO RLOG PARI expresiones_coma PARD
+    (25) imprimir -> . RCONSOLE PUNTO RLOG PARI parametros_ll PARD
+    (26) declaracion_normal -> . RLET ID DPUNTOS tipo IGUAL expresion
+    (27) declaracion_normal -> . RLET ID IGUAL expresion
+    (28) declaracion_normal -> . RLET ID
+    (29) declaracion_normal -> . RLET ID DPUNTOS tipo
+    (30) asignacion_normal -> . ID IGUAL expresion DPUNTOS DPUNTOS tipo
+    (31) asignacion_normal -> . ID IGUAL expresion
+    (36) condicional_if -> . RIF PARI expresion PARD LLAVEIZQ instrucciones LLAVEDER
+    (37) condicional_if -> . RIF PARI expresion PARD LLAVEIZQ instrucciones LLAVEDER condicional_elseifs RELSE LLAVEIZQ instrucciones LLAVEDER
+    (38) condicional_if -> . RIF PARI expresion PARD LLAVEIZQ instrucciones LLAVEDER condicional_elseifs
+    (39) condicional_if -> . RIF PARI expresion PARD LLAVEIZQ instrucciones LLAVEDER RELSE LLAVEIZQ instrucciones LLAVEDER
+    (13) funcion -> . RFUNCTION ID PARI PARD LLAVEIZQ instrucciones LLAVEDER
+    (14) funcion -> . RFUNCTION ID PARI parametros PARD LLAVEIZQ instrucciones LLAVEDER
+    (15) llamada_funcion -> . ID PARI PARD
+    (16) llamada_funcion -> . ID PARI parametros_ll PARD
+    (32) inst_return -> . RRETURN expresion
+    (33) inst_return -> . RRETURN
+    (34) inst_break -> . RBREAK
+    (35) inst_continue -> . RCONTINUE
+
+    RCONSOLE        shift and go to state 13
+    RLET            shift and go to state 14
+    ID              shift and go to state 15
+    RIF             shift and go to state 16
+    RFUNCTION       shift and go to state 17
+    RRETURN         shift and go to state 18
+    RBREAK          shift and go to state 19
+    RCONTINUE       shift and go to state 20
+
+    instrucciones                  shift and go to state 112
+    instruccion                    shift and go to state 3
+    imprimir                       shift and go to state 4
+    declaracion_normal             shift and go to state 5
+    asignacion_normal              shift and go to state 6
+    condicional_if                 shift and go to state 7
+    funcion                        shift and go to state 8
+    llamada_funcion                shift and go to state 9
+    inst_return                    shift and go to state 10
+    inst_break                     shift and go to state 11
+    inst_continue                  shift and go to state 12
+
+state 104
+
+    (20) parametro -> ID DPUNTOS . tipo
+    (43) tipo -> . STRING
+    (44) tipo -> . NUMBER
+    (45) tipo -> . BOOLEAN
+
+    STRING          shift and go to state 72
+    NUMBER          shift and go to state 73
+    BOOLEAN         shift and go to state 74
+
+    tipo                           shift and go to state 113
+
+state 105
+
+    (13) funcion -> RFUNCTION ID PARI PARD LLAVEIZQ . instrucciones LLAVEDER
+    (2) instrucciones -> . instrucciones instruccion
+    (3) instrucciones -> . instruccion
+    (4) instruccion -> . imprimir PTCOMA
+    (5) instruccion -> . declaracion_normal PTCOMA
+    (6) instruccion -> . asignacion_normal PTCOMA
+    (7) instruccion -> . condicional_if PTCOMA
+    (8) instruccion -> . funcion PTCOMA
+    (9) instruccion -> . llamada_funcion PTCOMA
+    (10) instruccion -> . inst_return PTCOMA
+    (11) instruccion -> . inst_break PTCOMA
+    (12) instruccion -> . inst_continue PTCOMA
+    (25) imprimir -> . RCONSOLE PUNTO RLOG PARI parametros_ll PARD
     (26) declaracion_normal -> . RLET ID DPUNTOS tipo IGUAL expresion
     (27) declaracion_normal -> . RLET ID IGUAL expresion
     (28) declaracion_normal -> . RLET ID
@@ -2826,82 +2860,14 @@ state 104
     inst_break                     shift and go to state 11
     inst_continue                  shift and go to state 12
 
-state 105
-
-    (20) parametro -> ID DPUNTOS . tipo
-    (43) tipo -> . STRING
-    (44) tipo -> . NUMBER
-    (45) tipo -> . BOOLEAN
-
-    STRING          shift and go to state 72
-    NUMBER          shift and go to state 73
-    BOOLEAN         shift and go to state 74
-
-    tipo                           shift and go to state 115
-
 state 106
-
-    (13) funcion -> RFUNCTION ID PARI PARD LLAVEIZQ . instrucciones LLAVEDER
-    (2) instrucciones -> . instrucciones instruccion
-    (3) instrucciones -> . instruccion
-    (4) instruccion -> . imprimir PTCOMA
-    (5) instruccion -> . declaracion_normal PTCOMA
-    (6) instruccion -> . asignacion_normal PTCOMA
-    (7) instruccion -> . condicional_if PTCOMA
-    (8) instruccion -> . funcion PTCOMA
-    (9) instruccion -> . llamada_funcion PTCOMA
-    (10) instruccion -> . inst_return PTCOMA
-    (11) instruccion -> . inst_break PTCOMA
-    (12) instruccion -> . inst_continue PTCOMA
-    (25) imprimir -> . RCONSOLE PUNTO RLOG PARI expresiones_coma PARD
-    (26) declaracion_normal -> . RLET ID DPUNTOS tipo IGUAL expresion
-    (27) declaracion_normal -> . RLET ID IGUAL expresion
-    (28) declaracion_normal -> . RLET ID
-    (29) declaracion_normal -> . RLET ID DPUNTOS tipo
-    (30) asignacion_normal -> . ID IGUAL expresion DPUNTOS DPUNTOS tipo
-    (31) asignacion_normal -> . ID IGUAL expresion
-    (36) condicional_if -> . RIF PARI expresion PARD LLAVEIZQ instrucciones LLAVEDER
-    (37) condicional_if -> . RIF PARI expresion PARD LLAVEIZQ instrucciones LLAVEDER condicional_elseifs RELSE LLAVEIZQ instrucciones LLAVEDER
-    (38) condicional_if -> . RIF PARI expresion PARD LLAVEIZQ instrucciones LLAVEDER condicional_elseifs
-    (39) condicional_if -> . RIF PARI expresion PARD LLAVEIZQ instrucciones LLAVEDER RELSE LLAVEIZQ instrucciones LLAVEDER
-    (13) funcion -> . RFUNCTION ID PARI PARD LLAVEIZQ instrucciones LLAVEDER
-    (14) funcion -> . RFUNCTION ID PARI parametros PARD LLAVEIZQ instrucciones LLAVEDER
-    (15) llamada_funcion -> . ID PARI PARD
-    (16) llamada_funcion -> . ID PARI parametros_ll PARD
-    (32) inst_return -> . RRETURN expresion
-    (33) inst_return -> . RRETURN
-    (34) inst_break -> . RBREAK
-    (35) inst_continue -> . RCONTINUE
-
-    RCONSOLE        shift and go to state 13
-    RLET            shift and go to state 14
-    ID              shift and go to state 15
-    RIF             shift and go to state 16
-    RFUNCTION       shift and go to state 17
-    RRETURN         shift and go to state 18
-    RBREAK          shift and go to state 19
-    RCONTINUE       shift and go to state 20
-
-    instrucciones                  shift and go to state 116
-    instruccion                    shift and go to state 3
-    imprimir                       shift and go to state 4
-    declaracion_normal             shift and go to state 5
-    asignacion_normal              shift and go to state 6
-    condicional_if                 shift and go to state 7
-    funcion                        shift and go to state 8
-    llamada_funcion                shift and go to state 9
-    inst_return                    shift and go to state 10
-    inst_break                     shift and go to state 11
-    inst_continue                  shift and go to state 12
-
-state 107
 
     (14) funcion -> RFUNCTION ID PARI parametros PARD . LLAVEIZQ instrucciones LLAVEDER
 
-    LLAVEIZQ        shift and go to state 117
+    LLAVEIZQ        shift and go to state 115
 
 
-state 108
+state 107
 
     (17) parametros -> parametros COMA . parametro
     (19) parametro -> . RLET ID DPUNTOS tipo
@@ -2911,58 +2877,23 @@ state 108
     RLET            shift and go to state 84
     ID              shift and go to state 80
 
-    parametro                      shift and go to state 118
+    parametro                      shift and go to state 116
 
-state 109
+state 108
 
     (19) parametro -> RLET ID . DPUNTOS tipo
 
-    DPUNTOS         shift and go to state 119
+    DPUNTOS         shift and go to state 117
+
+
+state 109
+
+    (25) imprimir -> RCONSOLE PUNTO RLOG PARI parametros_ll PARD .
+
+    PTCOMA          reduce using rule 25 (imprimir -> RCONSOLE PUNTO RLOG PARI parametros_ll PARD .)
 
 
 state 110
-
-    (25) imprimir -> RCONSOLE PUNTO RLOG PARI expresiones_coma PARD .
-
-    PTCOMA          reduce using rule 25 (imprimir -> RCONSOLE PUNTO RLOG PARI expresiones_coma PARD .)
-
-
-state 111
-
-    (67) expresiones_coma -> expresiones_coma COMA . expresion
-    (46) expresion -> . expresion MAS expresion
-    (47) expresion -> . expresion MENOS expresion
-    (48) expresion -> . expresion POR expresion
-    (49) expresion -> . expresion DIV expresion
-    (50) expresion -> . expresion POTENCIA expresion
-    (51) expresion -> . expresion PORCENTAJE expresion
-    (52) expresion -> . expresion IGUALIGUAL expresion
-    (53) expresion -> . expresion DIFERENTE expresion
-    (54) expresion -> . expresion MENOR expresion
-    (55) expresion -> . expresion MAYOR expresion
-    (56) expresion -> . expresion MENORIGUAL expresion
-    (57) expresion -> . expresion MAYORIGUAL expresion
-    (58) expresion -> . expresion AND expresion
-    (59) expresion -> . expresion OR expresion
-    (60) expresion -> . MENOS expresion
-    (61) expresion -> . ENTERO
-    (62) expresion -> . DECIMAL
-    (63) expresion -> . CADENA
-    (64) expresion -> . RTRUE
-    (65) expresion -> . RFALSE
-    (66) expresion -> . ID
-
-    MENOS           shift and go to state 38
-    ENTERO          shift and go to state 39
-    DECIMAL         shift and go to state 40
-    CADENA          shift and go to state 41
-    RTRUE           shift and go to state 42
-    RFALSE          shift and go to state 43
-    ID              shift and go to state 44
-
-    expresion                      shift and go to state 120
-
-state 112
 
     (26) declaracion_normal -> RLET ID DPUNTOS tipo IGUAL expresion .
     (46) expresion -> expresion . MAS expresion
@@ -2997,14 +2928,14 @@ state 112
     OR              shift and go to state 68
 
 
-state 113
+state 111
 
     (30) asignacion_normal -> ID IGUAL expresion DPUNTOS DPUNTOS tipo .
 
     PTCOMA          reduce using rule 30 (asignacion_normal -> ID IGUAL expresion DPUNTOS DPUNTOS tipo .)
 
 
-state 114
+state 112
 
     (36) condicional_if -> RIF PARI expresion PARD LLAVEIZQ instrucciones . LLAVEDER
     (37) condicional_if -> RIF PARI expresion PARD LLAVEIZQ instrucciones . LLAVEDER condicional_elseifs RELSE LLAVEIZQ instrucciones LLAVEDER
@@ -3020,7 +2951,7 @@ state 114
     (10) instruccion -> . inst_return PTCOMA
     (11) instruccion -> . inst_break PTCOMA
     (12) instruccion -> . inst_continue PTCOMA
-    (25) imprimir -> . RCONSOLE PUNTO RLOG PARI expresiones_coma PARD
+    (25) imprimir -> . RCONSOLE PUNTO RLOG PARI parametros_ll PARD
     (26) declaracion_normal -> . RLET ID DPUNTOS tipo IGUAL expresion
     (27) declaracion_normal -> . RLET ID IGUAL expresion
     (28) declaracion_normal -> . RLET ID
@@ -3040,7 +2971,69 @@ state 114
     (34) inst_break -> . RBREAK
     (35) inst_continue -> . RCONTINUE
 
-    LLAVEDER        shift and go to state 121
+    LLAVEDER        shift and go to state 118
+    RCONSOLE        shift and go to state 13
+    RLET            shift and go to state 14
+    ID              shift and go to state 15
+    RIF             shift and go to state 16
+    RFUNCTION       shift and go to state 17
+    RRETURN         shift and go to state 18
+    RBREAK          shift and go to state 19
+    RCONTINUE       shift and go to state 20
+
+    instruccion                    shift and go to state 21
+    imprimir                       shift and go to state 4
+    declaracion_normal             shift and go to state 5
+    asignacion_normal              shift and go to state 6
+    condicional_if                 shift and go to state 7
+    funcion                        shift and go to state 8
+    llamada_funcion                shift and go to state 9
+    inst_return                    shift and go to state 10
+    inst_break                     shift and go to state 11
+    inst_continue                  shift and go to state 12
+
+state 113
+
+    (20) parametro -> ID DPUNTOS tipo .
+
+    PARD            reduce using rule 20 (parametro -> ID DPUNTOS tipo .)
+    COMA            reduce using rule 20 (parametro -> ID DPUNTOS tipo .)
+
+
+state 114
+
+    (13) funcion -> RFUNCTION ID PARI PARD LLAVEIZQ instrucciones . LLAVEDER
+    (2) instrucciones -> instrucciones . instruccion
+    (4) instruccion -> . imprimir PTCOMA
+    (5) instruccion -> . declaracion_normal PTCOMA
+    (6) instruccion -> . asignacion_normal PTCOMA
+    (7) instruccion -> . condicional_if PTCOMA
+    (8) instruccion -> . funcion PTCOMA
+    (9) instruccion -> . llamada_funcion PTCOMA
+    (10) instruccion -> . inst_return PTCOMA
+    (11) instruccion -> . inst_break PTCOMA
+    (12) instruccion -> . inst_continue PTCOMA
+    (25) imprimir -> . RCONSOLE PUNTO RLOG PARI parametros_ll PARD
+    (26) declaracion_normal -> . RLET ID DPUNTOS tipo IGUAL expresion
+    (27) declaracion_normal -> . RLET ID IGUAL expresion
+    (28) declaracion_normal -> . RLET ID
+    (29) declaracion_normal -> . RLET ID DPUNTOS tipo
+    (30) asignacion_normal -> . ID IGUAL expresion DPUNTOS DPUNTOS tipo
+    (31) asignacion_normal -> . ID IGUAL expresion
+    (36) condicional_if -> . RIF PARI expresion PARD LLAVEIZQ instrucciones LLAVEDER
+    (37) condicional_if -> . RIF PARI expresion PARD LLAVEIZQ instrucciones LLAVEDER condicional_elseifs RELSE LLAVEIZQ instrucciones LLAVEDER
+    (38) condicional_if -> . RIF PARI expresion PARD LLAVEIZQ instrucciones LLAVEDER condicional_elseifs
+    (39) condicional_if -> . RIF PARI expresion PARD LLAVEIZQ instrucciones LLAVEDER RELSE LLAVEIZQ instrucciones LLAVEDER
+    (13) funcion -> . RFUNCTION ID PARI PARD LLAVEIZQ instrucciones LLAVEDER
+    (14) funcion -> . RFUNCTION ID PARI parametros PARD LLAVEIZQ instrucciones LLAVEDER
+    (15) llamada_funcion -> . ID PARI PARD
+    (16) llamada_funcion -> . ID PARI parametros_ll PARD
+    (32) inst_return -> . RRETURN expresion
+    (33) inst_return -> . RRETURN
+    (34) inst_break -> . RBREAK
+    (35) inst_continue -> . RCONTINUE
+
+    LLAVEDER        shift and go to state 119
     RCONSOLE        shift and go to state 13
     RLET            shift and go to state 14
     ID              shift and go to state 15
@@ -3063,68 +3056,6 @@ state 114
 
 state 115
 
-    (20) parametro -> ID DPUNTOS tipo .
-
-    PARD            reduce using rule 20 (parametro -> ID DPUNTOS tipo .)
-    COMA            reduce using rule 20 (parametro -> ID DPUNTOS tipo .)
-
-
-state 116
-
-    (13) funcion -> RFUNCTION ID PARI PARD LLAVEIZQ instrucciones . LLAVEDER
-    (2) instrucciones -> instrucciones . instruccion
-    (4) instruccion -> . imprimir PTCOMA
-    (5) instruccion -> . declaracion_normal PTCOMA
-    (6) instruccion -> . asignacion_normal PTCOMA
-    (7) instruccion -> . condicional_if PTCOMA
-    (8) instruccion -> . funcion PTCOMA
-    (9) instruccion -> . llamada_funcion PTCOMA
-    (10) instruccion -> . inst_return PTCOMA
-    (11) instruccion -> . inst_break PTCOMA
-    (12) instruccion -> . inst_continue PTCOMA
-    (25) imprimir -> . RCONSOLE PUNTO RLOG PARI expresiones_coma PARD
-    (26) declaracion_normal -> . RLET ID DPUNTOS tipo IGUAL expresion
-    (27) declaracion_normal -> . RLET ID IGUAL expresion
-    (28) declaracion_normal -> . RLET ID
-    (29) declaracion_normal -> . RLET ID DPUNTOS tipo
-    (30) asignacion_normal -> . ID IGUAL expresion DPUNTOS DPUNTOS tipo
-    (31) asignacion_normal -> . ID IGUAL expresion
-    (36) condicional_if -> . RIF PARI expresion PARD LLAVEIZQ instrucciones LLAVEDER
-    (37) condicional_if -> . RIF PARI expresion PARD LLAVEIZQ instrucciones LLAVEDER condicional_elseifs RELSE LLAVEIZQ instrucciones LLAVEDER
-    (38) condicional_if -> . RIF PARI expresion PARD LLAVEIZQ instrucciones LLAVEDER condicional_elseifs
-    (39) condicional_if -> . RIF PARI expresion PARD LLAVEIZQ instrucciones LLAVEDER RELSE LLAVEIZQ instrucciones LLAVEDER
-    (13) funcion -> . RFUNCTION ID PARI PARD LLAVEIZQ instrucciones LLAVEDER
-    (14) funcion -> . RFUNCTION ID PARI parametros PARD LLAVEIZQ instrucciones LLAVEDER
-    (15) llamada_funcion -> . ID PARI PARD
-    (16) llamada_funcion -> . ID PARI parametros_ll PARD
-    (32) inst_return -> . RRETURN expresion
-    (33) inst_return -> . RRETURN
-    (34) inst_break -> . RBREAK
-    (35) inst_continue -> . RCONTINUE
-
-    LLAVEDER        shift and go to state 122
-    RCONSOLE        shift and go to state 13
-    RLET            shift and go to state 14
-    ID              shift and go to state 15
-    RIF             shift and go to state 16
-    RFUNCTION       shift and go to state 17
-    RRETURN         shift and go to state 18
-    RBREAK          shift and go to state 19
-    RCONTINUE       shift and go to state 20
-
-    instruccion                    shift and go to state 21
-    imprimir                       shift and go to state 4
-    declaracion_normal             shift and go to state 5
-    asignacion_normal              shift and go to state 6
-    condicional_if                 shift and go to state 7
-    funcion                        shift and go to state 8
-    llamada_funcion                shift and go to state 9
-    inst_return                    shift and go to state 10
-    inst_break                     shift and go to state 11
-    inst_continue                  shift and go to state 12
-
-state 117
-
     (14) funcion -> RFUNCTION ID PARI parametros PARD LLAVEIZQ . instrucciones LLAVEDER
     (2) instrucciones -> . instrucciones instruccion
     (3) instrucciones -> . instruccion
@@ -3137,7 +3068,7 @@ state 117
     (10) instruccion -> . inst_return PTCOMA
     (11) instruccion -> . inst_break PTCOMA
     (12) instruccion -> . inst_continue PTCOMA
-    (25) imprimir -> . RCONSOLE PUNTO RLOG PARI expresiones_coma PARD
+    (25) imprimir -> . RCONSOLE PUNTO RLOG PARI parametros_ll PARD
     (26) declaracion_normal -> . RLET ID DPUNTOS tipo IGUAL expresion
     (27) declaracion_normal -> . RLET ID IGUAL expresion
     (28) declaracion_normal -> . RLET ID
@@ -3166,7 +3097,7 @@ state 117
     RBREAK          shift and go to state 19
     RCONTINUE       shift and go to state 20
 
-    instrucciones                  shift and go to state 123
+    instrucciones                  shift and go to state 120
     instruccion                    shift and go to state 3
     imprimir                       shift and go to state 4
     declaracion_normal             shift and go to state 5
@@ -3178,7 +3109,7 @@ state 117
     inst_break                     shift and go to state 11
     inst_continue                  shift and go to state 12
 
-state 118
+state 116
 
     (17) parametros -> parametros COMA parametro .
 
@@ -3186,7 +3117,7 @@ state 118
     COMA            reduce using rule 17 (parametros -> parametros COMA parametro .)
 
 
-state 119
+state 117
 
     (19) parametro -> RLET ID DPUNTOS . tipo
     (43) tipo -> . STRING
@@ -3197,45 +3128,9 @@ state 119
     NUMBER          shift and go to state 73
     BOOLEAN         shift and go to state 74
 
-    tipo                           shift and go to state 124
+    tipo                           shift and go to state 121
 
-state 120
-
-    (67) expresiones_coma -> expresiones_coma COMA expresion .
-    (46) expresion -> expresion . MAS expresion
-    (47) expresion -> expresion . MENOS expresion
-    (48) expresion -> expresion . POR expresion
-    (49) expresion -> expresion . DIV expresion
-    (50) expresion -> expresion . POTENCIA expresion
-    (51) expresion -> expresion . PORCENTAJE expresion
-    (52) expresion -> expresion . IGUALIGUAL expresion
-    (53) expresion -> expresion . DIFERENTE expresion
-    (54) expresion -> expresion . MENOR expresion
-    (55) expresion -> expresion . MAYOR expresion
-    (56) expresion -> expresion . MENORIGUAL expresion
-    (57) expresion -> expresion . MAYORIGUAL expresion
-    (58) expresion -> expresion . AND expresion
-    (59) expresion -> expresion . OR expresion
-
-    PARD            reduce using rule 67 (expresiones_coma -> expresiones_coma COMA expresion .)
-    COMA            reduce using rule 67 (expresiones_coma -> expresiones_coma COMA expresion .)
-    MAS             shift and go to state 55
-    MENOS           shift and go to state 56
-    POR             shift and go to state 57
-    DIV             shift and go to state 58
-    POTENCIA        shift and go to state 59
-    PORCENTAJE      shift and go to state 60
-    IGUALIGUAL      shift and go to state 61
-    DIFERENTE       shift and go to state 62
-    MENOR           shift and go to state 63
-    MAYOR           shift and go to state 64
-    MENORIGUAL      shift and go to state 65
-    MAYORIGUAL      shift and go to state 66
-    AND             shift and go to state 67
-    OR              shift and go to state 68
-
-
-state 121
+state 118
 
     (36) condicional_if -> RIF PARI expresion PARD LLAVEIZQ instrucciones LLAVEDER .
     (37) condicional_if -> RIF PARI expresion PARD LLAVEIZQ instrucciones LLAVEDER . condicional_elseifs RELSE LLAVEIZQ instrucciones LLAVEDER
@@ -3246,19 +3141,19 @@ state 121
     (42) condicional_elseif -> . RELSE RIF PARI expresion PARD LLAVEIZQ instrucciones LLAVEDER
 
     PTCOMA          reduce using rule 36 (condicional_if -> RIF PARI expresion PARD LLAVEIZQ instrucciones LLAVEDER .)
-    RELSE           shift and go to state 126
+    RELSE           shift and go to state 123
 
-    condicional_elseifs            shift and go to state 125
-    condicional_elseif             shift and go to state 127
+    condicional_elseifs            shift and go to state 122
+    condicional_elseif             shift and go to state 124
 
-state 122
+state 119
 
     (13) funcion -> RFUNCTION ID PARI PARD LLAVEIZQ instrucciones LLAVEDER .
 
     PTCOMA          reduce using rule 13 (funcion -> RFUNCTION ID PARI PARD LLAVEIZQ instrucciones LLAVEDER .)
 
 
-state 123
+state 120
 
     (14) funcion -> RFUNCTION ID PARI parametros PARD LLAVEIZQ instrucciones . LLAVEDER
     (2) instrucciones -> instrucciones . instruccion
@@ -3271,7 +3166,7 @@ state 123
     (10) instruccion -> . inst_return PTCOMA
     (11) instruccion -> . inst_break PTCOMA
     (12) instruccion -> . inst_continue PTCOMA
-    (25) imprimir -> . RCONSOLE PUNTO RLOG PARI expresiones_coma PARD
+    (25) imprimir -> . RCONSOLE PUNTO RLOG PARI parametros_ll PARD
     (26) declaracion_normal -> . RLET ID DPUNTOS tipo IGUAL expresion
     (27) declaracion_normal -> . RLET ID IGUAL expresion
     (28) declaracion_normal -> . RLET ID
@@ -3291,7 +3186,7 @@ state 123
     (34) inst_break -> . RBREAK
     (35) inst_continue -> . RCONTINUE
 
-    LLAVEDER        shift and go to state 128
+    LLAVEDER        shift and go to state 125
     RCONSOLE        shift and go to state 13
     RLET            shift and go to state 14
     ID              shift and go to state 15
@@ -3312,7 +3207,7 @@ state 123
     inst_break                     shift and go to state 11
     inst_continue                  shift and go to state 12
 
-state 124
+state 121
 
     (19) parametro -> RLET ID DPUNTOS tipo .
 
@@ -3320,28 +3215,28 @@ state 124
     COMA            reduce using rule 19 (parametro -> RLET ID DPUNTOS tipo .)
 
 
-state 125
+state 122
 
     (37) condicional_if -> RIF PARI expresion PARD LLAVEIZQ instrucciones LLAVEDER condicional_elseifs . RELSE LLAVEIZQ instrucciones LLAVEDER
     (38) condicional_if -> RIF PARI expresion PARD LLAVEIZQ instrucciones LLAVEDER condicional_elseifs .
     (40) condicional_elseifs -> condicional_elseifs . condicional_elseif
     (42) condicional_elseif -> . RELSE RIF PARI expresion PARD LLAVEIZQ instrucciones LLAVEDER
 
-    RELSE           shift and go to state 129
+    RELSE           shift and go to state 126
     PTCOMA          reduce using rule 38 (condicional_if -> RIF PARI expresion PARD LLAVEIZQ instrucciones LLAVEDER condicional_elseifs .)
 
-    condicional_elseif             shift and go to state 130
+    condicional_elseif             shift and go to state 127
 
-state 126
+state 123
 
     (39) condicional_if -> RIF PARI expresion PARD LLAVEIZQ instrucciones LLAVEDER RELSE . LLAVEIZQ instrucciones LLAVEDER
     (42) condicional_elseif -> RELSE . RIF PARI expresion PARD LLAVEIZQ instrucciones LLAVEDER
 
-    LLAVEIZQ        shift and go to state 132
-    RIF             shift and go to state 131
+    LLAVEIZQ        shift and go to state 129
+    RIF             shift and go to state 128
 
 
-state 127
+state 124
 
     (41) condicional_elseifs -> condicional_elseif .
 
@@ -3349,23 +3244,23 @@ state 127
     PTCOMA          reduce using rule 41 (condicional_elseifs -> condicional_elseif .)
 
 
-state 128
+state 125
 
     (14) funcion -> RFUNCTION ID PARI parametros PARD LLAVEIZQ instrucciones LLAVEDER .
 
     PTCOMA          reduce using rule 14 (funcion -> RFUNCTION ID PARI parametros PARD LLAVEIZQ instrucciones LLAVEDER .)
 
 
-state 129
+state 126
 
     (37) condicional_if -> RIF PARI expresion PARD LLAVEIZQ instrucciones LLAVEDER condicional_elseifs RELSE . LLAVEIZQ instrucciones LLAVEDER
     (42) condicional_elseif -> RELSE . RIF PARI expresion PARD LLAVEIZQ instrucciones LLAVEDER
 
-    LLAVEIZQ        shift and go to state 133
-    RIF             shift and go to state 131
+    LLAVEIZQ        shift and go to state 130
+    RIF             shift and go to state 128
 
 
-state 130
+state 127
 
     (40) condicional_elseifs -> condicional_elseifs condicional_elseif .
 
@@ -3373,14 +3268,14 @@ state 130
     PTCOMA          reduce using rule 40 (condicional_elseifs -> condicional_elseifs condicional_elseif .)
 
 
-state 131
+state 128
 
     (42) condicional_elseif -> RELSE RIF . PARI expresion PARD LLAVEIZQ instrucciones LLAVEDER
 
-    PARI            shift and go to state 134
+    PARI            shift and go to state 131
 
 
-state 132
+state 129
 
     (39) condicional_if -> RIF PARI expresion PARD LLAVEIZQ instrucciones LLAVEDER RELSE LLAVEIZQ . instrucciones LLAVEDER
     (2) instrucciones -> . instrucciones instruccion
@@ -3394,7 +3289,7 @@ state 132
     (10) instruccion -> . inst_return PTCOMA
     (11) instruccion -> . inst_break PTCOMA
     (12) instruccion -> . inst_continue PTCOMA
-    (25) imprimir -> . RCONSOLE PUNTO RLOG PARI expresiones_coma PARD
+    (25) imprimir -> . RCONSOLE PUNTO RLOG PARI parametros_ll PARD
     (26) declaracion_normal -> . RLET ID DPUNTOS tipo IGUAL expresion
     (27) declaracion_normal -> . RLET ID IGUAL expresion
     (28) declaracion_normal -> . RLET ID
@@ -3423,7 +3318,7 @@ state 132
     RBREAK          shift and go to state 19
     RCONTINUE       shift and go to state 20
 
-    instrucciones                  shift and go to state 135
+    instrucciones                  shift and go to state 132
     instruccion                    shift and go to state 3
     imprimir                       shift and go to state 4
     declaracion_normal             shift and go to state 5
@@ -3435,7 +3330,7 @@ state 132
     inst_break                     shift and go to state 11
     inst_continue                  shift and go to state 12
 
-state 133
+state 130
 
     (37) condicional_if -> RIF PARI expresion PARD LLAVEIZQ instrucciones LLAVEDER condicional_elseifs RELSE LLAVEIZQ . instrucciones LLAVEDER
     (2) instrucciones -> . instrucciones instruccion
@@ -3449,7 +3344,7 @@ state 133
     (10) instruccion -> . inst_return PTCOMA
     (11) instruccion -> . inst_break PTCOMA
     (12) instruccion -> . inst_continue PTCOMA
-    (25) imprimir -> . RCONSOLE PUNTO RLOG PARI expresiones_coma PARD
+    (25) imprimir -> . RCONSOLE PUNTO RLOG PARI parametros_ll PARD
     (26) declaracion_normal -> . RLET ID DPUNTOS tipo IGUAL expresion
     (27) declaracion_normal -> . RLET ID IGUAL expresion
     (28) declaracion_normal -> . RLET ID
@@ -3478,7 +3373,7 @@ state 133
     RBREAK          shift and go to state 19
     RCONTINUE       shift and go to state 20
 
-    instrucciones                  shift and go to state 136
+    instrucciones                  shift and go to state 133
     instruccion                    shift and go to state 3
     imprimir                       shift and go to state 4
     declaracion_normal             shift and go to state 5
@@ -3490,7 +3385,7 @@ state 133
     inst_break                     shift and go to state 11
     inst_continue                  shift and go to state 12
 
-state 134
+state 131
 
     (42) condicional_elseif -> RELSE RIF PARI . expresion PARD LLAVEIZQ instrucciones LLAVEDER
     (46) expresion -> . expresion MAS expresion
@@ -3523,9 +3418,9 @@ state 134
     RFALSE          shift and go to state 43
     ID              shift and go to state 44
 
-    expresion                      shift and go to state 137
+    expresion                      shift and go to state 134
 
-state 135
+state 132
 
     (39) condicional_if -> RIF PARI expresion PARD LLAVEIZQ instrucciones LLAVEDER RELSE LLAVEIZQ instrucciones . LLAVEDER
     (2) instrucciones -> instrucciones . instruccion
@@ -3538,7 +3433,7 @@ state 135
     (10) instruccion -> . inst_return PTCOMA
     (11) instruccion -> . inst_break PTCOMA
     (12) instruccion -> . inst_continue PTCOMA
-    (25) imprimir -> . RCONSOLE PUNTO RLOG PARI expresiones_coma PARD
+    (25) imprimir -> . RCONSOLE PUNTO RLOG PARI parametros_ll PARD
     (26) declaracion_normal -> . RLET ID DPUNTOS tipo IGUAL expresion
     (27) declaracion_normal -> . RLET ID IGUAL expresion
     (28) declaracion_normal -> . RLET ID
@@ -3558,7 +3453,7 @@ state 135
     (34) inst_break -> . RBREAK
     (35) inst_continue -> . RCONTINUE
 
-    LLAVEDER        shift and go to state 138
+    LLAVEDER        shift and go to state 135
     RCONSOLE        shift and go to state 13
     RLET            shift and go to state 14
     ID              shift and go to state 15
@@ -3579,7 +3474,7 @@ state 135
     inst_break                     shift and go to state 11
     inst_continue                  shift and go to state 12
 
-state 136
+state 133
 
     (37) condicional_if -> RIF PARI expresion PARD LLAVEIZQ instrucciones LLAVEDER condicional_elseifs RELSE LLAVEIZQ instrucciones . LLAVEDER
     (2) instrucciones -> instrucciones . instruccion
@@ -3592,7 +3487,7 @@ state 136
     (10) instruccion -> . inst_return PTCOMA
     (11) instruccion -> . inst_break PTCOMA
     (12) instruccion -> . inst_continue PTCOMA
-    (25) imprimir -> . RCONSOLE PUNTO RLOG PARI expresiones_coma PARD
+    (25) imprimir -> . RCONSOLE PUNTO RLOG PARI parametros_ll PARD
     (26) declaracion_normal -> . RLET ID DPUNTOS tipo IGUAL expresion
     (27) declaracion_normal -> . RLET ID IGUAL expresion
     (28) declaracion_normal -> . RLET ID
@@ -3612,7 +3507,7 @@ state 136
     (34) inst_break -> . RBREAK
     (35) inst_continue -> . RCONTINUE
 
-    LLAVEDER        shift and go to state 139
+    LLAVEDER        shift and go to state 136
     RCONSOLE        shift and go to state 13
     RLET            shift and go to state 14
     ID              shift and go to state 15
@@ -3633,7 +3528,7 @@ state 136
     inst_break                     shift and go to state 11
     inst_continue                  shift and go to state 12
 
-state 137
+state 134
 
     (42) condicional_elseif -> RELSE RIF PARI expresion . PARD LLAVEIZQ instrucciones LLAVEDER
     (46) expresion -> expresion . MAS expresion
@@ -3651,7 +3546,7 @@ state 137
     (58) expresion -> expresion . AND expresion
     (59) expresion -> expresion . OR expresion
 
-    PARD            shift and go to state 140
+    PARD            shift and go to state 137
     MAS             shift and go to state 55
     MENOS           shift and go to state 56
     POR             shift and go to state 57
@@ -3668,28 +3563,28 @@ state 137
     OR              shift and go to state 68
 
 
-state 138
+state 135
 
     (39) condicional_if -> RIF PARI expresion PARD LLAVEIZQ instrucciones LLAVEDER RELSE LLAVEIZQ instrucciones LLAVEDER .
 
     PTCOMA          reduce using rule 39 (condicional_if -> RIF PARI expresion PARD LLAVEIZQ instrucciones LLAVEDER RELSE LLAVEIZQ instrucciones LLAVEDER .)
 
 
-state 139
+state 136
 
     (37) condicional_if -> RIF PARI expresion PARD LLAVEIZQ instrucciones LLAVEDER condicional_elseifs RELSE LLAVEIZQ instrucciones LLAVEDER .
 
     PTCOMA          reduce using rule 37 (condicional_if -> RIF PARI expresion PARD LLAVEIZQ instrucciones LLAVEDER condicional_elseifs RELSE LLAVEIZQ instrucciones LLAVEDER .)
 
 
-state 140
+state 137
 
     (42) condicional_elseif -> RELSE RIF PARI expresion PARD . LLAVEIZQ instrucciones LLAVEDER
 
-    LLAVEIZQ        shift and go to state 141
+    LLAVEIZQ        shift and go to state 138
 
 
-state 141
+state 138
 
     (42) condicional_elseif -> RELSE RIF PARI expresion PARD LLAVEIZQ . instrucciones LLAVEDER
     (2) instrucciones -> . instrucciones instruccion
@@ -3703,7 +3598,7 @@ state 141
     (10) instruccion -> . inst_return PTCOMA
     (11) instruccion -> . inst_break PTCOMA
     (12) instruccion -> . inst_continue PTCOMA
-    (25) imprimir -> . RCONSOLE PUNTO RLOG PARI expresiones_coma PARD
+    (25) imprimir -> . RCONSOLE PUNTO RLOG PARI parametros_ll PARD
     (26) declaracion_normal -> . RLET ID DPUNTOS tipo IGUAL expresion
     (27) declaracion_normal -> . RLET ID IGUAL expresion
     (28) declaracion_normal -> . RLET ID
@@ -3732,7 +3627,7 @@ state 141
     RBREAK          shift and go to state 19
     RCONTINUE       shift and go to state 20
 
-    instrucciones                  shift and go to state 142
+    instrucciones                  shift and go to state 139
     instruccion                    shift and go to state 3
     imprimir                       shift and go to state 4
     declaracion_normal             shift and go to state 5
@@ -3744,7 +3639,7 @@ state 141
     inst_break                     shift and go to state 11
     inst_continue                  shift and go to state 12
 
-state 142
+state 139
 
     (42) condicional_elseif -> RELSE RIF PARI expresion PARD LLAVEIZQ instrucciones . LLAVEDER
     (2) instrucciones -> instrucciones . instruccion
@@ -3757,7 +3652,7 @@ state 142
     (10) instruccion -> . inst_return PTCOMA
     (11) instruccion -> . inst_break PTCOMA
     (12) instruccion -> . inst_continue PTCOMA
-    (25) imprimir -> . RCONSOLE PUNTO RLOG PARI expresiones_coma PARD
+    (25) imprimir -> . RCONSOLE PUNTO RLOG PARI parametros_ll PARD
     (26) declaracion_normal -> . RLET ID DPUNTOS tipo IGUAL expresion
     (27) declaracion_normal -> . RLET ID IGUAL expresion
     (28) declaracion_normal -> . RLET ID
@@ -3777,7 +3672,7 @@ state 142
     (34) inst_break -> . RBREAK
     (35) inst_continue -> . RCONTINUE
 
-    LLAVEDER        shift and go to state 143
+    LLAVEDER        shift and go to state 140
     RCONSOLE        shift and go to state 13
     RLET            shift and go to state 14
     ID              shift and go to state 15
@@ -3798,7 +3693,7 @@ state 142
     inst_break                     shift and go to state 11
     inst_continue                  shift and go to state 12
 
-state 143
+state 140
 
     (42) condicional_elseif -> RELSE RIF PARI expresion PARD LLAVEIZQ instrucciones LLAVEDER .
 
