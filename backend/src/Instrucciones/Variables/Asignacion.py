@@ -22,7 +22,7 @@ class AsignacionVar(Instruccion):
         if self.tipo == None: #Ve si el tipo 
             self.tipo = self.valor.tipo 
 
-        if self.tipo != self.valor.tipo: #Verifica que el tipo asignado sea el mismo que el del valor
+        if Tipo[self.tipo.upper()] != self.valor.tipo: #Verifica que el tipo asignado sea el mismo que el del valor
             return Excepcion("Semántico", "El tipo de dato en la variable \""+self.identificador+"\" es diferente", self.fila, self.columna)
 
         simboloVar = table.getTabla(str(self.identificador)) #Verifica si la variable ya existe en algún entorno

@@ -10,18 +10,18 @@ class Lower(Funcion):
         self.instrucciones = instrucciones
         self.fila = fila
         self.columna = columna
-        self.tipo = Tipo.NULO
+        self.tipo = "any"
 
     def interpretar(self, tree, table):
-        simbolo = table.getTabla('Lower$$Parametros123')
+        simbolo = table.getTabla('toLower##Param1')
 
         if simbolo == None:
             return Excepcion("Semántico", "No se encontro el parametro de la funcion nativa \"Lowercase\"", self.fila, self.columna)
 
         if simbolo.getTipo() != Tipo.CADENA:
-            return Excepcion("Semántico", "La variable \""+ self.identificador +"\" para Lowercase no es tipo Int64", self.fila, self.columna)
+            return Excepcion("Semántico", "La variable \""+ self.identificador +"\" para Lowercase no es tipo number", self.fila, self.columna)
 
-        self.tipo = Tipo.CADENA
+        self.tipo = simbolo.getTipo()
         return simbolo.getValor().lower()
 
     def getNode(self):

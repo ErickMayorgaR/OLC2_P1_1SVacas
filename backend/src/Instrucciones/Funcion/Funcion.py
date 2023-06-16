@@ -13,7 +13,7 @@ class Funcion(Instruccion):
         self.identificador = identificador
         self.parametros = parametros
         self.instrucciones = instrucciones
-        self.tipo = Tipo.NULO
+        self.tipo = 'number'
         self.fila = fila
         self.columna = columna
 
@@ -36,8 +36,8 @@ class Funcion(Instruccion):
                 self.tipo = value.tipo
                 return value.result
 
-        self.tipo = Tipo.NULO
-        return "Nothing"
+        self.tipo = 'number'
+        return None
 
     def getNode(self):
         nodo = NodeCst("funciones_instr")

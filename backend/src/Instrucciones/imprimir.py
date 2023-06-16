@@ -18,6 +18,7 @@ class Imprimir(Instruccion):
                 if isinstance(valor, Excepcion):
                     return valor
                 valores += str(valor)
+                valores += " "
         
         tree.updateConsola(valores)
         print(valores)

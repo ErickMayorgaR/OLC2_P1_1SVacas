@@ -1,28 +1,28 @@
-from Instrucciones.Funcion.Funcion import Funcion
-from Abstract.NodeCst import NodeCst
-from TS.Excepcion import Excepcion
-from TS.Tipo import Tipo
+from ..Instrucciones.Funcion.Funcion import Funcion
+from ..Abstract.NodeCst import NodeCst
+from ..TS.Excepcion import Excepcion
+from ..TS.Tipo import Tipo
 
-class Float(Funcion):
+class Fixed(Funcion):
     def __init__(self, identificador, parametros, instrucciones, fila, columna):
         self.identificador = identificador
         self.parametros = parametros
         self.instrucciones = instrucciones
         self.fila = fila
         self.columna = columna
-        self.tipo = Tipo.NULO
+        self.tipo = "any"
 
     def interpretar(self, tree, table):
-        simbolo = table.getTabla('Float$$Parametros123')
+        simbolo = table.getTabla('toFixed##Param1')
 
         if simbolo == None:
-            return Excepcion("Semántico", "No se encontro el parametro de la funcion nativa \"Float\"", self.fila, self.columna)
+            return Excepcion("Semántico", "No se encontro el parametro de la funcion nativa \"Fixed\"", self.fila, self.columna)
 
         if simbolo.getTipo() != Tipo.NUMBER:
-            return Excepcion("Semántico", "La variable \""+ self.identificador +"\" para Float no es tipo Int64", self.fila, self.columna)
+            return Excepcion("Semántico", "La variable \""+ self.identificador +"\" no es tipo number", self.fila, self.columna)
 
-        self.tipo = Tipo.DOBLE
-        return float(simbolo.getValor())
+        self.tipo = Tipo.NUMBER
+        return simbolo.getValor().fixed(self.parametros)
 
     def getNode(self):
         nodo = NodeCst("nativas_instr")

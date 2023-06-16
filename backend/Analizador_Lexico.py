@@ -15,7 +15,11 @@ reserved = {
     'true'        :   'RTRUE',
     'false'       :   'RFALSE',
     'if'          :   'RIF',
-    'else'        :   'RELSE'
+    'else'        :   'RELSE',
+    'function'    :   'RFUNCTION',
+    'return'      :   'RRETURN',
+    'continue'    :   'RCONTINUE',
+    'break'       :   'RBREAK'
 }
 
 tokens  = [

@@ -28,9 +28,10 @@ class If(Instruccion):
         if self.condicion.tipo != Tipo.BANDERA:
             return Excepcion("Semántico", "Tipo de dato no bool en sentencia de control If", self.fila, self.columna)
 
-        if condicion == True: #verifica si es verdadera la condicion
+        if bool(condicion) == True: #verifica si es verdadera la condicion
+            entorno = TablaSimbolos('if',table)
             for instruccion in self.bloqueIf:
-                result = copy(instruccion).interpretar(tree, table)
+                result = copy(instruccion).interpretar(tree, entorno)
                 if isinstance(result, Excepcion):
                     tree.getExcepciones().append(result)
                     tree.updateConsola(result.toString())
@@ -61,8 +62,9 @@ class If(Instruccion):
                         return None
 
             if self.bloqueElse != None and self.estado == False:
+                entorno = TablaSimbolos('if',table)
                 for instruccion in self.bloqueElse:
-                    result = copy(instruccion).interpretar(tree, table)
+                    result = copy(instruccion).interpretar(tree, entorno)
                     if isinstance(result, Excepcion):
                         tree.getExcepciones().append(result)
                         tree.updateConsola(result.toString())

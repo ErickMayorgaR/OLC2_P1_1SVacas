@@ -3,7 +3,7 @@ from ..Abstract.NodeCst import NodeCst
 from ..TS.Excepcion import Excepcion
 from ..TS.Tipo import Tipo
 
-class Upper(Funcion):
+class Concat(Funcion):
     def __init__(self, identificador, parametros, instrucciones, fila, columna):
         self.identificador = identificador
         self.parametros = parametros
@@ -13,16 +13,16 @@ class Upper(Funcion):
         self.tipo =  "any"
 
     def interpretar(self, tree, table):
-        simbolo = table.getTabla('toUpperCase##Param1')
+        simbolo = table.getTabla('concat##Param1')
 
         if simbolo == None:
-            return Excepcion("Semántico", "No se encontro el parametro de la funcion nativa \"Uppercase\"", self.fila, self.columna)
+            return Excepcion("Semántico", "No se encontro el parametro de la funcion nativa \"Concat\"", self.fila, self.columna)
 
-        if simbolo.getTipo() != Tipo.CADENA:
-            return Excepcion("Semántico", "La variable \""+ self.identificador +"\" para Uppercase no es tipo number", self.fila, self.columna)
+        if simbolo.getTipo() != Tipo.ARREGLO:
+            return Excepcion("Semántico", "La variable \""+ self.identificador +"\" para Concat no es tipo array", self.fila, self.columna)
 
         self.tipo = simbolo.getTipo()
-        return simbolo.getValor().upper()
+        return simbolo.getValor().concat(self.parametros)
 
     def getNode(self):
         nodo = NodeCst("nativas_instr")
