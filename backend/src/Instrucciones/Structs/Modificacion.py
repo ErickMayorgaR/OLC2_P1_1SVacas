@@ -11,7 +11,7 @@ class ModificacionStruct(Instruccion):
         self.valor = valor
         self.fila = fila
         self.columna = columna
-        self.tipo = Tipo.NULO
+        self.tipo = 'any'
 
     def interpretar(self, tree, table):
         simbolo = table.getTabla(str(self.identificador)) #Encuentra la variable tipo strict
@@ -19,13 +19,11 @@ class ModificacionStruct(Instruccion):
         if simbolo == None: #Ve si existe la variable existe
             return Excepcion("Semántico", "Variable \""+self.identificador+"\" no encontrado", self.fila, self.columna)
 
-        if simbolo.getTipo() != Tipo.STRUCT: #Ve si la variable es tipo struct 
+        if simbolo.getTipo() != 'interface': #Ve si la variable es tipo struct 
             return Excepcion("Semántico", "La varible \""+str(self.identificador)+"\" a la que intenta acceder no es tipo struct", self.fila, self.columna)
 
         struct = tree.getStruct(str(simbolo.getValor().owner)) #Busca el struct para sacar info jsjs
-        if not(struct.mutable): #Verifica si la struct es mutable
-            return Excepcion("Semántico", "La varible \""+str(self.identificador)+"\" es de tipo struct no mutable", self.fila, self.columna)
-        
+      
         try: #Verifica si existe ese parametro en el diccionario de los atributos jsjs
             simboloAtributo =  simbolo.getValor().tabla[str(self.atributo)]
             if isinstance(simboloAtributo, Excepcion):
@@ -52,7 +50,7 @@ class ModificacionStruct(Instruccion):
     def verificarTipos(self, atributos):
         for atributo in atributos:
             if atributo['identificador'] == self.atributo:
-                if atributo['tipo'] == self.valor.tipo or atributo['tipo'] == None:
+                if atributo['tipo'] == self.valor.tipo or atributo['tipo'] == 'any':
                     return  True
                 else:
                     return False

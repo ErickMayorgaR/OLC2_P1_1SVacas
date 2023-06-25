@@ -1,3 +1,12 @@
+from src.Nativas.Fixed import Fixed
+from src.Nativas.Exponential import Exponential
+from src.Nativas.String import String
+from src.Nativas.Lower import Lower
+from src.Nativas.Upper import Upper
+from src.Nativas.Split import Split
+from src.Nativas.Concat import Concat
+from src.Nativas.Typeof import Typeof
+
 import ply.yacc as yacc
 from Analizador_Lexico import tokens, lexer, errores, find_column
 from src.Expresiones.aritmetica import Aritmetica
@@ -12,18 +21,15 @@ from src.Instrucciones.Variables.Declaracion import DeclaracionVar
 from src.Instrucciones.Variables.Asignacion import AsignacionVar
 from src.Instrucciones.Arreglos.Asignacion import AsignacionArreglos
 from src.Instrucciones.Funcion.Funcion import Funcion
-from src.Instrucciones.Funcion.LlamadaFuncion import LlamadaFuncionStruct
+from src.Instrucciones.Funcion.LlamadaFuncion import LlamadaFuncion
 from src.Instrucciones.Sentencias.Return import Return
 from src.Instrucciones.Sentencias.Continue import Continue
 from src.Instrucciones.Sentencias.Break import Break
-from src.Nativas.Fixed import Fixed
-from src.Nativas.Exponential import Exponential
-from src.Nativas.String import String
-from src.Nativas.Lower import Lower
-from src.Nativas.Upper import Upper
-from src.Nativas.Split import Split
-from src.Nativas.Concat import Concat
-from src.Nativas.Typeof import Typeof
+from src.Instrucciones.Structs.Struct import Struct
+from src.Instrucciones.Structs.Acceso import AccesoStruct
+from src.Instrucciones.Structs.Modificacion import ModificacionStruct
+from src.Instrucciones.Structs.DeclareStruct import DeclareStruct
+
 from src.TS.Tipo import Tipo, OperadorAritmetico, OperadorLogico, OperadorRelacional
 from src.TS.Excepcion import Excepcion
 from src.TS.Arbol import Arbol
@@ -35,7 +41,7 @@ sys.setrecursionlimit(10000000)
 precedence = (
     ('left', 'OR'),
     ('left', 'AND'),
-    ('right', 'NOT'),
+    ('right', 'UNOT'),
     ('left', 'IGUALIGUAL', 'DIFERENTE', 'MENOR', 'MENORIGUAL', 'MAYOR', 'MAYORIGUAL', ),
     ('left','MAS','MENOS'),
     ('left', 'POR', 'DIV', 'PORCENTAJE'),
@@ -72,10 +78,14 @@ def p_instrucciones_2(t):
 def p_instrucciones_evaluar(t):
     '''instruccion : imprimir PTCOMA
                     | declaracion_normal PTCOMA
+                    | structs_declaration 
+                    | modificacion_struct PTCOMA
                     | asignacion_normal PTCOMA
                     | condicional_if PTCOMA
+                    | ciclo_while PTCOMA
                     | funcion PTCOMA
                     | llamada_funcion PTCOMA
+                    | llamada_struct PTCOMA
                     | inst_return PTCOMA
                     | inst_break PTCOMA
                     | inst_continue PTCOMA'''
@@ -83,26 +93,48 @@ def p_instrucciones_evaluar(t):
 
 def p_error(t):
     'instruccion : error PTCOMA'
-    print(" Error sintáctico en '%s'" % t.value)
+    errores.append(Excepcion("Sintáctico", "Error sintáctico, " + str(t.value), t.lineno, t.lexer.lexpos))
 
 #///////////////////////////////////////////////////////////FUNCIONES
 def p_funcion(t):
-    '''funcion : RFUNCTION ID PARI PARD LLAVEIZQ instrucciones LLAVEDER
-                | RFUNCTION ID PARI parametros PARD LLAVEIZQ instrucciones LLAVEDER'''
-    if len(t) == 6:
-        t[0] = Funcion(t[2],None,t[6], t.lineno(1), find_column(input, t.slice[1]))
-    else:
-        t[0] = Funcion(t[2], t[4], t[7], t.lineno(1), find_column(input, t.slice[1]))
+    'funcion : RFUNCTION ID PARI parametros PARD LLAVEIZQ instrucciones LLAVEDER'
+    t[0] = Funcion(t[2], t[4], t[7], t.lineno(1), find_column(input, t.slice[1]))
 
+def p_funcion_sin_parametro(t):
+    'funcion : RFUNCTION ID PARI PARD LLAVEIZQ instrucciones LLAVEDER'
+    t[0] = Funcion(t[2],None,t[6], t.lineno(1), find_column(input, t.slice[1]))
 #///////////////////////////////////////////////////////////LLAMADA FUNCION
 def p_llamada_funcion(t):
     '''llamada_funcion : ID PARI PARD
                         | ID PARI parametros_ll PARD''' 
     # (let nombre: string, let apellido: string, let edad: number)
     if len(t) == 3:
-        t[0] = LlamadaFuncionStruct(t[1],None,t.lineno(1), find_column(input, t.slice[1]))
+        t[0] = LlamadaFuncion(t[1],None,t.lineno(1), find_column(input, t.slice[1]))
     else:
-        t[0] = LlamadaFuncionStruct(t[1], t[3], t.lineno(1), find_column(input, t.slice[1]))
+        t[0] = LlamadaFuncion(t[1], t[3], t.lineno(1), find_column(input, t.slice[1]))
+
+def p_llamada_struct(t):
+    '''llamada_struct : RLET ID DPUNTOS ID IGUAL LLAVEIZQ structs_ll LLAVEDER'''
+    t[0] = DeclareStruct(t[2], t[4], t[7], t.lineno(1), find_column(input, t.slice[1]))
+
+#///////////////////////////////////////////////////////////ATRIBUTOS STRUCTS
+def p_structs_ll(t):
+    '''structs_ll : struct_ll
+                  | structs_ll COMA struct_ll'''
+    if len(t) == 2:
+        t[0] = [t[1]]
+    else:
+        t[1].append(t[3])
+        t[0] = t[1]
+
+#///////////////////////////////////////////////////////////ATRIBUTO STRUCT
+def p_struct_ll(t):
+    'struct_ll : ID DPUNTOS expresion'
+    t[0] = {'identificador' : t[1], 'parametro' : t[3]}
+
+def p_expresion_llaves(t):
+    'expresion : LLAVEIZQ structs_ll LLAVEDER'
+    t[0] = t[2]
 
 #///////////////////////////////////////////////////////////PARAMETROS DE FUNCION
 def p_parametros(t):
@@ -184,6 +216,10 @@ def p_return_expresion(t):
     'inst_return : RRETURN expresion'
     t[0] = Return(t[2], t.lineno(1), find_column(input, t.slice[1]))
 
+def p_return_structs(t):
+    'inst_return : RRETURN LLAVEIZQ parametros_ll LLAVEDER'
+    t[0] = Return(t[3], t.lineno(1), find_column(input, t.slice[1]))
+
 def p_return(t):
     'inst_return : RRETURN'
     t[0] = Return(None, t.lineno(1), find_column(input, t.slice[1]))
@@ -239,7 +275,8 @@ def p_ciclo_While(t):
 def p_tipo(t):
     '''tipo : STRING
             | NUMBER
-            | BOOLEAN'''
+            | BOOLEAN
+            | ID'''
     t[0] = t[1]
 
 # ///////////////////////////////////////////////////// ARITMETICAS
@@ -258,12 +295,12 @@ def p_expresion_binaria(t):
         t[0] = Aritmetica(OperadorAritmetico.ASTERISCO, t[1], t[3], t.lineno(2), find_column(input, t.slice[2]))
     elif t[2] == '/': 
         t[0] = Aritmetica(OperadorAritmetico.DIVISION, t[1], t[3], t.lineno(2), find_column(input, t.slice[2]))
-    elif p[2] == '^':
-        p[0] = Aritmetica(OperadorAritmetico.POTENCIA, p[1], p[3], p.lineno(2), find_column(input, p.slice[2]))
-    elif p[2] == '%':
-        p[0] = Aritmetica(OperadorAritmetico.PORCENTAJE, p[1], p[3], p.lineno(2), find_column(input, p.slice[2]))
+    elif t[2] == '^':
+        t[0] = Aritmetica(OperadorAritmetico.POTENCIA, t[1], t[3], t.lineno(2), find_column(input, t.slice[2]))
+    elif t[2] == '%':
+        t[0] = Aritmetica(OperadorAritmetico.PORCENTAJE, t[1], t[3], t.lineno(2), find_column(input, t.slice[2]))
 
-def p_expresion_binaria_relacional(p):
+def p_expresion_binaria_relacional(t):
     '''expresion : expresion IGUALIGUAL expresion
                  | expresion DIFERENTE expresion
                  | expresion MENOR expresion
@@ -271,76 +308,155 @@ def p_expresion_binaria_relacional(p):
                  | expresion MENORIGUAL expresion
                  | expresion MAYORIGUAL expresion'''
     
-    if p[2] == '==':
-        p[0] = Relacional(OperadorRelacional.IGUALIGUAL, p[1], p[3], p.lineno(2), find_column(input, p.slice[2]))
-    elif p[2] == '!=':
-        p[0] = Relacional(OperadorRelacional.DIFERENTE, p[1], p[3], p.lineno(2), find_column(input, p.slice[2]))
-    elif p[2] == '<':
-        p[0] = Relacional(OperadorRelacional.MENOR, p[1], p[3], p.lineno(2), find_column(input, p.slice[2]))
-    elif p[2] == '>':
-        p[0] = Relacional(OperadorRelacional.MAYOR, p[1], p[3], p.lineno(2), find_column(input, p.slice[2]))
-    elif p[2] == '<=':
-        p[0] = Relacional(OperadorRelacional.MENORIGUAL, p[1], p[3], p.lineno(2), find_column(input, p.slice[2]))
-    elif p[2] == '>=':
-        p[0] = Relacional(OperadorRelacional.MAYORIGUAL, p[1], p[3], p.lineno(2), find_column(input, p.slice[2]))
+    if t[2] == '===':
+        t[0] = Relacional(OperadorRelacional.IGUALIGUAL, t[1], t[3], t.lineno(2), find_column(input, t.slice[2]))
+    elif t[2] == '!==':
+        t[0] = Relacional(OperadorRelacional.DIFERENTE, t[1], t[3], t.lineno(2), find_column(input, t.slice[2]))
+    elif t[2] == '<':
+        t[0] = Relacional(OperadorRelacional.MENOR, t[1], t[3], t.lineno(2), find_column(input, t.slice[2]))
+    elif t[2] == '>':
+        t[0] = Relacional(OperadorRelacional.MAYOR, t[1], t[3], t.lineno(2), find_column(input, t.slice[2]))
+    elif t[2] == '<=':
+        t[0] = Relacional(OperadorRelacional.MENORIGUAL, t[1], t[3], t.lineno(2), find_column(input, t.slice[2]))
+    elif t[2] == '>=':
+        t[0] = Relacional(OperadorRelacional.MAYORIGUAL, t[1], t[3], t.lineno(2), find_column(input, t.slice[2]))
 
-def p_expresion_binaria_logica(p):
+def p_expresion_binaria_logica(t):
     '''expresion : expresion AND expresion
                  | expresion OR expresion'''
 
-    if p[2] == '&&':
-        p[0] = Logica(OperadorLogico.AND, p[1], p[3], p.lineno(2), find_column(input, p.slice[2]))
-    elif p[2] == '||':
-        p[0] = Logica(OperadorLogico.OR, p[1], p[3], p.lineno(2), find_column(input, p.slice[2]))
+    if t[2] == '&&':
+        t[0] = Logica(OperadorLogico.AND, t[1], t[3], t.lineno(2), find_column(input, t.slice[2]))
+    elif t[2] == '||':
+        t[0] = Logica(OperadorLogico.OR, t[1], t[3], t.lineno(2), find_column(input, t.slice[2]))
 
-def p_expresion_unaria(p):
-    '''expresion : NOT expresion %prec UNOT
-                 | MENOS expresion %prec UMINUS'''
-
-    if p[1] == '!':
-        p[0] = Logica(OperadorLogico.NOT, p[2], None, p.lineno(1), find_column(input, p.slice[1]))
-    elif p[1] == '-':
-        p[0] = Aritmetica(OperadorAritmetico.UMENOS, p[2], None, p.lineno(1), find_column(input, p.slice[1]))
-        
-        
 def p_expresion_unaria(t):
-    'expresion : MENOS expresion %prec UMENOS'
-    t[0] = -t[2]
+    '''expresion : NOT expresion %prec UNOT
+                 | MENOS expresion %prec UMENOS'''
+
+    if t[1] == '!':
+        t[0] = Logica(OperadorLogico.NOT, t[2], None, t.lineno(1), find_column(input, t.slice[1]))
+    elif t[1] == '-':
+        t[0] = Aritmetica(OperadorAritmetico.UMENOS, t[2], None, t.lineno(1), find_column(input, t.slice[1]))
+
+def p_expresion_parentesis(t):
+    'expresion : PARI expresion PARD'
+    t[0] = t[2]
 
 def p_expresion_entero(t):
     'expresion : ENTERO'
-    t[0] = Primitivos(Tipo.NUMBER, int(t[1]), t.lineno(1), find_column(input, t.slice[1]))
+    t[0] = Primitivos('number', int(t[1]), t.lineno(1), find_column(input, t.slice[1]))
 
 def p_expresion_decimal(t):
     'expresion : DECIMAL'
-    t[0] = Primitivos(Tipo.NUMBER, float(t[1]), t.lineno(1), find_column(input, t.slice[1]))
+    t[0] = Primitivos('number', float(t[1]), t.lineno(1), find_column(input, t.slice[1]))
 
 def p_expresion_cadena(t):
     'expresion : CADENA'
-    t[0] = Primitivos(Tipo.CADENA, str(t[1]).replace('\\n', '\n'), t.lineno(1), find_column(input, t.slice[1]))
+    t[0] = Primitivos('string', str(t[1]).replace('\\n', '\n'), t.lineno(1), find_column(input, t.slice[1]))
 
 def p_expresion_boolean(t):
     '''expresion : RTRUE
                 | RFALSE'''
     if t[1] == 'true':
-        t[0] = Primitivos(Tipo.BANDERA, True, t.lineno(1), find_column(input, t.slice[1]))
+        t[0] = Primitivos('boolean', True, t.lineno(1), find_column(input, t.slice[1]))
     else:
-        t[0] = Primitivos(Tipo.BANDERA, False, t.lineno(1), find_column(input, t.slice[1]))
-
+        t[0] = Primitivos('boolean', False, t.lineno(1), find_column(input, t.slice[1]))
 
 def p_expresion_identificador(t):
     'expresion : ID'
     t[0] = Identificador(t[1], t.lineno(1), find_column(input, t.slice[1]))
 
-#///////////////////////////////////////////////////////////EXPRESIONES COMA
-def p_expresiones_coma_expresiones_coma_expresion(p):
-    'expresiones_coma : expresiones_coma COMA expresion'
-    p[1].append(p[3])
-    p[0] = p[1]
+def p_expresion_llamada_funcion(t):
+    'expresion : llamada_funcion'
+    t[0] = t[1]
 
-def p_expresiones_coma_expresion(p):
-    'expresiones_coma : expresion'
-    p[0] = [p[1]]
+def p_expresion_llamada_struct(t):
+    'expresion : llamada_struct'
+    t[0] = t[1]
+
+def p_acceso_struct_expresion(t):
+    'expresion : acceso_struct'
+    t[0] = t[1]
+
+#///////////////////////////////////////////////////////////STRUCTS
+def p_structs(t):
+    'structs_declaration : RSTRUCT ID LLAVEIZQ lista_atributos LLAVEDER'
+    t[0] = Struct(t[2], t[4], t.lineno(1), find_column(input, t.slice[1]))
+
+#///////////////////////////////////////////////////////////ATRIBUTOS
+def p_atributos_atributos(t):
+    'lista_atributos : lista_atributos atributo PTCOMA'
+    t[1].append(t[2])
+    t[0] = t[1] 
+
+def p_atributos(t):
+    'lista_atributos : atributo PTCOMA'
+    t[0] = [t[1]]
+
+#///////////////////////////////////////////////////////////ATRIBUTO
+def p_atributo_tipo(t):
+    'atributo : ID DPUNTOS tipo'
+    t[0] = {'tipo' : t[3],'identificador' : t[1]}
+
+def p_atributo(t):
+    'atributo : ID'
+    t[0] = {'tipo' : 'any','identificador' : t[1]}
+
+#///////////////////////////////////////////////////////////ACCESO STRUCT
+def p_acceso_struct(t):
+    'acceso_struct : ID PUNTO ID'
+    t[0] = AccesoStruct(t[1], t[3], t.lineno(1), find_column(input, t.slice[1]))
+
+def p_acceso_struct_2(t):
+    'acceso_struct : acceso_struct PUNTO ID'
+    t[0] = AccesoStruct(t[1].identificador, t[3], t.lineno(1), t.lexer.lexpos)
+
+#///////////////////////////////////////////////////////////MODIFICACION STRUCT
+def p_modificacion_struct(t):
+    'modificacion_struct : ID PUNTO ID IGUAL expresion'
+    t[0] = ModificacionStruct(t[1], t[3], t[5], t.lineno(1), find_column(input, t.slice[1]))
+
+
+#//////////////////////////////////////////NATIVAS
+def p_to_lowercase(t):
+    'expresion : ID PUNTO LWCASE PARI PARD'
+    instrucciones = []
+    parametro = [{'tipo':'any', 'id':t[1]}]
+    t[0] = Lower(t[1], parametro, instrucciones, t.lineno(1), find_column(input, t.slice[1]))
+
+def p_to_uppercase(t):
+    'expresion : ID PUNTO UPCASE PARI PARD'
+    instrucciones = []
+    parametro = [{'tipo':'any', 'id':t[1]}]
+    t[0] = Upper(t[1], parametro, instrucciones, t.lineno(1), find_column(input, t.slice[1]))
+
+def p_to_fixed(t):
+    'expresion : ID PUNTO RFIXED PARI expresion PARD'
+    instrucciones = t[5]
+    parametro = [{'tipo':'any', 'id':t[1]}]
+    t[0] = Fixed(t[1], parametro, instrucciones, t.lineno(1), find_column(input, t.slice[1]))
+
+def p_to_exponential(t):
+    'expresion : ID PUNTO REXP PARI expresion PARD'
+    instrucciones = t[5]
+    parametro = [{'tipo':'any', 'id':t[1]}]
+    t[0] = Exponential(t[1], parametro, instrucciones, t.lineno(1), find_column(input, t.slice[1]))
+
+def p_to_string(t):
+    'expresion : ID PUNTO RSTRING PARI PARD'
+    instrucciones = []
+    parametro = [{'tipo':'any', 'id':t[1]}]
+    t[0] = String(t[1], parametro, instrucciones, t.lineno(1), find_column(input, t.slice[1]))
+
+
+import ply.yacc as yacc
+parser = yacc.yacc()
+
+input = ''
+
+def getErrores():
+    return errores 
 
 def agregarNativas(ast):
     instrucciones = []
@@ -350,22 +466,10 @@ def agregarNativas(ast):
     typeof = Typeof(nombre, parametro, instrucciones, -1,-1)
     ast.addFuncion(typeof)
 
-    nombre = "toUpperCase"
-    parametro = [{'tipo':'any', 'id':'toUpperCase##Param1'}]
-    toUpperCase = Upper(nombre, parametro, instrucciones, -1,-1)
-    ast.addFuncion(toUpperCase)
-
-    nombre = "toLowerCase"
-    parametro = [{'tipo':'any', 'id':'toLower##Param1'}]
-    toLowerCase = Lower(nombre, parametro, instrucciones, -1,-1)
-    ast.addFuncion(toLowerCase)
-
     nombre = "toString"
     parametro = [{'tipo':'any', 'id':'toString##Param1'}]
     toString = String(nombre, parametro, instrucciones, -1,-1)
     ast.addFuncion(toString)
-
-input = ''
 
 def parse(inp):
     global errores
@@ -377,23 +481,64 @@ def parse(inp):
     lexer.lineno = 1
     return parser.parse(inp)
 
-
-
-
 #Se va para la interfaz
 #file = open("./entrada.txt", "r", encoding="utf-8-sig")
 #entrada = file.read()
 
 entrada = '''
-let val1:number = 1;
-let val2:number = 10;
-let val3:number = 2021.2020;
-console.log("Probando declaracion de variables \n");
-console.log(val1, " ", val2, " ", val3);
-console.log("---------------------------------");
-// COMENTARIO DE UNA LINEA
-let a: number = 5;
-//console.log(typeof(toString(a))); // llamada a una funcion
+interface Actor {
+    nombre: string;
+    edad: number;
+}
+
+interface Pelicula {
+    nombre: string;
+    posicion: number;
+}
+
+interface Contrato {
+    actor: Actor;
+    pelicula: Pelicula;
+}
+
+function contratar(actor: Actor, pelicula: Pelicula){
+    return {
+        actor,
+        pelicula
+    };
+};
+
+function crearActor(nombre: string, edad: number){
+    return {
+        nombre,
+        edad
+    };
+};
+
+function crearPelicula(nombre: string, posicion: number){
+    return {
+        nombre,
+        posicion
+    };
+};
+
+function imprimir(contrato: Contrato){
+    console.log("Actor:", contrato.actor.nombre, "   Edad:", contrato.actor.edad);
+    console.log("Pelicula:", contrato.pelicula.nombre, "   Genero:", contrato.pelicula.posicion);
+};
+
+function contratos(){
+        let contrato: Contrato = {
+        actor: { nombre: "", edad: 0 },
+        pelicula: { nombre: "", posicion: 0 }
+        };
+        actor = crearActor("Elizabeth Olsen", 38);
+        pelicula = crearPelicula("Avengers: Age of Ultron", 1);
+        contrato = contratar(actor, pelicula);
+        imprimir(contrato);
+};
+
+contratos();
 '''
 
 instrucciones = parse(entrada) #ARBOL AST
@@ -407,10 +552,15 @@ for error in errores: #Captura de errores lexicos y sintacticos
     ast.updateConsolaln(error.toString())
 
 for instruccion in ast.getInstrucciones():
-    valor = instruccion.interpretar(ast, TSGlobal)
-    if isinstance(valor, Excepcion):
-        ast.getExcepciones().append(valor)
-        ast.updateConsolaln(valor.toString())
+    if isinstance(instruccion, Funcion):
+        ast.addFuncion(instruccion)
+    elif isinstance(instruccion, Struct):
+        ast.addStruct(instruccion)
+    else:
+        valor = instruccion.interpretar(ast,TSGlobal)
+        if isinstance(valor, Excepcion):
+            ast.getExcepciones().append(valor)
+            ast.updateConsolaln(valor.toString())
 
 print(ast.getConsola())
 print("salida")

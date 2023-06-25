@@ -13,16 +13,18 @@ class Fixed(Funcion):
         self.tipo = "any"
 
     def interpretar(self, tree, table):
-        simbolo = table.getTabla('toFixed##Param1')
-
+        simbolo = table.getTabla(self.identificador)
+        valor = self.instrucciones.interpretar(tree,table)
+        
         if simbolo == None:
             return Excepcion("Semántico", "No se encontro el parametro de la funcion nativa \"Fixed\"", self.fila, self.columna)
 
-        if simbolo.getTipo() != Tipo.NUMBER:
+        if simbolo.getTipo() != 'number':
             return Excepcion("Semántico", "La variable \""+ self.identificador +"\" no es tipo number", self.fila, self.columna)
 
-        self.tipo = Tipo.NUMBER
-        return simbolo.getValor().fixed(self.parametros)
+        self.tipo = 'number'
+        result = f"{simbolo.getValor():.{int(valor)}f}"
+        return result
 
     def getNode(self):
         nodo = NodeCst("nativas_instr")

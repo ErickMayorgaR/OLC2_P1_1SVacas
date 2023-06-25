@@ -9,20 +9,30 @@ class Return(Instruccion):
         self.expresion = expresion
         self.fila = fila
         self.columna = columna
-        self.tipo = Tipo.NULO
+        self.tipo = 'any'
         self.result = None
 
     def interpretar(self, tree, table):
         if self.expresion == None:
             self.result = 'Nothing'
             return self
-            
-        result = self.expresion.interpretar(tree, table)
-        if isinstance(result, Excepcion):
-            return result
+        
+        if isinstance(self.expresion, list):
+            resultados = []
+            for expresion in self.expresion:
+                result = expresion.interpretar(tree, table)
+                if isinstance(result, Excepcion):
+                    return result
+                resultados.append(result)
+            self.tipo = 'interface' #se le asigna el tipo a la expresion de return 
+            self.result = resultados
+        else:
+            result = self.expresion.interpretar(tree, table)    
+            if isinstance(result, Excepcion):
+                return result
+            self.tipo = self.expresion.tipo #se le asigna el tipo a la expresion de return 
+            self.result = result
 
-        self.tipo = self.expresion.tipo #se le asigna el tipo a la expresion de return 
-        self.result = result #tiene result para acceder a este cada que se quiera y no volver a interpretarlo
 
         return self #Retorna el mismo nodo para poder acceder a sus atributos
 

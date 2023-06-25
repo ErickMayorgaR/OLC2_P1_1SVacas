@@ -9,14 +9,14 @@ class AccesoStruct(Instruccion):
         self.atributo = atributo
         self.fila = fila
         self.columna = columna
-        self.tipo = Tipo.NULO
+        self.tipo = 'any'
 
     def interpretar(self, tree, table):
         simbolo = table.getTabla(str(self.identificador))
         if simbolo == None:
             return Excepcion("Semántico", "Variable \""+self.identificador+"\" no encontrado", self.fila, self.columna)
 
-        if simbolo.getTipo() != Tipo.STRUCT:
+        if simbolo.getTipo() != 'interface':
             return Excepcion("Semántico", "La varible \""+str(self.identificador)+"\" a la que intenta acceder no es tipo struct", self.fila, self.columna)
 
         try:

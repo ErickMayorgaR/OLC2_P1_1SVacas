@@ -12,18 +12,18 @@ class AsignacionVar(Instruccion):
         self.tipo = tipo
         self.fila = fila
         self.columna = columna
-        self.globall = False
 
     def interpretar(self, tree, table):
+        flag = False
         value = self.valor.interpretar(tree, table) #Interpreta el valor
         if isinstance(value, Excepcion):
             return value
 
-        if self.tipo == any: #Ve si el tipo 
+        if self.tipo == 'any': #Ve si el tipo 
             self.tipo = self.valor.tipo 
-
-        if Tipo[self.tipo.upper()] != self.valor.tipo: #Verifica que el tipo asignado sea el mismo que el del valor
-            return Excepcion("Semántico", "El tipo de dato en la variable \""+self.identificador+"\" es diferente", self.fila, self.columna)
+        if self.tipo != None:
+            if self.tipo != self.valor.tipo: #Verifica que el tipo asignado sea el mismo que el del valor
+                return Excepcion("Semántico", "El tipo de dato en la variable \""+self.identificador+"\" es diferente", self.fila, self.columna)
 
         simboloVar = table.getTabla(str(self.identificador)) #Verifica si la variable ya existe en algún entorno
         
@@ -37,12 +37,27 @@ class AsignacionVar(Instruccion):
                 elif tablaSimbolo.owner == 'global' and ambitoPadreFuncion == True:
                     simboloVar = None
             
-                simbolo = Simbolo(str(self.identificador), self.tipo, value, self.fila, self.columna)
+                simbolo = Simbolo(str(self.identificador), simboloVar.tipo, value, self.fila, self.columna)
                 result = table.actualizarTabla(simbolo)
                 if isinstance(result, Excepcion):
                     return result
+        elif simboloVar == None and flag == False:
+            # La variable no fue encontrada en la tabla de símbolos, buscar en los parámetros de los structs
+            structs = tree.getStructs()  # Obtener los structs de la tabla de símbolos
 
-        elif simboloVar == None: #Declara una variable
+            for struct in structs:
+                atributos = struct.atributos
+                for atributo in atributos:
+                    if atributo['identificador'] == self.identificador:
+                        # La variable fue encontrada en los atributos de un struct
+                        simbolo = Simbolo(str(self.identificador), atributo['tipo'], value, self.fila, self.columna)
+                        result = table.setTabla(simbolo)
+                        if isinstance(result, Excepcion):
+                            return result
+                        return None  # Terminar la búsqueda después de encontrar la variable en un struct
+            flag = True
+
+        elif simboloVar == None and flag == True: #Declara una variable
             simbolo = Simbolo(str(self.identificador), self.tipo, value, self.fila, self.columna)
             result = table.setTabla(simbolo)
             if isinstance(result, Excepcion):
@@ -59,18 +74,14 @@ class AsignacionVar(Instruccion):
         return nodo
 
     def tipoDato(self, tipo):
-        if tipo == Tipo.BANDERA:
+        if tipo == 'booleano':
             return "Bool"
-        elif tipo == Tipo.CADENA:
+        elif tipo == 'string':
             return "String"
-        elif tipo == Tipo.CARACTER:
-            return "Char"
-        elif tipo == Tipo.DOBLE:
-            return "Float64"
-        elif tipo == Tipo.NUMBER:
-            return "Int64"
-        elif tipo == Tipo.NULO:
-            return "Nothing"
+        elif tipo == 'number':
+            return "Number"
+        elif tipo == 'any':
+            return "Anything"
 
 
 

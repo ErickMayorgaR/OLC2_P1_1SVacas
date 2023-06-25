@@ -52,134 +52,98 @@ class Relacional(Instruccion):
 
     def igualacion(self, opIzq, opDer):
         #boolean
-        if self.opIzq.tipo == Tipo.NUMBER and self.opDer.tipo == Tipo.NUMBER:
-            self.tipo = Tipo.BANDERA
+        if self.opIzq.tipo == 'number' and self.opDer.tipo == 'number':
+            self.tipo = 'boolean'
             return self.getType(self.opIzq, opIzq) == self.getType(self.opDer, opDer)
-        elif self.opIzq.tipo == Tipo.DOBLE and self.opDer.tipo == Tipo.DOBLE:
-            self.tipo = Tipo.BANDERA
+        elif self.opIzq.tipo == 'string' and self.opDer.tipo == 'string':
+            self.tipo = 'boolean'
             return self.getType(self.opIzq, opIzq) == self.getType(self.opDer, opDer)
-        elif self.opIzq.tipo == Tipo.CADENA and self.opDer.tipo == Tipo.CADENA:
-            self.tipo = Tipo.BANDERA
-            return self.getType(self.opIzq, opIzq) == self.getType(self.opDer, opDer)
-        elif self.opIzq.tipo == Tipo.BANDERA and self.opDer.tipo == Tipo.BANDERA:
-            self.tipo = Tipo.BANDERA
+        elif self.opIzq.tipo == 'boolean' and self.opDer.tipo == 'boolean':
+            self.tipo = 'boolean'
             return self.getType(self.opIzq, opIzq) == self.getType(self.opDer, opDer)
         elif (self.opIzq.tipo == Tipo.NULO and self.opDer.tipo == Tipo.NULO):
-            self.tipo = Tipo.BANDERA
-            return self.getType(self.opIzq, opIzq) == self.getType(self.opDer, opDer)
-        elif (self.opIzq.tipo == Tipo.NUMBER and self.opDer.tipo == Tipo.DOBLE) or (self.opIzq.tipo == Tipo.DOBLE and self.opDer.tipo == Tipo.NUMBER):
-            self.tipo = Tipo.BANDERA
+            self.tipo = 'boolean'
             return self.getType(self.opIzq, opIzq) == self.getType(self.opDer, opDer)
         elif self.opIzq.tipo == Tipo.NULO or self.opDer.tipo == Tipo.NULO:
-            self.tipo = Tipo.BANDERA
+            self.tipo = 'boolean'
             return self.getType(self.opIzq, opIzq) == self.getType(self.opDer, opDer)
         return Excepcion("Semántico", "Los tipos de datos para el signo \"==\" no son los correctos", self.fila, self.columna)
     
 
     def diferencia(self, opIzq, opDer):
         #boolean
-        if self.opIzq.tipo == Tipo.NUMBER and self.opDer.tipo == Tipo.NUMBER:
-            self.tipo = Tipo.BANDERA
+        if self.opIzq.tipo == 'number' and self.opDer.tipo == 'number':
+            self.tipo = 'boolean'
             return self.getType(self.opIzq, opIzq) != self.getType(self.opDer, opDer)
-        elif self.opIzq.tipo == Tipo.DOBLE and self.opDer.tipo == Tipo.DOBLE:
-            self.tipo = Tipo.BANDERA
+        elif self.opIzq.tipo == 'string' and self.opDer.tipo == 'string':
+            self.tipo = 'boolean'
             return self.getType(self.opIzq, opIzq) != self.getType(self.opDer, opDer)
-        elif self.opIzq.tipo == Tipo.CADENA and self.opDer.tipo == Tipo.CADENA:
-            self.tipo = Tipo.BANDERA
-            return self.getType(self.opIzq, opIzq) != self.getType(self.opDer, opDer)
-        elif self.opIzq.tipo == Tipo.BANDERA and self.opDer.tipo == Tipo.BANDERA:
-            self.tipo = Tipo.BANDERA
+        elif self.opIzq.tipo == 'boolean' and self.opDer.tipo == 'boolean':
+            self.tipo = 'boolean'
             return self.getType(self.opIzq, opIzq) != self.getType(self.opDer, opDer)
         elif (self.opIzq.tipo == Tipo.NULO and self.opDer.tipo == Tipo.NULO):
-            self.tipo = Tipo.BANDERA
-            return self.getType(self.opIzq, opIzq) != self.getType(self.opDer, opDer)
-        elif (self.opIzq.tipo == Tipo.NUMBER and self.opDer.tipo == Tipo.DOBLE) or (self.opIzq.tipo == Tipo.DOBLE and self.opDer.tipo == Tipo.NUMBER):
-            self.tipo = Tipo.BANDERA
+            self.tipo = 'boolean'
             return self.getType(self.opIzq, opIzq) != self.getType(self.opDer, opDer)
         elif self.opIzq.tipo == Tipo.NULO or self.opDer.tipo == Tipo.NULO:
-            self.tipo = Tipo.BANDERA
+            self.tipo = 'boolean'
             return self.getType(self.opIzq, opIzq) != self.getType(self.opDer, opDer)
         return Excepcion("Semántico", "Los tipos de datos para el signo \"!=\" no son los correctos", self.fila, self.columna)
 
 
     def mayor(self, opIzq, opDer):
         #boolean
-        if self.opIzq.tipo == Tipo.NUMBER and self.opDer.tipo == Tipo.NUMBER:
-            self.tipo = Tipo.BANDERA
+        if self.opIzq.tipo == 'number' and self.opDer.tipo == 'number':
+            self.tipo = 'boolean'
             return self.getType(self.opIzq, opIzq) > self.getType(self.opDer, opDer)
-        elif self.opIzq.tipo == Tipo.DOBLE and self.opDer.tipo == Tipo.DOBLE:
-            self.tipo = Tipo.BANDERA
-            return self.getType(self.opIzq, opIzq) > self.getType(self.opDer, opDer)
-        elif self.opIzq.tipo == Tipo.CADENA and self.opDer.tipo == Tipo.CADENA:
-            self.tipo = Tipo.BANDERA
-            return self.getType(self.opIzq, opIzq) > self.getType(self.opDer, opDer)
-        elif (self.opIzq.tipo == Tipo.NUMBER and self.opDer.tipo == Tipo.DOBLE) or (self.opIzq.tipo == Tipo.DOBLE and self.opDer.tipo == Tipo.NUMBER):
-            self.tipo = Tipo.BANDERA
+        elif self.opIzq.tipo == 'string' and self.opDer.tipo == 'string':
+            self.tipo = 'boolean'
             return self.getType(self.opIzq, opIzq) > self.getType(self.opDer, opDer)
         return Excepcion("Semántico", "Los tipos de datos para el signo \">\" no son los correctos", self.fila, self.columna)
 
 
     def menor(self, opIzq, opDer):
         #boolean
-        if self.opIzq.tipo == Tipo.NUMBER and self.opDer.tipo == Tipo.NUMBER:
-            self.tipo = Tipo.BANDERA
+        if self.opIzq.tipo == 'number' and self.opDer.tipo == 'number':
+            self.tipo = 'boolean'
             return self.getType(self.opIzq, opIzq) < self.getType(self.opDer, opDer)
-        elif self.opIzq.tipo == Tipo.DOBLE and self.opDer.tipo == Tipo.DOBLE:
-            self.tipo = Tipo.BANDERA
-            return self.getType(self.opIzq, opIzq) < self.getType(self.opDer, opDer)
-        elif self.opIzq.tipo == Tipo.CADENA and self.opDer.tipo == Tipo.CADENA:
-            self.tipo = Tipo.BANDERA
-            return self.getType(self.opIzq, opIzq) < self.getType(self.opDer, opDer)
-        elif (self.opIzq.tipo == Tipo.NUMBER and self.opDer.tipo == Tipo.DOBLE) or (self.opIzq.tipo == Tipo.DOBLE and self.opDer.tipo == Tipo.NUMBER):
-            self.tipo = Tipo.BANDERA
+        elif self.opIzq.tipo == 'string' and self.opDer.tipo == 'string':
+            self.tipo = 'boolean'
             return self.getType(self.opIzq, opIzq) < self.getType(self.opDer, opDer)
         return Excepcion("Semántico", "Los tipos de datos para el signo \"<\" no son los correctos", self.fila, self.columna)
 
 
     def mayorIgual(self, opIzq, opDer):
         #boolean
-        if self.opIzq.tipo == Tipo.NUMBER and self.opDer.tipo == Tipo.NUMBER:
-            self.tipo = Tipo.BANDERA
+        if self.opIzq.tipo == 'number' and self.opDer.tipo == 'number':
+            self.tipo = 'boolean'
             return self.getType(self.opIzq, opIzq) >= self.getType(self.opDer, opDer)
-        elif self.opIzq.tipo == Tipo.DOBLE and self.opDer.tipo == Tipo.DOBLE:
-            self.tipo = Tipo.BANDERA
-            return self.getType(self.opIzq, opIzq) >= self.getType(self.opDer, opDer)
-        elif self.opIzq.tipo == Tipo.CADENA and self.opDer.tipo == Tipo.CADENA:
-            self.tipo = Tipo.BANDERA
-            return self.getType(self.opIzq, opIzq) >= self.getType(self.opDer, opDer)
-        elif (self.opIzq.tipo == Tipo.NUMBER and self.opDer.tipo == Tipo.DOBLE) or (self.opIzq.tipo == Tipo.DOBLE and self.opDer.tipo == Tipo.NUMBER):
-            self.tipo = Tipo.BANDERA
+        elif self.opIzq.tipo == 'string' and self.opDer.tipo == 'string':
+            self.tipo = 'boolean'
             return self.getType(self.opIzq, opIzq) >= self.getType(self.opDer, opDer)
         return Excepcion("Semántico", "Los tipos de datos para el signo \">=\" no son los correctos", self.fila, self.columna)
 
 
     def menorIgual(self, opIzq, opDer):
         #boolean
-        if self.opIzq.tipo == Tipo.NUMBER and self.opDer.tipo == Tipo.NUMBER:
-            self.tipo = Tipo.BANDERA
+        if self.opIzq.tipo == 'number' and self.opDer.tipo == 'number':
+            self.tipo = 'boolean'
             return self.getType(self.opIzq, opIzq) <= self.getType(self.opDer, opDer)
-        elif self.opIzq.tipo == Tipo.DOBLE and self.opDer.tipo == Tipo.DOBLE:
-            self.tipo = Tipo.BANDERA
-            return self.getType(self.opIzq, opIzq) <= self.getType(self.opDer, opDer)
-        elif self.opIzq.tipo == Tipo.CADENA and self.opDer.tipo == Tipo.CADENA:
-            self.tipo = Tipo.BANDERA
-            return self.getType(self.opIzq, opIzq) <= self.getType(self.opDer, opDer)
-        elif (self.opIzq.tipo == Tipo.NUMBER and self.opDer.tipo == Tipo.DOBLE) or (self.opIzq.tipo == Tipo.DOBLE and self.opDer.tipo == Tipo.NUMBER):
-            self.tipo = Tipo.BANDERA
+        elif self.opIzq.tipo == 'string' and self.opDer.tipo == 'string':
+            self.tipo = 'boolean'
             return self.getType(self.opIzq, opIzq) <= self.getType(self.opDer, opDer)
         return Excepcion("Semántico", "Los tipos de datos para el signo \"<=\" no son los correctos", self.fila, self.columna)
 
 
     def getType(self, nodo, valor):
-        if nodo.tipo == Tipo.NUMBER:
+        if nodo.tipo == 'number':
             return int(valor)
-        elif nodo.tipo == Tipo.DOBLE:
+        elif nodo.tipo == 'number':
             return float(valor)
-        elif nodo.tipo == Tipo.CADENA:
+        elif nodo.tipo == 'string':
             return str(valor)
         elif nodo.tipo == Tipo.CARACTER:
             return str(valor)
-        elif nodo.tipo == Tipo.BANDERA:
+        elif nodo.tipo == 'boolean':
             if str(valor).lower() == 'true':
                 return True
             elif str(valor).lower() == 'false':
@@ -205,6 +169,6 @@ class Relacional(Instruccion):
         elif op == OperadorRelacional.MAYORIGUAL:
             return '>='
         elif op == OperadorRelacional.IGUALIGUAL:
-            return '=='
+            return '==='
         elif op == OperadorRelacional.DIFERENTE:
-            return '=!'
+            return '!=='

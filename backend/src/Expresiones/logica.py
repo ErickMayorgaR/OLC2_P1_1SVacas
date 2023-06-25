@@ -38,34 +38,34 @@ class Logica(Instruccion):
 
 
     def And(self, opIzq, opDer):
-        if self.opIzq.tipo == Tipo.BANDERA and self.opDer.tipo == Tipo.BANDERA:
-            self.tipo = Tipo.BANDERA
+        if self.opIzq.tipo == 'boolean' and self.opDer.tipo == 'boolean':
+            self.tipo = 'boolean'
             return self.getType(self.opIzq, opIzq) and self.getType(self.opDer, opDer)
         return Excepcion("Semántico", "Los tipos de datos para el signo \"&&\" no son los correctos", self.fila, self.columna)
 
     
     def Or(self, opIzq, opDer):
-        if self.opIzq.tipo == Tipo.BANDERA and self.opDer.tipo == Tipo.BANDERA:
-            self.tipo = Tipo.BANDERA
+        if self.opIzq.tipo == 'boolean' and self.opDer.tipo == 'boolean':
+            self.tipo = 'boolean'
             return self.getType(self.opIzq, opIzq) or self.getType(self.opDer, opDer)
         return Excepcion("Semántico", "Los tipos de datos para el signo \"||\" no son los correctos", self.fila, self.columna)
 
 
     def Not(self, opIzq):
-        if self.opIzq.tipo == Tipo.BANDERA:
-            self.tipo = Tipo.BANDERA
+        if self.opIzq.tipo == 'boolean':
+            self.tipo = 'boolean'
             return not self.getType(self.opIzq, opIzq)
         return Excepcion("Semántico", "Los tipos de datos para el signo \"!\" no son los correctos", self.fila, self.columna)
 
 
     def getType(self, nodo, valor):
-        if nodo.tipo == Tipo.NUMBER:
+        if nodo.tipo == 'number':
             return int(valor)
-        elif nodo.tipo == Tipo.DOBLE:
+        elif nodo.tipo == 'number':
             return float(valor)
-        elif nodo.tipo == Tipo.CADENA:
+        elif nodo.tipo == 'string':
             return str(valor)
-        elif nodo.tipo == Tipo.BANDERA:
+        elif nodo.tipo == 'boolean':
             if str(valor).lower() == 'true':
                 return True
             elif str(valor).lower() == 'false':

@@ -13,13 +13,13 @@ class Lower(Funcion):
         self.tipo = "any"
 
     def interpretar(self, tree, table):
-        simbolo = table.getTabla('toLower##Param1')
+        simbolo = table.getTabla(self.identificador)
 
         if simbolo == None:
             return Excepcion("Semántico", "No se encontro el parametro de la funcion nativa \"Lowercase\"", self.fila, self.columna)
 
-        if simbolo.getTipo() != Tipo.CADENA:
-            return Excepcion("Semántico", "La variable \""+ self.identificador +"\" para Lowercase no es tipo number", self.fila, self.columna)
+        if simbolo.getTipo() != 'string':
+            return Excepcion("Semántico", "La variable \""+ self.identificador +"\" para Lowercase no es tipo string", self.fila, self.columna)
 
         self.tipo = simbolo.getTipo()
         return simbolo.getValor().lower()

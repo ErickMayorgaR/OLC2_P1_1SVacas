@@ -25,7 +25,7 @@ class Funcion(Instruccion):
                 tree.getExcepciones().append(value)
                 tree.updateConsolaln(value.toString())
             if isinstance(value, Continue):
-                err = Excepcion("Semántico", "Sentencia CONTUNUE fuera de ciclo", instruccion.fila, instruccion.columna)
+                err = Excepcion("Semántico", "Sentencia CONTINUE fuera de ciclo", instruccion.fila, instruccion.columna)
                 tree.getExcepciones().append(err)
                 tree.updateConsolaln(err.toString())
             if isinstance(value, Break):
@@ -62,15 +62,11 @@ class Funcion(Instruccion):
         return nodo
 
     def tipoDato(self, tipo):
-        if tipo == Tipo.BANDERA:
+        if tipo == 'boolean':
             return "Bool"
-        elif tipo == Tipo.CADENA:
+        elif tipo == 'string':
             return "String"
-        elif tipo == Tipo.CARACTER:
-            return "Char"
-        elif tipo == Tipo.DOBLE:
-            return "Float64"
-        elif tipo == Tipo.NUMBER:
-            return "Int64"
-        elif tipo == Tipo.NULO:
-            return "Nothing"
+        elif tipo == 'number':
+            return "Number"
+        elif tipo == 'any':
+            return "Anything"

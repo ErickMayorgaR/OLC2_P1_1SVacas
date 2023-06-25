@@ -13,8 +13,8 @@ class String(Instruccion):
         self.tipo = "string"
 
     def interpretar(self, tree, table):
-        simbolo = table.getTabla("toString##Param1")
-        if simbolo == None: return Excepcion("Semantico", "No se encontro el parametro de toUpperCase", self.fila, self.columna)
+        simbolo = table.getTabla(self.identificador)
+        if simbolo == None: return Excepcion("Semantico", "No se encontro el parametro de toString", self.fila, self.columna)
         simbolo.setTipo("string")
         return str(simbolo.getValor())
         

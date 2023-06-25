@@ -13,16 +13,19 @@ class Exponential(Funcion):
         self.tipo =  "any"
 
     def interpretar(self, tree, table):
-        simbolo = table.getTabla('toExponential##Param1')
-
+        simbolo = table.getTabla(self.identificador)
+        valor = self.instrucciones.interpretar(tree,table)
+        
         if simbolo == None:
             return Excepcion("Semántico", "No se encontro el parametro de la funcion nativa \"toExponential\"", self.fila, self.columna)
 
-        if simbolo.getTipo() != Tipo.NUMBER:
+        if simbolo.getTipo() != 'number':
             return Excepcion("Semántico", "La variable \""+ self.identificador +"\" para Exponential no es tipo number", self.fila, self.columna)
 
-        self.tipo = simbolo.getTipo()
-        return simbolo.getValor().exp(self.parametros)
+        self.tipo = 'string'
+        result = "{:.{}e}".format(simbolo.getValor(), int(valor))
+        result = result.replace('e+','+')
+        return result
 
     def getNode(self):
         nodo = NodeCst("nativas_instr")

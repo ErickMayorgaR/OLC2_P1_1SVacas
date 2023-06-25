@@ -25,7 +25,7 @@ class DeclaracionVar(Instruccion):
                
             if self.tipo == 'any': #Verifica si el tipo de la var no viene
                 self.tipo = self.valor.tipo #Le asigna el tipo a la var
-            if Tipo[self.tipo.upper()] != self.valor.tipo: #Verifica que las variables sean del mismo tipo 
+            if self.tipo != self.valor.tipo: #Verifica que las variables sean del mismo tipo 
                 return Excepcion("Semántico", "El tipo de dato en la variable \""+self.identificador+"\" es diferente", self.fila, self.columna) 
             
             simbolo = Simbolo(str(self.identificador), self.tipo, value, self.fila, self.columna)

@@ -19,7 +19,7 @@ class While(Instruccion):
             condicion = self.condicion.interpretar(tree, table)
             if isinstance(condicion, Excepcion):
                 return condicion
-            if self.condicion.tipo == Tipo.BANDERA:
+            if self.condicion.tipo == 'boolean':
                 if condicion == True: #Verifica en cada ciclo que la condicion sea verdadera
                     nuevaTabla = TablaSimbolos('while', table) #Se crea un nuevo entorno 
                     for instruccion in self.instrucciones:

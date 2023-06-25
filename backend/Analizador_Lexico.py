@@ -8,7 +8,6 @@ reserved = {
     'console'     :   'RCONSOLE',
     'log'         :   'RLOG',
     'let'         :   'RLET',
-    'Any'         :   'ANY',
     'number'      :   'NUMBER',
     'string'      :   'STRING',
     'boolean'     :   'BOOLEAN',
@@ -20,7 +19,13 @@ reserved = {
     'function'    :   'RFUNCTION',
     'return'      :   'RRETURN',
     'continue'    :   'RCONTINUE',
-    'break'       :   'RBREAK'
+    'break'       :   'RBREAK',
+    'toLowerCase' :   'LWCASE',
+    'toUpperCase' :   'UPCASE',
+    'toFixed'     :   'RFIXED',
+    'toString'    :   'RSTRING',
+    'toExponential' :   'REXP',
+    'interface'   :   'RSTRUCT'
 }
 
 tokens  = [
@@ -73,8 +78,8 @@ t_MAYOR         = r'\>'
 t_IGUAL         = r'\='
 t_MAYORIGUAL    = r'\>\='
 t_MENORIGUAL    = r'\<\='
-t_IGUALIGUAL    = r'\=\='
-t_DIFERENTE     = r'\!\='
+t_IGUALIGUAL    = r'\=\=\='
+t_DIFERENTE     = r'\!\=\='
 t_OR            = r'\|\|'
 t_AND           = r'\&\&'
 t_NOT           = r'\!'

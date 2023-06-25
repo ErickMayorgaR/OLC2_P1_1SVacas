@@ -25,7 +25,7 @@ class If(Instruccion):
         if isinstance(condicion, Excepcion): 
             return condicion
 
-        if self.condicion.tipo != Tipo.BANDERA:
+        if self.condicion.tipo != 'boolean':
             return Excepcion("Semántico", "Tipo de dato no bool en sentencia de control If", self.fila, self.columna)
 
         if bool(condicion) == True: #verifica si es verdadera la condicion

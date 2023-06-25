@@ -1,7 +1,7 @@
 from enum import Enum
 
 class Tipo(Enum):
-    NUMBER = 1
+    number = 1
     DOBLE = 2 
     BANDERA = 3
     CARACTER = 4 

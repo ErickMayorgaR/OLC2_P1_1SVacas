@@ -55,8 +55,8 @@ class Arbol:
                 return funcion
         return None
 
-    def addFuncion(self, funciones):
-        self.funciones.append(funciones)
+    def addFuncion(self, funcion):
+        self.funciones.append(funcion)
 
     def getStructs(self):
         return self.structs
