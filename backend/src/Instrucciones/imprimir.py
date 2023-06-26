@@ -1,7 +1,8 @@
 from ..Abstract.abstract import Instruccion
 from ..Abstract.NodeCst import NodeCst
 from ..TS.Excepcion import Excepcion
-from ..TS.Arbol import Arbol
+from ..TS.TablaSimbolos import TablaSimbolos
+from copy import copy 
 
 class Imprimir(Instruccion):
 
@@ -20,8 +21,21 @@ class Imprimir(Instruccion):
                 valores += str(valor)
                 valores += " "
         
+        if isinstance(valor, TablaSimbolos):
+            nuevoValor = copy(valor.tabla)
+            self.interpretarStruct(nuevoValor, valor.tabla)
+            valores = str(nuevoValor)
+        
         tree.updateConsola(valores)
         print(valores)
+        return None
+    
+    def interpretarStruct(self, structNuevo, struct):
+        for keys, value in struct.items(): 
+            structNuevo[keys] = value.valor
+            if isinstance(value.valor, TablaSimbolos):
+                structNuevo[keys] = copy(value.valor.tabla)
+                self.interpretarStruct(structNuevo[keys],value.valor.tabla)
         return None
     
     def getNode(self):

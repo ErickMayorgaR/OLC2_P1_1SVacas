@@ -16,8 +16,11 @@ class AccesoStruct(Instruccion):
         if simbolo == None:
             return Excepcion("Semántico", "Variable \""+self.identificador+"\" no encontrado", self.fila, self.columna)
 
-        if simbolo.getTipo() != 'interface':
-            return Excepcion("Semántico", "La varible \""+str(self.identificador)+"\" a la que intenta acceder no es tipo struct", self.fila, self.columna)
+        structs = tree.getStructs()  # Obtener los structs de la tabla de símbolos
+        tipo_simbolo = simbolo.getTipo()
+
+        if tipo_simbolo not in structs:
+            return Excepcion("Semántico", f"La variable \"{self.identificador}\" a la que intenta acceder no es de tipo struct", self.fila, self.columna)
 
         try:
             valor =  simbolo.getValor().tabla[str(self.atributo)].valor

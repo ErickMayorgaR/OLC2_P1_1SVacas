@@ -15,6 +15,8 @@ class AsignacionVar(Instruccion):
 
     def interpretar(self, tree, table):
         flag = False
+        flag2 = False
+
         value = self.valor.interpretar(tree, table) #Interpreta el valor
         if isinstance(value, Excepcion):
             return value
@@ -26,42 +28,52 @@ class AsignacionVar(Instruccion):
                 return Excepcion("Semántico", "El tipo de dato en la variable \""+self.identificador+"\" es diferente", self.fila, self.columna)
 
         simboloVar = table.getTabla(str(self.identificador)) #Verifica si la variable ya existe en algún entorno
-        
+        # La variable no fue encontrada en la tabla de símbolos, buscar en los parámetros de los structs
+        structs = tree.getStructs()  # Obtener los structs de la tabla de símbolos
 
         if simboloVar != None:
-                tablaSimbolo = table.getRealTabla(str(self.identificador))
-                ambitoPadreFuncion =  table.getNombreTabla()
-                #Por si se quiere declarar una variable igual en un entorno de funcion que ya exista en la global 
-                if table.owner == 'function' and tablaSimbolo.owner == 'global':                                            
-                    simboloVar = None
-                elif tablaSimbolo.owner == 'global' and ambitoPadreFuncion == True:
-                    simboloVar = None
-            
-                simbolo = Simbolo(str(self.identificador), simboloVar.tipo, value, self.fila, self.columna)
-                result = table.actualizarTabla(simbolo)
-                if isinstance(result, Excepcion):
-                    return result
-        elif simboloVar == None and flag == False:
-            # La variable no fue encontrada en la tabla de símbolos, buscar en los parámetros de los structs
-            structs = tree.getStructs()  # Obtener los structs de la tabla de símbolos
+                tipo_simbolo = simboloVar.getTipo()
+                if any(tipo_simbolo == struct.identificador for struct in structs):
+                    flag2 = True
 
-            for struct in structs:
-                atributos = struct.atributos
-                for atributo in atributos:
-                    if atributo['identificador'] == self.identificador:
-                        # La variable fue encontrada en los atributos de un struct
-                        simbolo = Simbolo(str(self.identificador), atributo['tipo'], value, self.fila, self.columna)
+        if simboloVar != None and flag2 == False:
+                    # Continuar la rutina si no se encuentra coincidencia
+                    tablaSimbolo = table.getRealTabla(str(self.identificador))
+                    ambitoPadreFuncion =  table.getNombreTabla()
+                    #Por si se quiere declarar una variable igual en un entorno de funcion que ya exista en la global 
+                    if table.owner == 'function' and tablaSimbolo.owner == 'global':                                            
+                        simboloVar = None
+                    elif tablaSimbolo.owner == 'global' and ambitoPadreFuncion == True:
+                        simboloVar = None
+                
+                    simbolo = Simbolo(str(self.identificador), simboloVar.tipo, value, self.fila, self.columna)
+                    result = table.actualizarTabla(simbolo)
+                    if isinstance(result, Excepcion):
+                        return result
+       
+        else:
+                for struct in structs:
+                    atributos = struct.atributos
+                    for atributo in atributos:
+                        if atributo['identificador'] == self.identificador:
+                            flag = True
+                            # La variable fue encontrada en los atributos de un struct
+                            simbolo = Simbolo(str(self.identificador), atributo['tipo'], value, self.fila, self.columna)
+                            result = table.setTabla(simbolo)
+                            if isinstance(result, Excepcion):
+                                return result
+                if flag == False:                   
+                    if flag2 == True:
+                        simbolo = Simbolo(str(self.identificador), tipo_simbolo, value, self.fila, self.columna)
+                        result = table.actualizarTabla(simbolo)
+                        if isinstance(result, Excepcion):
+                            return result
+                    else:
+                        simbolo = Simbolo(str(self.identificador), self.tipo, value, self.fila, self.columna)
                         result = table.setTabla(simbolo)
                         if isinstance(result, Excepcion):
                             return result
-                        return None  # Terminar la búsqueda después de encontrar la variable en un struct
-            flag = True
-
-        elif simboloVar == None and flag == True: #Declara una variable
-            simbolo = Simbolo(str(self.identificador), self.tipo, value, self.fila, self.columna)
-            result = table.setTabla(simbolo)
-            if isinstance(result, Excepcion):
-                return result
+                         
             
 
     def getNode(self):

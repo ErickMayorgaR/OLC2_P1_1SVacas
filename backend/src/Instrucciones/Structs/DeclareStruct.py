@@ -21,11 +21,17 @@ class DeclareStruct(Instruccion):
             self.identificador = self.identificador_struct
 
         if struct != None: #Para las structs
-            nuevaTabla = TablaSimbolos(str(self.identificador), table)
-
+            nuevaTabla = TablaSimbolos(str(self.identificador_struct), table)
+            
             if len(struct.atributos) != len(self.parametros):
                 return Excepcion("Semántico", "Cantidad de parámetros incorrecta para struct \""+self.identificador+"\"", self.fila, self.columna)
 
+            simbolo = Simbolo(self.identificador, self.identificador_struct, None, self.fila, self.columna)
+            resultTable = table.setTabla(simbolo)
+            
+            if isinstance(resultTable, Excepcion):
+                return resultTable
+            
             for atributo in struct.atributos:
                 if any(parametro['identificador'] == atributo['identificador'] for parametro in self.parametros):
                     indice = next((i for i, p in enumerate(self.parametros) if p['identificador'] == atributo['identificador']), None)
@@ -41,8 +47,8 @@ class DeclareStruct(Instruccion):
                                 simbolo = Simbolo(expr['identificador'], tipo, resultExpresion, self.fila, self.columna)
                                 result_final.append(simbolo)
                                 
-                            simbolo = Simbolo(atributo['identificador'], atributo['tipo'], result_final, self.fila, self.columna)
-                            resultTable = nuevaTabla.setTabla(simbolo)
+                            simbolo_result = Simbolo(atributo['identificador'], atributo['tipo'], result_final, self.fila, self.columna)
+                            resultTable = nuevaTabla.setTabla(simbolo_result)
                             if isinstance(resultTable, Excepcion):
                                 return resultTable
                         else:
@@ -50,13 +56,14 @@ class DeclareStruct(Instruccion):
                             tipo = expr['parametro'].tipo
                             if isinstance(resultExpresion, Excepcion):
                                 return resultExpresion
-                            simbolo = Simbolo(atributo['identificador'], atributo['tipo'], resultExpresion, self.fila, self.columna)
-                            resultTable = nuevaTabla.setTabla(simbolo)
+                            simbolo_result = Simbolo(atributo['identificador'], atributo['tipo'], resultExpresion, self.fila, self.columna)
+                            resultTable = nuevaTabla.setTabla(simbolo_result)
                             if isinstance(resultTable, Excepcion):
                                 return resultTable
                     else:
                         return Excepcion("Semántico", "El atributo \""+atributo['identificador']+"\" no se encuentra definido en el struct \""+self.identificador+"\"", self.fila, self.columna)
 
+            
             self.tipo = struct.tipo
             valor = struct.interpretar(tree, nuevaTabla)
             if isinstance(valor, Excepcion):
