@@ -59,13 +59,13 @@ export class AppComponent {
       const x = { "entrada": this.entrada }
       this.appService.consumirAnalizador(x).subscribe({
 
-        next: (data) => {
+        next: (data:any) => {
           console.log('Datos recibidos');
           this.salida = data.salida;
           this.simbolos = data.arreglo_simbolos;
           this.errores = data.arreglo_errores;
         },
-        error: (error) => {
+        error: (error:any) => {
           console.log('There was an error :(', error);
           this.simbolos = [];
           this.errores = [];
