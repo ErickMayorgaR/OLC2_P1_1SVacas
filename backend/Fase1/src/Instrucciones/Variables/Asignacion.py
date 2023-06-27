@@ -56,12 +56,23 @@ class AsignacionVar(Instruccion):
                     atributos = struct.atributos
                     for atributo in atributos:
                         if atributo['identificador'] == self.identificador:
+                            tipo_atributo = atributo['tipo']
+                            for struct in structs:
+                                if struct.identificador == atributo['tipo']:
+                                    struct_tipo = struct
+                                    break
+                            if struct_tipo is None:
+                                return Excepcion("Semántico", f"No se encontró el struct '{atributo['tipo']}'", self.fila, self.columna)
+                
                             flag = True
-                            # La variable fue encontrada en los atributos de un struct
-                            simbolo = Simbolo(str(self.identificador), atributo['tipo'], value, self.fila, self.columna)
-                            result = table.setTabla(simbolo)
-                            if isinstance(result, Excepcion):
-                                return result
+                            simbolos = []
+                            if len(value) == len(struct_tipo.atributos):
+                                for sub_atributo in struct_tipo.atributos:
+                                    simbolo = Simbolo(sub_atributo['identificador'], sub_atributo['tipo'], value.pop(0), self.fila, self.columna)
+                                    simbolos.append(simbolo)
+                            else:
+                                return Excepcion("Semántico", "La cantidad de valores no coincide con la cantidad de atributos del struct", self.fila, self.columna)
+                    
                 if flag == False:                   
                     if flag2 == True:
                         simbolo = Simbolo(str(self.identificador), tipo_simbolo, value, self.fila, self.columna)
@@ -73,6 +84,10 @@ class AsignacionVar(Instruccion):
                         result = table.setTabla(simbolo)
                         if isinstance(result, Excepcion):
                             return result
+                else:
+                    simbolo = Simbolo(str(self.identificador), tipo_atributo, simbolos, self.fila, self.columna)
+                    table.setTabla(simbolo)
+
                          
             
 

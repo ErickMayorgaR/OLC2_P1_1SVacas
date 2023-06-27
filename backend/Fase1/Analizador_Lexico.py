@@ -8,7 +8,7 @@ reserved = {
     'console'     :   'RCONSOLE',
     'log'         :   'RLOG',
     'let'         :   'RLET',
-    'Any'         :   'ANY',
+    'any'         :   'ANY',
     'number'      :   'NUMBER',
     'string'      :   'STRING',
     'boolean'     :   'BOOLEAN',
@@ -22,6 +22,7 @@ reserved = {
     'continue'    :   'RCONTINUE',
     'break'       :   'RBREAK',
     'for'         :   'RFOR',
+    'of'          :   'ROF',
     'toLowerCase' :   'LWCASE',
     'toUpperCase' :   'UPCASE',
     'toFixed'     :   'RFIXED',
@@ -39,6 +40,8 @@ tokens  = [
     'PARD',
     'LLAVEIZQ',
     'LLAVEDER',
+    'CORCHETEIZQ',
+    'CORCHETEDER',
     'MAS',
     'MENOS',
     'POR',
@@ -69,6 +72,8 @@ t_PARI          = r'\('
 t_PARD          = r'\)'
 t_LLAVEIZQ      = r'\{'
 t_LLAVEDER      = r'\}'
+t_CORCHETEIZQ      = r'\['
+t_CORCHETEDER      = r'\]'
 t_MAS           = r'\+'
 t_MENOS         = r'\-'
 t_POR           = r'\*'

@@ -28,10 +28,9 @@ class DeclareStruct(Instruccion):
 
             simbolo = Simbolo(self.identificador, self.identificador_struct, None, self.fila, self.columna)
             resultTable = table.setTabla(simbolo)
-            
+            resultado = []
             if isinstance(resultTable, Excepcion):
-                return resultTable
-            
+                            return resultTable         
             for atributo in struct.atributos:
                 if any(parametro['identificador'] == atributo['identificador'] for parametro in self.parametros):
                     indice = next((i for i, p in enumerate(self.parametros) if p['identificador'] == atributo['identificador']), None)
@@ -48,6 +47,7 @@ class DeclareStruct(Instruccion):
                                 result_final.append(simbolo)
                                 
                             simbolo_result = Simbolo(atributo['identificador'], atributo['tipo'], result_final, self.fila, self.columna)
+                            resultado.append(simbolo_result)
                             resultTable = nuevaTabla.setTabla(simbolo_result)
                             if isinstance(resultTable, Excepcion):
                                 return resultTable
@@ -57,9 +57,16 @@ class DeclareStruct(Instruccion):
                             if isinstance(resultExpresion, Excepcion):
                                 return resultExpresion
                             simbolo_result = Simbolo(atributo['identificador'], atributo['tipo'], resultExpresion, self.fila, self.columna)
+                            resultado.append(simbolo_result)
                             resultTable = nuevaTabla.setTabla(simbolo_result)
                             if isinstance(resultTable, Excepcion):
                                 return resultTable
+                            
+                        simbolo = Simbolo(self.identificador, self.identificador_struct, resultado, self.fila, self.columna)
+                        resultTable = table.actualizarTabla(simbolo)
+                        if isinstance(resultTable, Excepcion):
+                            return resultTable
+
                     else:
                         return Excepcion("Semántico", "El atributo \""+atributo['identificador']+"\" no se encuentra definido en el struct \""+self.identificador+"\"", self.fila, self.columna)
 

@@ -1,7 +1,6 @@
 from ...Abstract.abstract import Instruccion
 from ...Abstract.NodeCst import NodeCst
 from ...TS.Excepcion import Excepcion
-from ...TS.Tipo import Tipo
 from copy import copy
 
 class ModificacionArreglo(Instruccion):
@@ -29,7 +28,7 @@ class ModificacionArreglo(Instruccion):
         if simbolo == None:
             return Excepcion("Semántico", "Arreglo \""+self.identificador+"\" no encontrado", self.fila, self.columna)
 
-        if simbolo.getTipo() != Tipo.ARREGLO:
+        if simbolo.getTipo() != 'array':
             return Excepcion("Semántico", "La varible \""+str(self.identificador)+"\" a la que intenta acceder no es un arreglo", self.fila, self.columna)
 
         valueResult = self.modify(tree, table, copy(self.dimensiones), simbolo.getValor(), value)
@@ -83,7 +82,7 @@ class ModificacionArreglo(Instruccion):
             return Excepcion("Semántico", "Indice en arreglo \""+self.identificador+"\" fuera de rango", self.fila, self.columna)
 
         
-        if dimension.tipo != Tipo.NUMBER:
+        if dimension.tipo != 'number':
             return Excepcion("Semántico", "Expresion diferente a ENTERO en Arreglo", self.fila, self.columna)
 
         try:

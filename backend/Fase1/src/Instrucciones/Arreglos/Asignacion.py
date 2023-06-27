@@ -1,8 +1,7 @@
 from ...Abstract.abstract import Instruccion
 from ...Abstract.NodeCst import NodeCst
 from ...TS.Excepcion import Excepcion
-from ...TS.Simbolo import Simbolo
-from ...TS.Tipo import Tipo
+from ...TS.Simbolo import Simbolo 
 from copy import copy
 
 class AsignacionArreglos(Instruccion):

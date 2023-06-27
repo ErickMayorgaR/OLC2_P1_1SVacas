@@ -29,6 +29,9 @@ from src.Instrucciones.Structs.Struct import Struct
 from src.Instrucciones.Structs.Acceso import AccesoStruct
 from src.Instrucciones.Structs.Modificacion import ModificacionStruct
 from src.Instrucciones.Structs.DeclareStruct import DeclareStruct
+from src.Instrucciones.Sentencias.For import For
+from src.Instrucciones.Arreglos.Acceso import AccesoArreglo
+from src.Instrucciones.Arreglos.Modificacion import ModificacionArreglo
 
 from src.TS.Tipo import Tipo, OperadorAritmetico, OperadorLogico, OperadorRelacional
 from src.TS.Excepcion import Excepcion
@@ -82,7 +85,6 @@ def p_instrucciones_evaluar(t):
                     | modificacion_struct PTCOMA
                     | asignacion_normal PTCOMA
                     | condicional_if PTCOMA
-                    | ciclo_while PTCOMA
                     | funcion PTCOMA
                     | llamada_funcion PTCOMA
                     | llamada_struct PTCOMA
@@ -90,7 +92,8 @@ def p_instrucciones_evaluar(t):
                     | inst_break PTCOMA
                     | inst_continue PTCOMA
                     | inst_while PTCOMA
-                    | inst_for PTCOMA'''
+                    | inst_for PTCOMA
+                    | modificar_arreglo PTCOMA'''
     t[0] = t[1]
 
 
@@ -190,6 +193,10 @@ def p_declaracion_sin_tipo(t):
     'declaracion_normal : RLET ID IGUAL expresion'
     t[0] = DeclaracionVar(t[2], 'any', t[4], t.lineno(1), find_column(input, t.slice[1]))
 
+def p_declaracion_array(t):
+    'declaracion_normal : RLET ID IGUAL CORCHETEIZQ parametros_ll CORCHETEDER'
+    t[0] = DeclaracionVar(t[2], 'array', t[5], t.lineno(1), find_column(input, t.slice[1]))
+
 def p_declaracion_sin_tipo_sin_valor(t):
     'declaracion_normal : RLET ID'
     t[0] = DeclaracionVar(t[2], 'any', None, t.lineno(1), find_column(input, t.slice[1]))
@@ -211,9 +218,28 @@ def p_asignacion_var_tipo(t):
 def p_asignacion_var(t):
     'asignacion_normal : ID IGUAL expresion'
     if isinstance(t[3], list):
-        t[0] = AsignacionArreglos(t[1], t[3], Tipo.ARREGLO, t.lineno(1), find_column(input, t.slice[1]))
+        t[0] = AsignacionArreglos(t[1], t[3], 'array', t.lineno(1), find_column(input, t.slice[1]))
     else:
         t[0] = AsignacionVar(t[1], t[3], None, t.lineno(1), find_column(input, t.slice[1]))    
+
+#///////////////////////////////////////////////////////////MODIFICAR ARREGLO
+def p_modificar_arreglo(t):
+    'modificar_arreglo : ID lista_dimensiones IGUAL expresion'
+    t[0] = ModificacionArreglo(t[1], t[2], t[4], t.lineno(1), find_column(input, t.slice[1]))
+
+#///////////////////////////////////////////////////////////ACCESO ARREGLO
+def p_acceso_arreglo(t):
+    'acceso_arreglo : ID lista_dimensiones'
+    t[0] = AccesoArreglo(t[1], t[2], t.lineno(1), find_column(input, t.slice[1]))
+ 
+def p_lista_dimensiones(t):
+    'lista_dimensiones : lista_dimensiones CORCHETEIZQ expresion CORCHETEDER' 
+    t[1].append(t[3])
+    t[0] = t[1]
+
+def p_lista_dimensione(t):
+    'lista_dimensiones : CORCHETEIZQ expresion CORCHETEDER'
+    t[0] = [t[2]] 
 
 #///////////////////////////////////////////////////////////SENTENCIAS DE TRANSFERENCIA
 def p_return_expresion(t):
@@ -275,6 +301,15 @@ def p_inst_while(t):
     'inst_while : WHILE PARI expresion PARD LLAVEIZQ instrucciones LLAVEDER'
     t[0] = While(t[3], t[6], t.lineno(1), find_column(input, t.slice[1]))
 
+#///////////////////////////////////////////////////////////FOR
+def p_for_string(t): #Lo hace con strings
+    'inst_for : RFOR PARI declaracion_normal ROF expresion PARD LLAVEIZQ instrucciones LLAVEDER'
+    t[0] = For(t[3], t[5], None, t[8], t.lineno(1), find_column(input, t.slice[1]))
+
+def p_for_arrays(t): #Lo hace con arrays
+    'inst_for : RFOR PARI declaracion_normal ROF CORCHETEIZQ parametros_ll CORCHETEDER PARD LLAVEIZQ instrucciones LLAVEDER'
+    t[0] = For(t[3], t[6], None, t[9], t.lineno(1), find_column(input, t.slice[1]))
+
 def p_inst_for(t):
     'inst_for : RFOR PARI  declaracion_normal PTCOMA expresion PTCOMA expresion  PARD LLAVEIZQ instrucciones LLAVEDER'
     t[0] = For(t[3], t[5], t[7], t[10], t.lineno(1), find_column(input, t.slice[1]))
@@ -287,6 +322,7 @@ def p_tipo(t):
     '''tipo : STRING
             | NUMBER
             | BOOLEAN
+            | ANY
             | ID'''
     t[0] = t[1]
 
@@ -386,19 +422,23 @@ def p_expresion_llamada_struct(t):
     'expresion : llamada_struct'
     t[0] = t[1]
 
-def p_expresion_incrementable(p):
+def p_expresion_incrementable(t):
     '''expresion : expresion MAS MAS
                  | expresion MENOS MENOS'''
-    if p[2] == '+':
-        incrementar = Primitivos('number', 1, p.lineno(2), find_column(input, p.slice[2]))
-        p[0] = Aritmetica(OperadorAritmetico.MAS, p[1], incrementar, p.lineno(2), find_column(input, p.slice[2]))
-    elif p[2] == '-':
-        decrementar = Primitivos('number', 1, p.lineno(2), find_column(input, p.slice[2]))
-        p[0] = Primitivos(p[1], p.lineno(2), find_column(input, p.slice[2]))
-        p[0] = Aritmetica(OperadorAritmetico.MENOS, p[1], decremantar, p.lineno(2), find_column(input, p.slice[2]))
+    if t[2] == '+':
+        incrementar = Primitivos('number', 1, t.lineno(2), find_column(input, t.slice[2]))
+        t[0] = Aritmetica(OperadorAritmetico.MAS, t[1], incrementar, t.lineno(2), find_column(input, t.slice[2]))
+    elif t[2] == '-':
+        decrementar = Primitivos('number', 1, t.lineno(2), find_column(input, t.slice[2]))
+        t[0] = Primitivos(t[1], t.lineno(2), find_column(input, t.slice[2]))
+        t[0] = Aritmetica(OperadorAritmetico.MENOS, t[1], decrementar, t.lineno(2), find_column(input, t.slice[2]))
 
 def p_acceso_struct_expresion(t):
     'expresion : acceso_struct'
+    t[0] = t[1]
+
+def p_acceso_arreglo_expresion(t):
+    'expresion : acceso_arreglo'
     t[0] = t[1]
 
 #///////////////////////////////////////////////////////////STRUCTS
@@ -471,10 +511,8 @@ def p_to_string(t):
     parametro = [{'tipo':'any', 'id':t[1]}]
     t[0] = String(t[1], parametro, instrucciones, t.lineno(1), find_column(input, t.slice[1]))
 
-
 import ply.yacc as yacc
 parser = yacc.yacc()
-
 input = ''
 
 def getErrores():
@@ -508,15 +546,41 @@ def parse(inp):
 #entrada = file.read()
 
 entrada = '''
-let val1:number = 1;
-let val2:number = 10;
-let val3:number = 2021.2020;
-console.log("Probando declaracion de variables \n");
-console.log(val1, " ", val2, " ", val3);
-console.log("---------------------------------");
-// COMENTARIO DE UNA LINEA
-let a: number = 5;
-//console.log(typeof(toString(a))); // llamada a una funcion
+console.log("=======================================================================");
+console.log("==========================FUNCIONES Y RETURN===========================");
+console.log("=======================================================================");
+
+function potenciaNativa(base: number, exponente: number) {
+    let resultado: number = base;
+    while (exponente > 1) {
+        resultado = resultado * base;
+        exponente = exponente - 1;
+    };
+    return resultado;
+};
+
+console.log(potenciaNativa(5, 7));
+console.log(potenciaNativa(2, 2));
+console.log(potenciaNativa(4, 2));
+
+function sumarTodo(num1: number, num2: number) {
+    let result: number = 0;
+    if (num1 < 0 || num2 < 0) {
+        return -1;
+    };
+
+    while (num1 > 0 || num2 > 0) {
+        result = result + (num1 + num2);
+        num1 = num1 - 1;
+        num2 = num2 - 1;
+    };
+    return result;
+};
+
+console.log(sumarTodo(5, 4));
+console.log(sumarTodo(-1, -5));
+console.log(sumarTodo(7, 7));
+
 '''
 
 instrucciones = parse(entrada) #ARBOL AST

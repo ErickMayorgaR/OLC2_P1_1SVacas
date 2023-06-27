@@ -1,7 +1,7 @@
 from ...Abstract.abstract import Instruccion
 from ...Abstract.NodeCst import NodeCst
 from ...TS.Excepcion import Excepcion
-from ...TS.Tipo import Tipo
+from ...TS.Simbolo import Simbolo
 
 class AccesoStruct(Instruccion):
     def __init__(self, identificador, atributo, fila, columna):
@@ -19,11 +19,14 @@ class AccesoStruct(Instruccion):
         structs = tree.getStructs()  # Obtener los structs de la tabla de símbolos
         tipo_simbolo = simbolo.getTipo()
 
-        if tipo_simbolo not in structs:
+        if not any(tipo_simbolo == struct.identificador for struct in structs):
+            # Continuar la rutina si no se encuentra coincidencia
             return Excepcion("Semántico", f"La variable \"{self.identificador}\" a la que intenta acceder no es de tipo struct", self.fila, self.columna)
 
         try:
-            valor =  simbolo.getValor().tabla[str(self.atributo)].valor
+            valor = self.buscar_identificador(simbolo, self.atributo)
+            if isinstance(valor, Excepcion):
+                return valor
             if isinstance(valor, Excepcion):
                 return valor
         except:
@@ -31,6 +34,24 @@ class AccesoStruct(Instruccion):
 
         self.tipo = simbolo.getValor().tabla[str(self.atributo)].tipo
         return valor
+
+    def buscar_identificador(self, simbolo, identificador):
+        valor = simbolo.getValor().tabla
+        if isinstance(valor, dict):
+            if identificador in valor:
+                tipo = valor[identificador].tipo
+                valor = valor[identificador].valor
+                return tipo, valor
+        elif isinstance(valor, list):
+            for elemento in valor:
+                if isinstance(elemento, Simbolo):
+                    tipo, resultado = self.buscar_identificador(elemento, identificador)
+                    if isinstance(resultado, Excepcion):
+                        return resultado
+                    elif resultado is not None:
+                        return tipo, resultado
+        return None, None
+
 
     def getNode(self):
         nodo = NodeCst("acceso_struct")
