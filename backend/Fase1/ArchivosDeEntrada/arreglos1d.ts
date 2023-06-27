@@ -4,8 +4,8 @@ function swap(i: number, j: number, arr: any[]) {
     arr[j] = temp;
 };
 function bubbleSort(arr: any[]) {
-    for (let i = 0; i < length(arr) - 1; i++) {
-        for (let j = 1; j < length(arr) - 1; j++) {
+    for (let i = 0; i <= length(arr) - 1; i++) {
+        for (let j = 1; j <= length(arr) - 1; j++) {
         if (arr[j] > arr[j + 1]) {
             swap(j, j + 1, arr);
         };
@@ -14,7 +14,7 @@ function bubbleSort(arr: any[]) {
 };
 
 function insertionSort(arr: any[]) {
-    for (let i = 1; i < lenght(arr); i++) {
+    for (let i = 1; i <= lenght(arr); i++) {
         let j = i;
         let temp = arr[i];
         while (j > 0 && arr[j - 1] > temp) {
