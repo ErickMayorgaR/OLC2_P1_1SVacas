@@ -82,7 +82,7 @@ def p_instrucciones_2(t):
 def p_instrucciones_evaluar(t):
     '''instruccion : imprimir PTCOMA
                     | declaracion_normal PTCOMA
-                    | structs_declaration 
+                    | structs_declaration PTCOMA
                     | modificacion_struct PTCOMA
                     | asignacion_normal PTCOMA
                     | condicional_if PTCOMA
@@ -95,6 +95,24 @@ def p_instrucciones_evaluar(t):
                     | inst_while PTCOMA
                     | inst_for PTCOMA
                     | modificar_arreglo PTCOMA'''
+    t[0] = t[1]
+
+def p_instrucciones_evaluar_1(t):
+    '''instruccion : imprimir
+                    | declaracion_normal 
+                    | structs_declaration 
+                    | modificacion_struct 
+                    | asignacion_normal 
+                    | condicional_if 
+                    | funcion 
+                    | llamada_funcion 
+                    | llamada_struct 
+                    | inst_return 
+                    | inst_break 
+                    | inst_continue 
+                    | inst_while 
+                    | inst_for 
+                    | modificar_arreglo'''
     t[0] = t[1]
 
 
