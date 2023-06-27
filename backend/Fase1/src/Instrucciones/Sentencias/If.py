@@ -81,19 +81,19 @@ class If(Instruccion):
         nodo.addChildNode(self.condicion.getNode())
 
         instruccionesIfNodo = NodeCst("if_instr")
-        for instruccion in self.instruccionesIf:
+        for instruccion in self.bloqueIf:
             instruccionesIfNodo.addChildNode(instruccion.getNode())
         nodo.addChildNode(instruccionesIfNodo)
 
-        if self.instruccionesElse != None:
+        if self.bloqueElse != None:
             instruccionesElseNodo = NodeCst("else_instr")
-            for instruccion in self.instruccionesElse:
+            for instruccion in self.bloqueElse:
                 instruccionesElseNodo.addChildNode(instruccion.getNode())
             nodo.addChildNode(instruccionesElseNodo)
 
-        if self.ElseIf != None:
+        if self.bloqueElseIf != None:
             instruccionesElseIfNodo = NodeCst("elseif_instr")
-            for instruccion in self.ElseIf:
+            for instruccion in self.bloqueElseIf:
                 instruccionesElseIfNodo.addChildNode(instruccion.getNode())
             nodo.addChildNode(instruccionesElseIfNodo)
         

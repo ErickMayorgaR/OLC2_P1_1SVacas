@@ -70,6 +70,7 @@ class AsignacionVar(Instruccion):
                                 for sub_atributo in struct_tipo.atributos:
                                     simbolo = Simbolo(sub_atributo['identificador'], sub_atributo['tipo'], value.pop(0), self.fila, self.columna)
                                     simbolos.append(simbolo)
+                                valor = Simbolo(atributo['identificador'], struct_tipo, simbolos, self.fila, self.columna)
                             else:
                                 return Excepcion("Semántico", "La cantidad de valores no coincide con la cantidad de atributos del struct", self.fila, self.columna)
                     
@@ -85,7 +86,7 @@ class AsignacionVar(Instruccion):
                         if isinstance(result, Excepcion):
                             return result
                 else:
-                    simbolo = Simbolo(str(self.identificador), tipo_atributo, simbolos, self.fila, self.columna)
+                    simbolo = Simbolo(str(self.identificador), tipo_atributo, valor, self.fila, self.columna)
                     table.setTabla(simbolo)
 
                          

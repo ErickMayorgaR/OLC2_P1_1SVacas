@@ -13,16 +13,22 @@ class Concat(Funcion):
         self.tipo =  "any"
 
     def interpretar(self, tree, table):
-        simbolo = table.getTabla('concat##Param1')
+        simbolo = table.getTabla(self.identificador)
+        
+        array_concat = []
+        for instruccion in self.instrucciones:
+            array = instruccion.interpretar(tree,table)
+            array_concat.append(array)
 
         if simbolo == None:
             return Excepcion("Semántico", "No se encontro el parametro de la funcion nativa \"Concat\"", self.fila, self.columna)
 
-        if simbolo.getTipo() != Tipo.ARREGLO:
+        if simbolo.getTipo() != 'array':
             return Excepcion("Semántico", "La variable \""+ self.identificador +"\" para Concat no es tipo array", self.fila, self.columna)
-
+       
+        resultado = simbolo.getValor() + array_concat
         self.tipo = simbolo.getTipo()
-        return simbolo.getValor().concat(self.parametros)
+        return resultado
 
     def getNode(self):
         nodo = NodeCst("nativas_instr")

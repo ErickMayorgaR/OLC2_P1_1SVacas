@@ -31,5 +31,5 @@ let aprox_1 = 3.141516;
 console.log(aprox_1.toFixed(3), aprox_1.toExponential(3));
 let carnet:string = "201903865";
 console.log("Hola " + carnet.toString());
-//console.log(typeof(val1), " ", typeof(rel1)); // Esta funcion sera extra, la veremos en clase para que la implementen
+console.log(typeof(val1), " ", typeof(rel1)); // Esta funcion sera extra, la veremos en clase para que la implementen
 console.log("---------------------------------");

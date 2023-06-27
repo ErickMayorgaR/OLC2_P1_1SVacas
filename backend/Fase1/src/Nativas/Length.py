@@ -1,9 +1,8 @@
 from ..Instrucciones.Funcion.Funcion import Funcion
 from ..Abstract.NodeCst import NodeCst
 from ..TS.Excepcion import Excepcion
-from ..TS.Tipo import Tipo
 
-class Exponential(Funcion):
+class Length(Funcion):
     def __init__(self, identificador, parametros, instrucciones, fila, columna):
         self.identificador = identificador
         self.parametros = parametros
@@ -13,19 +12,16 @@ class Exponential(Funcion):
         self.tipo =  "any"
 
     def interpretar(self, tree, table):
-        simbolo = table.getTabla(self.identificador)
-        valor = self.instrucciones.interpretar(tree,table)
-        
+        simbolo = table.getTabla('length##Param1')
+
         if simbolo == None:
-            return Excepcion("Semántico", "No se encontro el parametro de la funcion nativa \"toExponential\"", self.fila, self.columna)
+            return Excepcion("Semántico", "No se encontro el parametro de la funcion nativa \"Length\"", self.fila, self.columna)
 
-        if simbolo.getTipo() != 'number':
-            return Excepcion("Semántico", "La variable \""+ self.identificador +"\" para Exponential no es tipo number", self.fila, self.columna)
+        if simbolo.getTipo() != 'array':
+            return Excepcion("Semántico", "La variable \""+ self.identificador +"\" para Length no es tipo array", self.fila, self.columna)
 
-        self.tipo = 'string'
-        result = "{:.{}e}".format(simbolo.getValor(), int(valor))
-        result = result.replace('e+','+')
-        return result
+        self.tipo = 'number'
+        return len(simbolo.getValor())
 
     def getNode(self):
         nodo = NodeCst("nativas_instr")
@@ -42,12 +38,8 @@ class Exponential(Funcion):
         nodo.addChildNode(parametrosNodo)
 
         instruccionesNodo = NodeCst("instrucciones")
-        if isinstance(self.instrucciones,list):
-            for instruccion in self.instrucciones:
-                instruccionesNodo.addChildNode(instruccion.getNode())
-            nodo.addChildNode(instruccionesNodo)
-        else:
-            instruccionesNodo.addChildNode(self.instrucciones.getNode())
-            nodo.addChildNode(instruccionesNodo)
+        for instruccion in self.instrucciones:
+            instruccionesNodo.addChildNode(instruccion.getNode())
+        nodo.addChildNode(instruccionesNodo)
 
         return nodo

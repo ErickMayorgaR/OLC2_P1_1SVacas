@@ -22,6 +22,13 @@ class TablaSimbolos:
                 tablaActual = tablaActual.anterior
         return None
 
+    def getSimbolos(self):
+        tablaActual = self
+        simbolos = []
+        for symbol in tablaActual.tabla:
+            simbolos.append(symbol)
+        return simbolos
+
     def getRealTabla(self, identificador):
         tablaActual = self
         while tablaActual != None:

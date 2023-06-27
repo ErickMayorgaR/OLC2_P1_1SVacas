@@ -36,9 +36,9 @@ class LlamadaFuncion(Instruccion):
 
                     #Creacion de simbolo e ingresandolo a la tabla de simbolos
                     if funcion.parametros[contador]['tipo'] == "any":
-                        simbolo = Simbolo(funcion.parametros[contador]['id'], expresion.tipo, resultExpresion, self.fila, self.columna)
+                        simbolo = Simbolo(funcion.parametros[contador]['identificador'], expresion.tipo, resultExpresion, self.fila, self.columna)
                     else:
-                        simbolo = Simbolo(funcion.parametros[contador]['id'], expresion.tipo, resultExpresion, self.fila, self.columna)
+                        simbolo = Simbolo(funcion.parametros[contador]['identificador'], expresion.tipo, resultExpresion, self.fila, self.columna)
                     
                     resultTable = nuevaTabla.setTabla(simbolo)
                     if isinstance(resultTable, Excepcion):
@@ -64,7 +64,7 @@ class LlamadaFuncion(Instruccion):
         parametrosNodo = NodeCst("parametros_llamada")
         for parametro in self.parametros:
             parametroNodo = NodeCst("parametro_llamada")
-            parametroNodo.addChild(parametro.getNode())
+            parametroNodo.addChild(parametro)
             parametrosNodo.addChildNode(parametroNodo)
 
         nodo.addChildNode(parametrosNodo)

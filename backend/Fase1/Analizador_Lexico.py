@@ -28,6 +28,8 @@ reserved = {
     'toFixed'     :   'RFIXED',
     'toString'    :   'RSTRING',
     'toExponential' :   'REXP',
+    'split'       :   'RSPLIT',
+    'concat'      :   'RCONCAT',
     'interface'   :   'RSTRUCT'
 }
 

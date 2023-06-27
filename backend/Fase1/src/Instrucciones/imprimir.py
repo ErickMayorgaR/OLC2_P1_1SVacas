@@ -25,7 +25,7 @@ class Imprimir(Instruccion):
             nuevoValor = copy(valor.tabla)
             self.interpretarStruct(nuevoValor, valor.tabla)
             valores = str(nuevoValor)
-        
+        valores += "\n"
         tree.updateConsola(valores)
         print(valores)
         return None

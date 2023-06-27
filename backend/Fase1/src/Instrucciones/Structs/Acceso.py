@@ -4,9 +4,10 @@ from ...TS.Excepcion import Excepcion
 from ...TS.Simbolo import Simbolo
 
 class AccesoStruct(Instruccion):
-    def __init__(self, identificador, atributo, fila, columna):
+    def __init__(self, identificador, atributo1, atributo2, fila, columna):
         self.identificador = identificador
-        self.atributo = atributo
+        self.atributo1 = atributo1
+        self.atributo2 = atributo2
         self.fila = fila
         self.columna = columna
         self.tipo = 'any'
@@ -24,32 +25,40 @@ class AccesoStruct(Instruccion):
             return Excepcion("Semántico", f"La variable \"{self.identificador}\" a la que intenta acceder no es de tipo struct", self.fila, self.columna)
 
         try:
-            valor = self.buscar_identificador(simbolo, self.atributo)
+            [tipo, valor] = self.buscar_identificador(simbolo, self.atributo1, self.atributo2)
+            self.tipo = tipo
             if isinstance(valor, Excepcion):
                 return valor
             if isinstance(valor, Excepcion):
                 return valor
         except:
-            return Excepcion("Semántico", "Atributo \""+self.atributo+"\" en variable \""+self.identificador+"\" no existe", self.fila, self.columna)
+            return Excepcion("Semántico", "Atributo \""+self.atributo1+"\" en variable \""+self.identificador+"\" no existe", self.fila, self.columna)
 
-        self.tipo = simbolo.getValor().tabla[str(self.atributo)].tipo
         return valor
 
-    def buscar_identificador(self, simbolo, identificador):
-        valor = simbolo.getValor().tabla
-        if isinstance(valor, dict):
-            if identificador in valor:
-                tipo = valor[identificador].tipo
-                valor = valor[identificador].valor
-                return tipo, valor
-        elif isinstance(valor, list):
+    def buscar_identificador(self, simbolo, identificador1, identificador2):
+        valor = simbolo.getValor()
+        if isinstance(valor, list):
             for elemento in valor:
-                if isinstance(elemento, Simbolo):
-                    tipo, resultado = self.buscar_identificador(elemento, identificador)
-                    if isinstance(resultado, Excepcion):
-                        return resultado
-                    elif resultado is not None:
-                        return tipo, resultado
+                if elemento.identificador == identificador2:
+                    if isinstance(elemento, list):
+                        for atributo in elemento:
+                            if atributo.identificador == identificador1:
+                                tipo, resultado = self.buscar_identificador(atributo, None, elemento)
+                                if isinstance(resultado, Excepcion):
+                                    return resultado
+                                elif resultado is not None:
+                                    return tipo, resultado
+
+                    elif isinstance(elemento, Simbolo):
+                        tipo, resultado = self.buscar_identificador(elemento, None, identificador1)
+                        if isinstance(resultado, Excepcion):
+                            return resultado
+                        elif resultado is not None:
+                            return tipo, resultado
+        else:
+            tipo = simbolo.getTipo()
+            return tipo, valor
         return None, None
 
 
@@ -58,7 +67,7 @@ class AccesoStruct(Instruccion):
         nodoID = NodeCst("ID")
         nodoID.addChild(str(self.identificador))
         nodoAtributo = NodeCst("ID")
-        nodoAtributo.addChild(str(self.atributo))
+        nodoAtributo.addChild(str(self.atributo1))
         nodo.addChildNode(nodoID)
         nodo.addChildNode(nodoAtributo)
         return nodo

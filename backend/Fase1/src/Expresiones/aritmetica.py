@@ -1,6 +1,6 @@
 from ..Abstract.abstract import Instruccion
 from ..TS.Excepcion import Excepcion
-from ..TS.Tipo import OperadorAritmetico, Tipo
+from ..TS.Tipo import OperadorAritmetico
 from ..Abstract.NodeCst import NodeCst
 
 class Aritmetica(Instruccion):
@@ -172,9 +172,7 @@ class Aritmetica(Instruccion):
             return float(valor)
         elif nodo.tipo == 'string':
             return str(valor)
-        elif nodo.tipo == Tipo.CARACTER:
-            return str(valor)
-        elif nodo.tipo == Tipo.BANDERA:
+        elif nodo.tipo == 'boolean':
             if str(valor).lower() == 'true':
                 return True
             elif str(valor).lower() == 'false':

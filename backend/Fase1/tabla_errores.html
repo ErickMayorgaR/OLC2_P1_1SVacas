@@ -1,0 +1,36 @@
+<html>
+<head>
+</head>
+<body>
+<div>
+    <center>
+        <h2>Tabla de errores</h2>
+    </center>
+</div>
+<br><br><br><br><br><br>
+<center>
+    <table border="1">
+        <tr>
+            <th>Numero</th>
+            <th>Tipo</th>
+            <th>Descripcion</th>
+            <th>Fila</th>
+            <th>Columna</th>
+            <th>Fecha</th>
+            <th>Hora</th>
+        </tr>
+        {% for error in errores %}
+        <tr>
+            <td>{{ loop.index }}</td>
+            <td>{{ error.tipo }}</td>
+            <td>{{ error.descripcion }}</td>
+            <td>{{ error.fila }}</td>
+            <td>{{ error.columna }}</td>
+            <td>{{ error.fecha }}</td>
+            <td>{{ error.hora }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</center>
+</body>
+</html>

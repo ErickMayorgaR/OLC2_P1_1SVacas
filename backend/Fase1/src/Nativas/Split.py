@@ -13,16 +13,17 @@ class Split(Funcion):
         self.tipo =  "any"
 
     def interpretar(self, tree, table):
-        simbolo = table.getTabla('split##Param1')
+        simbolo = table.getTabla(self.identificador)
+        val = self.instrucciones.interpretar(tree,table)
 
         if simbolo == None:
-            return Excepcion("Semántico", "No se encontro el parametro de la funcion nativa \"Uppercase\"", self.fila, self.columna)
+            return Excepcion("Semántico", "No se encontro el parametro de la funcion nativa \"Split\"", self.fila, self.columna)
 
-        if simbolo.getTipo() != Tipo.CADENA:
-            return Excepcion("Semántico", "La variable \""+ self.identificador +"\" para Uppercase no es tipo number", self.fila, self.columna)
+        if simbolo.getTipo() != 'string':
+            return Excepcion("Semántico", "La variable \""+ self.identificador +"\" para Split no es tipo string", self.fila, self.columna)
 
         self.tipo = simbolo.getTipo()
-        return simbolo.getValor().split(self.parametros)
+        return simbolo.getValor().split(str(val))
 
     def getNode(self):
         nodo = NodeCst("nativas_instr")
@@ -39,8 +40,12 @@ class Split(Funcion):
         nodo.addChildNode(parametrosNodo)
 
         instruccionesNodo = NodeCst("instrucciones")
-        for instruccion in self.instrucciones:
-            instruccionesNodo.addChildNode(instruccion.getNode())
-        nodo.addChildNode(instruccionesNodo)
+        if isinstance(self.instrucciones,list):
+            for instruccion in self.instrucciones:
+                instruccionesNodo.addChildNode(instruccion.getNode())
+            nodo.addChildNode(instruccionesNodo)
+        else:
+            instruccionesNodo.addChildNode(self.instrucciones.getNode())
+            nodo.addChildNode(instruccionesNodo)
 
         return nodo

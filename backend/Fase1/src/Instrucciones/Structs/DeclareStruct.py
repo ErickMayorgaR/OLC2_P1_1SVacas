@@ -88,8 +88,13 @@ class DeclareStruct(Instruccion):
         parametrosNodo = NodeCst("parametros_llamada")
         for parametro in self.parametros:
             parametroNodo = NodeCst("parametro_llamada")
-            parametroNodo.addChild(parametro.getNode())
-            parametrosNodo.addChildNode(parametroNodo)
+            if isinstance(parametro['parametro'],list):
+                for inst in parametro['parametro']:
+                    parametroNodo.addChild(inst['parametro'].getNode())
+                parametrosNodo.addChildNode(parametroNodo)
+            else:
+                parametroNodo.addChild(parametro['parametro'].getNode())
+                parametrosNodo.addChildNode(parametroNodo)
 
         nodo.addChildNode(parametrosNodo)
         

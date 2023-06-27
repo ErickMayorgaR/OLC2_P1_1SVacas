@@ -62,8 +62,8 @@ export class AppComponent {
         next: (data:any) => {
           console.log('Datos recibidos');
           this.salida = data.salida;
-          this.simbolos = data.arreglo_simbolos;
-          this.errores = data.arreglo_errores;
+          this.simbolos = data.simbolos;
+          this.errores = data.errores;
         },
         error: (error:any) => {
           console.log('There was an error :(', error);

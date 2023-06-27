@@ -6,6 +6,7 @@ from src.Nativas.Upper import Upper
 from src.Nativas.Split import Split
 from src.Nativas.Concat import Concat
 from src.Nativas.Typeof import Typeof
+from src.Nativas.Length import Length
 
 import ply.yacc as yacc
 from Analizador_Lexico import tokens, lexer, errores, find_column
@@ -33,7 +34,7 @@ from src.Instrucciones.Sentencias.For import For
 from src.Instrucciones.Arreglos.Acceso import AccesoArreglo
 from src.Instrucciones.Arreglos.Modificacion import ModificacionArreglo
 
-from src.TS.Tipo import Tipo, OperadorAritmetico, OperadorLogico, OperadorRelacional
+from src.TS.Tipo import OperadorAritmetico, OperadorLogico, OperadorRelacional
 from src.TS.Excepcion import Excepcion
 from src.TS.Arbol import Arbol
 from src.TS.TablaSimbolos import TablaSimbolos
@@ -159,11 +160,11 @@ def p_parametro(t):
                 | ID DPUNTOS tipo
                 | ID'''
     if len(t) == 2:
-        t[0] = {'tipo': 'any', 'id': t[1]}
+        t[0] = {'tipo': 'any', 'identificador': t[1]}
     elif len(t) == 4:
-        t[0] = {'tipo': t[3], 'id': t[1]}
+        t[0] = {'tipo': t[3], 'identificador': t[1]}
     else:
-        t[0] = {'tipo': t[4], 'id': t[2]}
+        t[0] = {'tipo': t[4], 'identificador': t[2]}
 
 #///////////////////////////////////////////////////////////PARAMETROS LLAMADA FUNCION
 def p_parametros_ll(t):
@@ -204,11 +205,14 @@ def p_declaracion_sin_tipo_sin_valor(t):
 def p_declaracion_sin_valor(t):
     'declaracion_normal : RLET ID DPUNTOS tipo'
     if t[4] == "number":
-        t[0] = DeclaracionVar(t[2], t[4], "0", t.lineno(1), find_column(input, t.slice[1]))
+        variable = Primitivos('number', int("0"), t.lineno(2), find_column(input, t.slice[2]))
+        t[0] = DeclaracionVar(t[2], t[4], variable, t.lineno(1), find_column(input, t.slice[1]))
     elif t[4] == "string":
-        t[0] = DeclaracionVar(t[2], t[4], "", t.lineno(1), find_column(input, t.slice[1]))
+        variable = Primitivos('string', str(""), t.lineno(2), find_column(input, t.slice[2]))
+        t[0] = DeclaracionVar(t[2], t[4], variable, t.lineno(1), find_column(input, t.slice[1]))
     elif t[4] == "boolean":
-        t[0] = DeclaracionVar(t[2], t[4], "true", t.lineno(1), find_column(input, t.slice[1]))
+        variable = Primitivos('boolean', True, t.lineno(2), find_column(input, t.slice[2]))
+        t[0] = DeclaracionVar(t[2], t[4], variable, t.lineno(1), find_column(input, t.slice[1]))
 
 #///////////////////////////////////////////////////////////ASIGNACION DE VARIABLES
 def p_asignacion_var_tipo(t):
@@ -237,9 +241,13 @@ def p_lista_dimensiones(t):
     t[1].append(t[3])
     t[0] = t[1]
 
-def p_lista_dimensione(t):
+def p_lista_dimension(t):
     'lista_dimensiones : CORCHETEIZQ expresion CORCHETEDER'
     t[0] = [t[2]] 
+
+def p_lista_dimension_exp(t):
+    'expresion : CORCHETEIZQ parametros_ll CORCHETEDER'
+    t[0] = t[2] 
 
 #///////////////////////////////////////////////////////////SENTENCIAS DE TRANSFERENCIA
 def p_return_expresion(t):
@@ -308,21 +316,19 @@ def p_for_string(t): #Lo hace con strings
 
 def p_for_arrays(t): #Lo hace con arrays
     'inst_for : RFOR PARI declaracion_normal ROF CORCHETEIZQ parametros_ll CORCHETEDER PARD LLAVEIZQ instrucciones LLAVEDER'
-    t[0] = For(t[3], t[6], None, t[9], t.lineno(1), find_column(input, t.slice[1]))
+    t[0] = For(t[3], t[6], None, t[10], t.lineno(1), find_column(input, t.slice[1]))
 
 def p_inst_for(t):
     'inst_for : RFOR PARI  declaracion_normal PTCOMA expresion PTCOMA expresion  PARD LLAVEIZQ instrucciones LLAVEDER'
     t[0] = For(t[3], t[5], t[7], t[10], t.lineno(1), find_column(input, t.slice[1]))
-
-#'inst_for : RFOR PARI  declaracion_normal PUNTOCOMA expresion PUNTOCOMA expresion  PARD LLAVEIZQ instrucciones LLAVEDER'
-
 
 # ///////////////////////////////////////////////////// TIPOS
 def p_tipo(t):
     '''tipo : STRING
             | NUMBER
             | BOOLEAN
-            | ANY
+            | ANY CORCHETEIZQ CORCHETEDER
+            | ANY CORCHETEIZQ CORCHETEDER CORCHETEIZQ CORCHETEDER
             | ID'''
     t[0] = t[1]
 
@@ -468,11 +474,11 @@ def p_atributo(t):
 #///////////////////////////////////////////////////////////ACCESO STRUCT
 def p_acceso_struct(t):
     'acceso_struct : ID PUNTO ID'
-    t[0] = AccesoStruct(t[1], t[3], t.lineno(1), find_column(input, t.slice[1]))
+    t[0] = AccesoStruct(t[1], t[3], None, t.lineno(1), find_column(input, t.slice[1]))
 
 def p_acceso_struct_2(t):
-    'acceso_struct : acceso_struct PUNTO ID'
-    t[0] = AccesoStruct(t[1].identificador, t[3], t.lineno(1), t.lexer.lexpos)
+    'acceso_struct : ID PUNTO ID PUNTO ID'
+    t[0] = AccesoStruct(t[1], t[5], t[3], t.lineno(1), find_column(input, t.slice[1]))
 
 #///////////////////////////////////////////////////////////MODIFICACION STRUCT
 def p_modificacion_struct(t):
@@ -484,32 +490,45 @@ def p_modificacion_struct(t):
 def p_to_lowercase(t):
     'expresion : ID PUNTO LWCASE PARI PARD'
     instrucciones = []
-    parametro = [{'tipo':'any', 'id':t[1]}]
+    parametro = [{'tipo':'any', 'identificador':t[1]}]
     t[0] = Lower(t[1], parametro, instrucciones, t.lineno(1), find_column(input, t.slice[1]))
 
 def p_to_uppercase(t):
     'expresion : ID PUNTO UPCASE PARI PARD'
     instrucciones = []
-    parametro = [{'tipo':'any', 'id':t[1]}]
+    parametro = [{'tipo':'any', 'identificador':t[1]}]
     t[0] = Upper(t[1], parametro, instrucciones, t.lineno(1), find_column(input, t.slice[1]))
 
 def p_to_fixed(t):
     'expresion : ID PUNTO RFIXED PARI expresion PARD'
     instrucciones = t[5]
-    parametro = [{'tipo':'any', 'id':t[1]}]
+    parametro = [{'tipo':'any', 'identificador':t[1]}]
     t[0] = Fixed(t[1], parametro, instrucciones, t.lineno(1), find_column(input, t.slice[1]))
 
 def p_to_exponential(t):
     'expresion : ID PUNTO REXP PARI expresion PARD'
     instrucciones = t[5]
-    parametro = [{'tipo':'any', 'id':t[1]}]
+    parametro = [{'tipo':'any', 'identificador':t[1]}]
     t[0] = Exponential(t[1], parametro, instrucciones, t.lineno(1), find_column(input, t.slice[1]))
 
 def p_to_string(t):
     'expresion : ID PUNTO RSTRING PARI PARD'
     instrucciones = []
-    parametro = [{'tipo':'any', 'id':t[1]}]
+    parametro = [{'tipo':'any', 'identificador':t[1]}]
     t[0] = String(t[1], parametro, instrucciones, t.lineno(1), find_column(input, t.slice[1]))
+
+def p_to_split(t):
+    'expresion : ID PUNTO RSPLIT PARI expresion PARD'
+    instrucciones = t[5]
+    parametro = [{'tipo':'any', 'identificador':t[1]}]
+    t[0] = Split(t[1], parametro, instrucciones, t.lineno(1), find_column(input, t.slice[1]))
+
+def p_to_concat(t):
+    'expresion : ID PUNTO RCONCAT PARI expresion PARD'
+    instrucciones = t[5]
+    parametro = [{'tipo':'any', 'identificador':t[1]}]
+    t[0] = Concat(t[1], parametro, instrucciones, t.lineno(1), find_column(input, t.slice[1]))
+
 
 import ply.yacc as yacc
 parser = yacc.yacc()
@@ -522,14 +541,14 @@ def agregarNativas(ast):
     instrucciones = []
 
     nombre = "typeof"
-    parametro = [{'tipo':'any', 'id':'typeof##Param1'}]
+    parametro = [{'tipo':'any', 'identificador':'typeof##Param1'}]
     typeof = Typeof(nombre, parametro, instrucciones, -1,-1)
     ast.addFuncion(typeof)
 
-    nombre = "toString"
-    parametro = [{'tipo':'any', 'id':'toString##Param1'}]
-    toString = String(nombre, parametro, instrucciones, -1,-1)
-    ast.addFuncion(toString)
+    nombre = "length"
+    parametro = [{'tipo':'any', 'identificador':'length##Param1'}]
+    length = Length(nombre, parametro, instrucciones, -1,-1)
+    ast.addFuncion(length)
 
 def parse(inp):
     global errores
@@ -546,41 +565,64 @@ def parse(inp):
 #entrada = file.read()
 
 entrada = '''
-console.log("=======================================================================");
-console.log("==========================FUNCIONES Y RETURN===========================");
-console.log("=======================================================================");
+interface Actor {
+    nombre: string;
+    edad: number;
+}
 
-function potenciaNativa(base: number, exponente: number) {
-    let resultado: number = base;
-    while (exponente > 1) {
-        resultado = resultado * base;
-        exponente = exponente - 1;
+interface Pelicula {
+    nombre: string;
+    posicion: number;
+}
+
+interface Contrato {
+    actor: Actor;
+    pelicula: Pelicula;
+}
+
+actores = ["Elizabeth Olsen", "Adam Sandler", "Christian Bale", "Jennifer Aniston"];
+peliculas = ["Avengers: Age of Ultron", "Mr. Deeds", "Batman: The Dark Knight", "Marley & Me"];
+
+function contratar(actor: Actor, pelicula: Pelicula){
+    return {
+        actor,
+        pelicula
     };
-    return resultado;
 };
 
-console.log(potenciaNativa(5, 7));
-console.log(potenciaNativa(2, 2));
-console.log(potenciaNativa(4, 2));
-
-function sumarTodo(num1: number, num2: number) {
-    let result: number = 0;
-    if (num1 < 0 || num2 < 0) {
-        return -1;
-    };
-
-    while (num1 > 0 || num2 > 0) {
-        result = result + (num1 + num2);
-        num1 = num1 - 1;
-        num2 = num2 - 1;
-    };
-    return result;
+function crearActor(nombre: string, edad: number){
+    return {
+        nombre,
+        edad
+};
 };
 
-console.log(sumarTodo(5, 4));
-console.log(sumarTodo(-1, -5));
-console.log(sumarTodo(7, 7));
+function crearPelicula(nombre: string, posicion: number){
+    return {
+        nombre,
+        posicion
+    };
+};
+function imprimir(contrato: Contrato){
+    console.log("Actor:", contrato.actor.nombre, "   Edad:", contrato.actor.edad);
+    console.log("Pelicula:", contrato.pelicula.nombre, "   Genero:", contrato.pelicula.posicion);
+};
+function contratos(){
+    for (let i = 2; i < 4; i++) {
+        let contrato: Contrato = {
+        actor: { nombre: "", edad: 0 },
+        pelicula: { nombre: "", posicion: 0 }
+        };
+        if (i < 5) {
+        actor = crearActor(actores[i - 1], i + 38);
+        pelicula = crearPelicula(peliculas[i - 1], i-1);
+        contrato = contratar(actor, pelicula);
+        };
+        imprimir(contrato);
+    };
+};
 
+contratos();
 '''
 
 instrucciones = parse(entrada) #ARBOL AST

@@ -39,5 +39,9 @@ class Return(Instruccion):
     def getNode(self):
         nodo = NodeCst("return_instr")
         nodo.addChild("RETURN")
-        nodo.addChildNode(self.expresion.getNode())
+        if isinstance(self.expresion,list):
+            for instruccion in self.expresion:
+                nodo.addChildNode(instruccion.getNode())
+        else:
+            nodo.addChildNode(self.expresion.getNode())
         return nodo

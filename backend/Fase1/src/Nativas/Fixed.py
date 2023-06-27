@@ -41,8 +41,11 @@ class Fixed(Funcion):
         nodo.addChildNode(parametrosNodo)
 
         instruccionesNodo = NodeCst("instrucciones")
-        for instruccion in self.instrucciones:
-            instruccionesNodo.addChildNode(instruccion.getNode())
-        nodo.addChildNode(instruccionesNodo)
-
+        if isinstance(self.instrucciones,list):
+            for instruccion in self.instrucciones:
+                instruccionesNodo.addChildNode(instruccion.getNode())
+            nodo.addChildNode(instruccionesNodo)
+        else:
+            instruccionesNodo.addChildNode(self.instrucciones.getNode())
+            nodo.addChildNode(instruccionesNodo)
         return nodo

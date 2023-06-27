@@ -20,47 +20,10 @@ class AsignacionArreglos(Instruccion):
         if isinstance(val, Excepcion):
             return val
         self.value = value
-        simboloVar = table.getTabla(str(self.identificador)) #Verifica si la variable ya existe en algún entorno
-        
-
-        if simboloVar != None:
-            if simboloVar.globall == False and  simboloVar.local == False:
-                tablaSimbolo = table.getRealTabla(str(self.identificador))
-                ambitoPadreFuncion =  table.getNombreTabla()
-                #Por si se quiere declarar una variable igual en un entorno de funcion que ya exista en la global 
-                if table.owner == 'function' and tablaSimbolo.owner == 'global':                                            
-                    simboloVar = None
-                elif tablaSimbolo.owner == 'global' and ambitoPadreFuncion == True:
-                    simboloVar = None
-
-
-        if simboloVar != None: #Reasigna una variable ya existente
-            if simboloVar.globall: #Si la variable es global
-                simbolo = Simbolo(str(self.identificador), self.tipo, value, False, True, self.fila, self.columna)
-                result = table.actualizarTabla(simbolo) #Actualiza la variable del entorno global
-                if isinstance(result, Excepcion):
-                    return result
-                resultGlobal = tree.getTSGlobal().actualizarTabla(simbolo) #Actualiza la variable global
-                if isinstance(resultGlobal, Excepcion):
-                    return result
-            
-            elif simboloVar.local: #Si la variable es local
-                simbolo = Simbolo(str(self.identificador), self.tipo, value, True, False, self.fila, self.columna)
-                result = table.actualizarTabla(simbolo) #Actualiza la variable local mas cercana
-                if isinstance(result, Excepcion):
-                    return result
-            
-            else: #Si se declara normalita
-                simbolo = Simbolo(str(self.identificador), self.tipo, value, False, False, self.fila, self.columna)
-                result = table.actualizarTabla(simbolo)
-                if isinstance(result, Excepcion):
-                    return result
-
-        elif simboloVar == None: #Declara una variable
-            simbolo = Simbolo(str(self.identificador), self.tipo, value, False, False, self.fila, self.columna)
-            result = table.setTabla(simbolo)
-            if isinstance(result, Excepcion):
-                return result
+        simbolo = Simbolo(str(self.identificador), self.tipo, value, self.fila, self.columna)
+        result = table.setTabla(simbolo)
+        if isinstance(result, Excepcion):
+            return result
 
 
     def interpretarArreglos(self, tree, table, arreglo):
