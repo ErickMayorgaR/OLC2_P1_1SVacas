@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { InterpretarService } from './services/interpretar.service';
+import { C3DService } from './services/c3-d.service';
 // import { saveAs } from 'file-saver';
 
 
@@ -9,7 +10,7 @@ import { InterpretarService } from './services/interpretar.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  constructor(private appService: InterpretarService) { }
+  constructor(private appService: InterpretarService, private appService2: C3DService) { }
 
   EditorOptions = {
     theme: "vs-dark",
@@ -62,12 +63,43 @@ export class AppComponent {
         next: (data:any) => {
           console.log('Datos recibidos');
           this.salida = data.salida;
-          this.simbolos = data.simbolos;
+          this.simbolos = data.tablaSimbolos;
           this.errores = data.errores;
         },
         error: (error:any) => {
           console.log('There was an error :(', error);
           this.simbolos = [];
+          this.errores = [];
+  
+          if (error.error) {
+            if (error.error.output)
+              this.salida = error.error.output;
+            else if (error.error.message)
+              this.salida = error.error.message;
+            else
+              this.salida = error.error;
+          } else {
+            this.salida = "Ocurrió un error desconocido.\nIngrese otra entrada.";
+          }
+        }
+      });
+    } else {
+      this.salida = "Entrada vacía. Intente de nuevo.";
+    }
+  }
+
+  onSubmit2() {
+    if (this.entrada != "") {
+      const x = { "entrada": this.entrada }
+      this.appService2.consumirAnalizador(x).subscribe({
+
+        next: (data:any) => {
+          console.log('Datos recibidos');
+          this.salida = data.salida;
+          this.errores = data.arreglo_errores;
+        },
+        error: (error:any) => {
+          console.log('There was an error :(', error);
           this.errores = [];
   
           if (error.error) {
