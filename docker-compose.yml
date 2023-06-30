@@ -1,0 +1,29 @@
+version: "3.9" 
+services:
+  backendfase1:
+    build: ./backend/Fase1
+    container_name: backend-compif1
+    ports:
+      - "5000:5000"
+    networks:
+    - proyectocompi2
+  backendfase2:
+    build: ./backend/Fase2
+    container_name: backend-compif2
+    ports:
+      - "3800:3800"
+    networks:
+    - proyectocompi2
+  
+  frontendreact:
+    build: ./frontend
+    container_name: frontend-compi
+    ports:
+      - "80:80"
+    networks:
+    - proyectocompi2
+
+networks:
+  proyectocompi2:
+    name: "proyectocompi2"
+    driver: bridge

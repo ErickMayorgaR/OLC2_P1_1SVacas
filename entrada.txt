@@ -1,0 +1,10 @@
+
+let hola = 5;
+
+function prueba(){
+    console.log("entro a la funcion");
+    return 5;
+}
+
+console.log(hola);
+prueba();

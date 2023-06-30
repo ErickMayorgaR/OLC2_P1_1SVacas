@@ -2,7 +2,7 @@
 
 </div>
 <nav class="title">
-    <h2 class="title" href="#">C# to Python</h2>
+    <h2 class="title" href="#">PyTypeCraft</h2>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01"
         aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -43,6 +43,11 @@
     <form #iForm="ngForm" class="mb-4" (ngSubmit)="onSubmit()" novalidate>
 
     <button type="submit" class="btn btn-dark rounded-0"  style="display: block; margin: 0 auto;">Ejecutar</button>
+    </form>
+
+    <form #iForm="ngForm" class="mb-4" (ngSubmit)="onSubmit2()" novalidate>
+
+    <button type="submit2" class="btn btn-dark rounded-0"  style="display: block; margin: 0 auto;">C3D</button>
     </form>
 
 
@@ -99,37 +104,34 @@
         <div id="myTabContent" class="tab-content">
             <div class="tab-pane fade in active show" id="simbolos">
                 <div class="col-md-12">
-                  <br>
-                  <div style="width: auto; height: auto;">
-                    <table class="table table-info table-hover">
-                      <thead>
-                        <tr>
-                          <td>#</td>
-                          <td>Nombre</td>
-                          <td>Tipo símbolo</td>
-                          <td>Tipo dato</td>
-                          <td>Ámbito</td>
-                          <td>Fila</td>
-                          <td>Columna</td>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr *ngFor="let item of simbolos; let i = index">
-                          <th scope="row">{{i+1}}</th>
-                          <td>{{item.id}}</td>
-                          <td>{{item.objeto}}</td>
-                          <td>{{item.tipo}}</td>
-                          <td>{{item.entorno}}</td>
-                          <td>{{item.linea}}</td>
-                          <td>{{item.columna}}</td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </div>
-                  <br>
+                    <br>
+                    <div style="width: auto; height: auto;">
+                        <table class="table table-info table-hover">
+                            <thead>
+                                <tr>
+                                    <td>#</td>
+                                    <td>Nombre</td>
+                                    <td>Tipo símbolo</td>
+                                    <td>Valor</td>                                    
+                                    <td>Fila</td>
+                                    <td>Columna</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let item of simbolos; let i = index">
+                                    <th scope="row">{{i+1}}</th>
+                                    <td>{{item.identificador}}</td> 
+                                    <td>{{item.tipo}}</td>                              
+                                    <td>{{item.valor}}</td>                                 
+                                    <td>{{item.fila}}</td>
+                                    <td>{{item.columna}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <br>
                 </div>
             </div>
-              
             <div class="tab-pane fade" id="errores">
                 <div class="col-md-12">
                     <br>
@@ -142,15 +144,20 @@
                                     <th scope="col">Error</th>
                                     <th class="text-center" scope="col">Fila</th>
                                     <th class="text-center" scope="col">Columna</th>
+                                    <th class="text-center" scope="col">Hora</th>
+                                    <th class="text-center" scope="col">Fecha</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr *ngFor="let item of errores; let i = index">
                                     <th scope="row">{{i+1}}</th>
                                     <td>{{item.tipo}}</td>
-                                    <td class="fc">{{item.error}}</td>
-                                    <td class="text-center">{{item.linea}}</td>
+                                    <td class="fc">{{item.descripcion}}</td>
+                                    <td class="text-center">{{item.fila}}</td>
                                     <td class="text-center">{{item.columna}}</td>
+                                    <td class="text-center">{{item.hora}}</td>
+                                    <td class="text-center">{{item.fecha}}</td>
+
                                 </tr>
                             </tbody>
                         </table>
@@ -169,7 +176,8 @@
 <footer class="text-center text-lg-start">
     <div class="text-center p-3" style="background-color: #219ebc;">
         <p class="foot my-0">
-            © 2022 Erick Ivan Mayorga
+            © 2023 Erick Ivan Mayorga Rodriguez
+            © 2023 Mario Jose Rodriguez Vasquez
         </p>
     </div>
 </footer>
