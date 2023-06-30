@@ -24,6 +24,12 @@ class Arbol:
 
     def getExcepciones(self):
         return self.excepciones
+    
+    def getExcepcionesJSON(self):
+        lista = []
+        for excepcion in self.excepciones:
+            lista.append(excepcion.getJSON())
+        return lista
 
     def setExcepciones(self, excepciones):
         self.excepciones = excepciones

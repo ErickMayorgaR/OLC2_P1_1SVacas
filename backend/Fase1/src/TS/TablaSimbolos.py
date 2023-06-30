@@ -28,6 +28,13 @@ class TablaSimbolos:
         for symbol in tablaActual.tabla:
             simbolos.append(symbol)
         return simbolos
+    
+    def getSimbolosJSON(self):
+        tablaActual = self
+        simbolos = []
+        for symbol in tablaActual.tabla.values():
+            simbolos.append(symbol.getJsonSymbol())
+        return simbolos
 
     def getRealTabla(self, identificador):
         tablaActual = self

@@ -18,3 +18,13 @@ class Excepcion:
 
     def getHora(self):
         return str(self.now.hour)+":"+str(self.now.minute)
+    
+    def getJSON(self):
+        return {
+            'tipo': self.tipo,
+            'descripcion': self.descripcion,
+            'fila': self.fila,
+            'columna': self.columna,
+            'fecha': self.fecha,
+            'hora': self.hora
+        }
